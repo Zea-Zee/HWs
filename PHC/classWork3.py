@@ -205,7 +205,7 @@ class Inventory():
     def put_object(self, obj, i):
         if not obj.eatable:
             print("obj can't be added cuz it isn't edible")
-            return 
+            return
         if i < len(self._lst):
             self._lst[i] = obj
             print("obj was added to inventory")
