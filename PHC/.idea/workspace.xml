@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f379308-13ca-4823-825b-2ecd19778d92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cinema_sessions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classWork5.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/titanic_with_labels.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wells_info.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wells_info_na.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/HWs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/HWs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PHC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PHC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3f379308-13ca-4823-825b-2ecd19778d92" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,6 +85,7 @@
       <updated>1696301961794</updated>
       <workItem from="1696301966829" duration="7874000" />
       <workItem from="1696312683165" duration="8772000" />
+      <workItem from="1696656102952" duration="39000" />
     </task>
     <servers />
   </component>
