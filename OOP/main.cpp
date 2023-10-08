@@ -13,7 +13,7 @@ private:
     int bitLen;
 public:
 //    BitArray(int bLen = 0){
-//        int intLen = ceil(bitLen / 31);
+//        int intLen = ceil((double) bitLen / 31);
 //        array = new int[intLen];
 //    }
     explicit BitArray(int num_bits, unsigned long value = 0){
@@ -22,7 +22,7 @@ public:
             this->array = (unsigned int*) malloc(0);
             return;
         }
-        int intLen = (int) (bitLen / 32) + 1;
+        int intLen = ceil((double) bitLen / 32);
         array = (unsigned int*) calloc(intLen, sizeof(unsigned int));
         array[0] = value;
     }
@@ -32,11 +32,11 @@ public:
             this->array = (unsigned  int*) malloc(0);
             return;
         }
-        int intLen = (int) (bitLen / 32) + 1;
+        int intLen = ceil((double) this->bitLen / 32);
         this->array = (unsigned int*) calloc(intLen, sizeof(unsigned int));
 //        memcpy(this->array, b.array);
 //        copy(begin(b.array), end(b.array), begin(this->array));
-//        copy(b.array, *(*b.array + (ceil((double) b.bitLen / 31)), this->array));
+//        copy(b.array, *(*b.array + (ceil((double) (double) b.bitLen / 31)), this->array));
         for(int i = 0; i < intLen; i++) this->array[i] = b.array[i];
     }
     ~BitArray(){
@@ -45,7 +45,7 @@ public:
     }
     void swap(BitArray &b){           //works for BitArray with same sizes
         if(this->bitLen == 0 and b.bitLen == 0) return;
-        if((int) (this->bitLen / 32) + 1 != (int) (b.bitLen / 32) + 1){
+        if(ceil((double) this->bitLen / 32) != ceil((double) b.bitLen / 32)){
             std::cerr << "BitArrays have different size!" << std::endl;
             return;
         }
@@ -60,7 +60,7 @@ public:
 //        this->bitLen = num_bits;
 //        int newLen = (unsigned int) (num_bits / 8) + 1;
         if(this->bitLen == 0)
-            this->array = (unsigned int*) calloc((unsigned int) (num_bits / 32) + 1, 4);
+            this->array = (unsigned int*) calloc((unsigned int) ceil((double) num_bits / 32), 4);
         else
             this->array = (unsigned int*) realloc(this->array, (unsigned int) (num_bits / 8) + 1);
 //        cout << this->array[(int) (num_bits / 32) + 1]
@@ -85,14 +85,16 @@ public:
     void push_back(bool bit){
         if(this->bitLen % 32 == 0)
             this->resize(this->bitLen + 1, bit);
-        else
+        else {
+            unsigned int shift = (bit ? 1 : 0) << (this->bitLen);
+            this->array[(int) this->bitLen / 32] += (shift);
             this->bitLen++;
-        this->array[(int) this->bitLen / 32] += (1 << (this->bitLen - 1));
+        }
     }
     BitArray& operator=(const BitArray& b){
         if(this->bitLen == 0 and b.bitLen == 0) return *this;
         resize(b.bitLen, false);
-        for(int i = 0; i < (int) this->bitLen / 32 + 1; i++) this->array[i] = b.array[i];
+        for(int i = 0; i < ceil((double) this->bitLen / 32); i++) this->array[i] = b.array[i];
         return *this;
     }
     BitArray& operator&=(const BitArray& b){
@@ -100,7 +102,7 @@ public:
             cout << "arrays must be same size" << endl;
             return *this;
         }
-        int intLen = (int) (this->bitLen / 32) + 1;
+        int intLen = ceil((double) this->bitLen / 32);
         for(int i = intLen - 1; i >= 0; i--){
             this->array[i] &= b.array[i];
         }
@@ -111,7 +113,7 @@ public:
             cout << "arrays must be same size" << endl;
             return *this;
         }
-        int intLen = (int) (this->bitLen / 32) + 1;
+        int intLen = ceil((double) this->bitLen / 32);
         for(int i = intLen - 1; i >= 0; i--){
             this->array[i] |= b.array[i];
         }
@@ -122,33 +124,124 @@ public:
             cout << "arrays must be same size" << endl;
             return *this;
         }
-        int intLen = (int) (this->bitLen / 32) + 1;
+        int intLen = ceil((double) this->bitLen / 32);
         for(int i = intLen - 1; i >= 0; i--){
             this->array[i] ^= b.array[i];
         }
         return *this;
     }
     BitArray& operator<<=(int n){
-        int intLen = (int) (this->bitLen / 32) + 1;
+        int intLen = ceil((double) this->bitLen / 32);
         for(int i = intLen - 1; i >= 0; i--){
-            if(i == intLen - 1) this->array[i] = (this->array[i] << n);
+            if(i == intLen - 1){
+//                unsigned int num = this->array[i];
+//                unsigned int shift = (this->array[i] << n);
+                this->array[i] = (this->array[i] << n);
+//                this->print();
+            }
             else{
-                this->array[i + 1] = (this->array[i] >> (this->bitLen - n));
+                this->array[i + 1] += (this->array[i] >> (this->bitLen - n));
                 this->array[i] = (this->array[i] << n);
             }
         }
         return *this;
     }
-    BitArray& operator>>=(int n);
-    BitArray operator<<(int n) const;
-    BitArray operator>>(int n) const;
+    BitArray& operator>>=(int n){
+        int intLen = ceil((double) this->bitLen / 32);
+        for(int i = 0; i < intLen; i++){
+            if(i == 0){
+//                unsigned int num = this->array[i];
+//                unsigned int shift = (this->array[i] << n);
+                this->array[i] = (this->array[i] >> n);
+//                this->print();
+            }
+            else{
+                this->array[i - 1] += (this->array[i] << (this->bitLen - n));
+                this->array[i] = (this->array[i] >> n);
+            }
+        }
+        return *this;
+    }
+    BitArray operator<<(int n) const{
+        BitArray resBitArr(*this);
+        int intLen = ceil((double) resBitArr.bitLen / 32);
+        for(int i = intLen - 1; i >= 0; i--){
+            if(i == intLen - 1){
+//                unsigned int num = resBitArr.array[i];
+//                unsigned int shift = (resBitArr.array[i] << n);
+                resBitArr.array[i] = (resBitArr.array[i] << n);
+//                resBitArr.print();
+            }
+            else{
+                resBitArr.array[i + 1] += (resBitArr.array[i] >> (resBitArr.bitLen - n));
+                resBitArr.array[i] = (resBitArr.array[i] << n);
+            }
+        }
+        return resBitArr;
+    }
+    BitArray operator>>(int n) const{
+        BitArray resBitArr(*this);
+        int intLen = ceil((double) resBitArr.bitLen / 32);
+        for(int i = 0; i < intLen; i++){
+            if(i == 0){
+//                unsigned int num = resBitArr.array[i];
+//                unsigned int shift = (resBitArr.array[i] << n);
+                resBitArr.array[i] = (resBitArr.array[i] >> n);
+//                resBitArr.print();
+            }
+            else{
+                resBitArr.array[i - 1] += (resBitArr.array[i] << (resBitArr.bitLen - n));
+                resBitArr.array[i] = (resBitArr.array[i] >> n);
+            }
+        }
+        return resBitArr;
+    }
+    BitArray& set(int n, bool val = true){
+        if(n >= this->bitLen){
+            cout << "index out of range in set" << endl;
+            return *this;
+        }
+        int intIndex = (int) n / 32;
+        unsigned int newInt = 0;//(this->array[intIndex] >> (n + 1)) << (n + 1);
+        newInt += (val ? 1 : 0) << n;
+        newInt += (this->array[intIndex] << (32 - n)) >> ((32 - n));
+        this->array[intIndex] = newInt;
+        return *this;
+    }
+    BitArray& set(){
+        int len = this->bitLen;
+        this->clear();
+        this->resize(len, true);
+        return *this;
+    }
+    BitArray& reset(int n){
+        return this->set(n, false);
+    }
+    BitArray& reset(){
+        int len = this->bitLen;
+        this->clear();
+        this->resize(len, false);
+        return *this;
+    }
+    bool any() const{
+        for(int i = 0; i < ceil((double)this->bitLen / 32); i++) if(this->array[i] > 0) return true;
+        return false;
+    }
+    bool none() const{
+        for(int i = 0; i < ceil((double)this->bitLen / 32); i++) if(this->array[i] > 0) return false;
+        return true;
+    }
+    BitArray operator~() const{
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++) this->array[i] = ~this->array[i];
+    }
     void print(){
         if(this->bitLen == 0){
             cout << "bitarray is empty" << endl;
             return;
         }
-        cout << "bitLen is " << this->bitLen << ", intLen is " << (int) this->bitLen / 32 + 1 << " representations of every 4 byte block is: " << endl;
-        int intLen = (int) (this->bitLen / 32) + 1;
+        cout << "bitLen is " << this->bitLen << ", intLen is " << ceil((double) this->bitLen / 32) << " representations of every 4 byte block is: " << endl;
+        int intLen = ceil((double) this->bitLen / 32);
         for (int i = intLen - 1; i >= 0; i--){
             cout << i << "th block is " << this->array[i] << " ";
         }
@@ -177,6 +270,8 @@ int main(){
 //    bitA.push_back(true);
 //    bitA.print();
 //
+
+
 //    BitArray bitB(4, 5);
 //    cout << "A ";
 //    bitA.print();
@@ -191,35 +286,86 @@ int main(){
 //    bitB.resize(2, true);
 //    bitA = bitB;
 //    bitA.print();
-    BitArray bitA(0, 0);
-    bitA.print();
-    bitA.push_back(true);
-    bitA.print();
-    bitA.push_back(false);
-    bitA.print();
-    bitA.push_back(true);
-    bitA.print();
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.push_back(true);
-    bitA.push_back(false);
-    bitA.print();
+
+
+
+//    BitArray bitA(0, 0);
+//    bitA.print();
+//    bitA.push_back(true);
+//    bitA.print();
+//    bitA.push_back(false);
+//    bitA.print();
+//    bitA.push_back(true);
+//    bitA.print();
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.print();
 //    bitA.resize(64, true);
 //    bitA.print();
-//    bitA <<= 10;
+//    bitA <<= 16;
 //    bitA.print();
+
+
+
+//    BitArray bitA(8, 255);
+//    bitA.resize(8, 1)
+//    bitA.print();
+//    bitA.set(4, 0);
+//    bitA.print();
+//    bitA.push_back(true);
+//    bitA.print();
+//    bitA.push_back(false);
+//    bitA.print();
+//    bitA.push_back(true);
+//    bitA.print();
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.push_back(true);
+//    bitA.push_back(false);
+//    bitA.print();
+//    bitA.resize(64, true);
+//    bitA.print();
+//    (bitA >> 16).print();
+//    bitA >>= 16;
+//    bitA.print();
+
+//    BitArray bitA(32, 0);
+//    bitA.print();
+//    bitA.set();
+//    bitA.print();
+
+//    BitArray bitA(32, 4294967295);
+    BitArray bitA(32, 4294967295);
+    bitA.print();
+    bitA.reset();
+    bitA.print();
     return 0;
 }
