@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include <string>
 //#include <cstring>
+#define UNSIGNED_INT 4294967295
 
 using namespace std;
 
@@ -235,6 +237,94 @@ public:
         int intLen = ceil((double) bitLen / 32);
         for(int i = 0; i < intLen; i++) this->array[i] = ~this->array[i];
     }
+    int count() const{
+        int n = 0;
+        unsigned int one = 1;
+        int intLen = ceil((double) this->bitLen / 32);
+        for(int i = 0; i < intLen; i++){
+            for(int j = 0; j < 32; j++){
+                n += ((one << j) & this->array[i]) >> j;
+            }
+        }
+        return n;
+    }
+    int size() const{
+        return ceil((double) bitLen / 32);
+    }
+    bool empty() const{
+        return this->bitLen ==  0;
+    }
+    string to_string() const{
+//        int intLen = ceil((double) bitLen / 32);
+//        char* res = (char*) calloc(ceil((double)this->bitLen / 8), 1);
+//        int spb = 0;
+//        bool lastFlag = false;
+//        for(int i = intLen - 1; i>= 0; i--){
+//            for(int j = 31; j >= 0; j--){
+//                if(i == intLen - 1 and lastFlag == false){
+//                    lastFlag = true;
+//                    j = this->bitLen % 32;
+//                }
+//                res[spb] = () this->array[i] >> j & 1;
+//                sp++;
+//            }
+//        }
+//        return res;
+        string res = "";
+        if(this->bitLen == 0){
+            cout << "bitarray is empty" << endl;
+            return res;
+        }
+        int intLen = ceil((double) this->bitLen / 32);
+        for(int i = intLen * 32 - 1; i >= 0; i--) res += (((this->array[(int)i / 32] >> (i % 32)) & 1) ? '1' : '0');
+        return res;
+    }
+    bool operator==(const BitArray &b) const{
+        if(this->bitLen != b.bitLen) return false;
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++) if(this->array[i] != b.array[i]) return false;
+        return true;
+    }
+    bool operator!=(const BitArray & b) const{
+        if(this->bitLen != b.bitLen) return true;
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++) if(this->array[i] != b.array[i]) return true;
+        return false;
+    }
+    BitArray operator&(const BitArray& b2) const{
+        BitArray new1(*this);
+        BitArray new2(b2);
+        if(new1.empty()) return new1;
+        if(new2.empty()) return new2;
+        if(new1.bitLen < new2.bitLen) new1.resize(new2.bitLen, false);
+        else if(new1.bitLen > new2.bitLen) new2.resize(new1.bitLen, false);
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++) new1.array[i] &= new2.array[i];
+        return new1;
+    }
+    BitArray operator|(const BitArray& b2) const{
+        BitArray new1(*this);
+        BitArray new2(b2);
+        if(new1.empty()) return new1;
+        if(new2.empty()) return new2;
+        if(new1.bitLen < new2.bitLen) new1.resize(new2.bitLen, false);
+        else if(new1.bitLen > new2.bitLen) new2.resize(new1.bitLen, false);
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++)
+            new1.array[i] |= new2.array[i];
+        return new1;
+    }
+    BitArray operator^(const BitArray& b2) const{
+        BitArray new1(*this);
+        BitArray new2(b2);
+        if(new1.empty()) return new1;
+        if(new2.empty()) return new2;
+        if(new1.bitLen < new2.bitLen) new1.resize(new2.bitLen, false);
+        else if(new1.bitLen > new2.bitLen) new2.resize(new1.bitLen, false);
+        int intLen = ceil((double) bitLen / 32);
+        for(int i = 0; i < intLen; i++) new1.array[i] ^= new2.array[i];
+        return new1;
+    }
     void print(){
         if(this->bitLen == 0){
             cout << "bitarray is empty" << endl;
@@ -363,9 +453,29 @@ int main(){
 //    bitA.print();
 
 //    BitArray bitA(32, 4294967295);
-    BitArray bitA(32, 4294967295);
+//    BitArray bitA(32, 4294967295);
+//    bitA.print();
+//    bitA.reset();
+//    bitA.print();
+
+
+//    BitArray bitA(64, UNSIGNED_INT);
+//    bitA.print();
+//    cout << bitA.count() << endl;
+//    return 0;
+
+
+//    BitArray bitA(8, 49);
+//    bitA.print();
+//    cout << bitA.to_string() << endl;
+
+    BitArray bitA(80, 128);
     bitA.print();
-    bitA.reset();
-    bitA.print();
+    BitArray bitB(8, 127);
+    bitB.print();
+    cout << (bitA & bitB).to_string() << endl;
+//    cout << bitA.to_string() << endl;
+
+
     return 0;
 }
