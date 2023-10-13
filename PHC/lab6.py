@@ -30,20 +30,6 @@ while ret:
         is_danger = not is_danger
         change_state_time = np.random.randint(1, 10) + time.time()
     ret, frame_b = cap.read()
-<<<<<<< HEAD
-    frame_ag = cv2.cvtColor(frame_a, cv2.COLOR_BGR2GRAY)
-    frame_bg = cv2.cvtColor(frame_b, cv2.COLOR_BGR2GRAY)
-    diffFrame = cv2.absdiff(frame_ag, frame_bg)
-    # diffFrame = cv2.cvtColor(diffFrame, cv2.COLOR_BGR2GRAY)
-    _, thresholded_diff = cv2.threshold(diffFrame, 30, 255, cv2.THRESH_BINARY)
-    contours, _ = cv2.findContours(thresholded_diff, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(frame_b, contours, -1, (0, 255, 0), 10)
-    cv2.imshow("diffplusorig", thresholded_diff)
-    cv2.imshow("diff", diffFrame)
-    # cap.read()
-    # cap.read()
-    frame_a = frame_b#cap.read()
-=======
     diffFrame = cv2.absdiff(cv2.cvtColor(frame_a, cv2.COLOR_BGR2GRAY), cv2.cvtColor(frame_b, cv2.COLOR_BGR2GRAY))
     _, thresholded_diff = cv2.threshold(diffFrame, 50, 255, cv2.THRESH_BINARY)
     output = frame_b.copy()
@@ -64,7 +50,6 @@ while ret:
     cv2.imshow("diff", diffFrame)
     cv2.imshow("thres_diff", empty_img)
     cv2.imshow("res", output)
->>>>>>> 372f7fe210ffbd13b7751b9d97cc93a2bd09e13e
     if cv2.waitKey(100) == ord('q'):
         break
     frame_a = frame_b
