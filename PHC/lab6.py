@@ -19,9 +19,11 @@ while ret:
     # diffFrame = cv2.cvtColor(diffFrame, cv2.COLOR_BGR2GRAY)
     _, thresholded_diff = cv2.threshold(diffFrame, 30, 255, cv2.THRESH_BINARY)
     contours, _ = cv2.findContours(thresholded_diff, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(frame_b, contours, -1, (0, 255, 0), 3)
-    cv2.imshow("diffplusorig", frame_b)
-    cv2.imshow("diff", thresholded_diff)
-    frame_a = frame_b
-    if cv2.waitKey(0) == ord('q'):
+    cv2.drawContours(frame_b, contours, -1, (0, 255, 0), 10)
+    cv2.imshow("diffplusorig", thresholded_diff)
+    cv2.imshow("diff", diffFrame)
+    # cap.read()
+    # cap.read()
+    frame_a = frame_b#cap.read()
+    if cv2.waitKey(100) == ord('q'):
         break
