@@ -50,10 +50,21 @@ def img_loader(imgs_path, num, width, height):
             # for i in range(num):
             i = num if num < len(images_left) else len(images_left) - 1
             limited_img_lst = images_left[:i].copy()
-            imges = list(map(lambda img: np.array((Image.open("./nails_dataset/images/" + img)).thumbnail((width, height), Image.Resampling.LANCZOS)), limited_img_lst))
-            labels = list(map(lambda img: np.array((Image.open("./nails_dataset/labels/" + img)).thumbnail((width, height), Image.Resampling.LANCZOS)), limited_img_lst))
+            imges = list(map(lambda img: Image.open("./nails_dataset/images/" + img), limited_img_lst))
+            labels = list(map(lambda img: Image.open("./nails_dataset/labels/" + img), limited_img_lst))
+            for i in range(len(imges)):
+                # print(imges[i].width)
+                imges[i].thumbnail((width, height), Image.Resampling.LANCZOS)
+                # print(imges[i].width)
+                imges[i] = np.array(imges[i])
+                # print(len(imges[i][0]))
+                labels[i].thumbnail((width, height), Image.Resampling.LANCZOS)
+                labels[i] = np.array(labels[i])
+            imges = np.array(imges)
+            labels = np.array(labels)
             for i in range(len(imges)):
                 augmentate(imges[i], labels[i], imges_res, labels_res)
+
 
             yield [imges_res, labels_res]
             if i == len(images_left) - 1:
@@ -68,5 +79,6 @@ for el in pics:
     for i in range(len(el[0])):
         cv2.imshow("img", el[0][i])
         cv2.imshow("label", el[1][i])
+        cv2.waitKey(0)
 
 
