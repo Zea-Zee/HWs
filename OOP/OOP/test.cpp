@@ -1,6 +1,8 @@
-#include <gtest/gtest.h>
+//#include "googletest/googletest/include/gtest/gtest.h"
+//#include <gtest/gtest.h>
 #include "mybitarray.h"
 #include <string>
+#include <gtest/gtest.h>
 
 //V new params
 // new copy

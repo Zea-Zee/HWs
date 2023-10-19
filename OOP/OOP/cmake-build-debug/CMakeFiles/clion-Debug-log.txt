@@ -1,4 +1,5 @@
-"C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.2.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\kuzga\CLionProjects\OOP -B C:\Users\kuzga\CLionProjects\OOP\cmake-build-debug
--- Configuring done (0.1s)
--- Generating done (0.0s)
--- Build files have been written to: C:/Users/kuzga/CLionProjects/OOP/cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\kuzga\Desktop\HWs\OOP\OOP -B C:\Users\kuzga\Desktop\HWs\OOP\OOP\cmake-build-debug
+-- Found Python3: C:/Users/kuzga/AppData/Local/Programs/Python/Python311/python.exe (found version "3.11.5") found components: Interpreter 
+-- Configuring done (3.5s)
+-- Generating done (0.3s)
+-- Build files have been written to: C:/Users/kuzga/Desktop/HWs/OOP/OOP/cmake-build-debug

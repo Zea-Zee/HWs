@@ -3,8 +3,57 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6a10d2ee-5e21-4c2d-b069-961eb940e18e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/cache-v2-fbc4d3ced600e22bc885.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-8935349109581b17585d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-cec2ed27c6764b71d546.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/index-2023-10-09T10-13-53-0528.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/target-OOP-Debug-e707fc99d3c3b37d0c22.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/target-gmock-Debug-7c1addffc5470017b2cf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/target-gmock_main-Debug-989cf6558973d2ba325f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/target-gtest-Debug-4fe6cded360f48c69d08.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/target-gtest_main-Debug-d8b8cc25a5444a0282ab.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-1555a5ce31899eddd569.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/3rd_hw.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/main.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/OOP.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/OOP.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/CTestTestfile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/CTestTestfile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googlemock/CTestTestfile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googlemock/CTestTestfile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googlemock/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googlemock/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CTestTestfile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/CTestTestfile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/googletest/googletest/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/lib/libgtest.a" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/lib/libgtest.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/lib/libgtest_main.a" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/cmake-build-debug/lib/libgtest_main.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/OOP/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/OOP/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PHC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PHC.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classWork7.py" beforeDir="false" afterPath="$PROJECT_DIR$/classWork7.py" afterDir="false" />
@@ -13,6 +62,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -30,12 +82,16 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -48,9 +104,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (washing)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -74,13 +129,27 @@
       <updated>1697511960576</updated>
       <workItem from="1697511964423" duration="6192000" />
       <workItem from="1697521197329" duration="4683000" />
+      <workItem from="1697529821253" duration="203000" />
+      <workItem from="1697530072795" duration="143000" />
+      <workItem from="1697531719762" duration="9851000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classWork7.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PHC$classWork7.coverage" NAME="classWork7 Coverage Results" MODIFIED="1697526506369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PHC$classWork7.coverage" NAME="classWork7 Coverage Results" MODIFIED="1697633355838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

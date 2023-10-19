@@ -11,6 +11,3 @@ add_subdirectory(googletest)
 
 # Link the gtest and gtest_main targets against your target
 target_link_libraries(OOP gtest gtest_main)
-
-#add_subdirectory(src)
-#add_subdirectory(test)
