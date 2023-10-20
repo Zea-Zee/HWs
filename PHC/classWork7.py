@@ -1,10 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
 import cv2
 import os
 import random
-from PIL import Image
 
 def resize_and_crop(image, t_width, t_height):
     c_width = image.shape[1]
@@ -70,10 +67,10 @@ def img_loader(imgs_path, num, width, height):
             imges_res.append(cv2.blur(img, (blur, blur)))
             labels_res.append(cv2.blur(label, (blur, blur)))
         cuts_counter = 0
-        while random.randint(0, 1) < 1 and cuts_counter < 2:
+        while random.randint(0, 5) < 4 and cuts_counter < 2:
             cuts_counter += 1
-            xs, ys = random.randint(0, width), random.randint(0, height)
-            xe, ye = random.randint(max(int(width / 2), xs), width), random.randint(max(int(height / 3), ys), height)
+            xs, ys = random.randint(0, width / 2), random.randint(0, height / 2)
+            xe, ye = random.randint(int(width / 2), width), random.randint(int(height / 2), height)
             rected_img = img.copy()
             rected_img = cv2.rectangle(rected_img, (xs, ys), (xe, ye), (0, 0, 0), -1)
             # cv2.imshow("rected", rected_img)
@@ -117,11 +114,12 @@ for el in pics:
     for i in range(len(el[0])):
         cv2.imshow("image", el[0][i])
         cv2.imshow("label", el[1][i])
-        key = cv2.waitKey(1)
+        key = cv2.waitKey(0)
         if key == ord('q'):
             break
         if key == ord('c'):
             cv2.destroyAllWindows()
+            print("Number of generated pics =", gen_pics_num)
             exit(0)
 cv2.destroyAllWindows()
 print("Number of generated pics =", gen_pics_num)
