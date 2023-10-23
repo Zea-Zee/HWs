@@ -11,7 +11,11 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="Project" targetName="gtest" />
+      <config projectName="OOP" targetName="gmock" />
+      <config projectName="OOP" targetName="gmock_main" />
+      <config projectName="OOP" targetName="OOP" />
+      <config projectName="OOP" targetName="gtest_main" />
+      <config projectName="OOP" targetName="gtest" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -20,168 +24,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed91dded-5a21-4614-afce-a1dcfbe8f509" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mybitarray.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mybitarray.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/OOP.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/cache-v2-9dc9f31f074f43ba5380.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-abadd52c24ed59c71511.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-d679d75a14d574d9cca7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/directory-googletest-Debug-294c64d4885f2a55f3f7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/directory-googletest.googlemock-Debug-f13e4241936bd40d56a2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/directory-googletest.googletest-Debug-97bd92dfd05de4e4770b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/index-2023-10-17T08-25-11-0926.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/target-OOP-Debug-c0bf0359a03c66029c28.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/target-gmock-Debug-32a09705ab3d14efc8d0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/target-gmock_main-Debug-b716b7fe8e26dfb81f6e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/target-gtest-Debug-f54160ac20567d4433bd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/target-gtest_main-Debug-c35a919423b96d421685.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-3cb7ac949bd4d029da2a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.ninja_deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/includes_CXX.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/linkLibs.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.cpp.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/mybitarray.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/objects.a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/objects1.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.cpp.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/OOP.dir/test.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/OOP.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/OOP.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/CTestTestfile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/cmake_clean_target.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/includes_CXX.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/cmake_clean_target.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/includes_CXX.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/gmock_main.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/CTestTestfile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googlemock/gmock.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest-distribution.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/Export/0c08b8e77dd885bfe55a19a9659d9fc1/GTestTargets-debug.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/Export/0c08b8e77dd885bfe55a19a9659d9fc1/GTestTargets.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean_target.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/includes_CXX.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean_target.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/compiler_depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/compiler_depend.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/includes_CXX.rsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/CTestTestfile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/GTestConfig.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/GTestConfigVersion.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/gmock.pc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/gmock_main.pc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/gtest.pc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/generated/gtest_main.pc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/googletest/googletest/gtest.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/lib/libgtest.a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/lib/libgtest_main.a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/googletest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/mybitarray.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/mybitarray.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/test.cpp" beforeDir="false" />
-    </list>
+    <list default="true" id="ee8f69aa-0b9c-41df-80cd-d4ff623550f2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -192,70 +35,117 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/googletest" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2.1" />
+  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="2WsnaetAaIzdVoVZ7SHzAyc4PhJ" />
+  <component name="ProjectId" id="2VvjUhW9bhihvsWIqNf1pot26gQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuzga/Desktop/HWs/OOP/OOP/test.cpp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/kuzga/CLionProjects/BitArray",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kuzga\CLionProjects\OOP" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.gtest">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="OOP" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="OOP">
+    <configuration name="OOP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BitArray" TARGET_NAME="OOP" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BitArray" RUN_TARGET_NAME="OOP">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mybitarray.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OOP" TARGET_NAME="mybitarray.cpp" CONFIG_NAME="mybitarray.cpp">
-      <option name="sourceFile" value="C:\Users\kuzga\Desktop\HWs\OOP\OOP\mybitarray.cpp" />
+    <configuration name="gmock" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BitArray" TARGET_NAME="gmock" CONFIG_NAME="Debug">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gmock_main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BitArray" TARGET_NAME="gmock_main" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BitArray" TARGET_NAME="gtest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BitArray" RUN_TARGET_NAME="OOP">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BitArray" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="C/C++ File.mybitarray.cpp" />
+      <item itemvalue="CMake Application.OOP" />
+      <item itemvalue="CMake Application.gmock" />
+      <item itemvalue="CMake Application.gmock_main" />
       <item itemvalue="CMake Application.gtest" />
+      <item itemvalue="CMake Application.gtest_main" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ed91dded-5a21-4614-afce-a1dcfbe8f509" name="Changes" comment="" />
-      <created>1697530223180</created>
+      <changelist id="ee8f69aa-0b9c-41df-80cd-d4ff623550f2" name="Changes" comment="" />
+      <created>1695723465798</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1697530223180</updated>
-      <workItem from="1697530228382" duration="1436000" />
-      <workItem from="1697775505338" duration="622000" />
-      <workItem from="1697776443512" duration="94000" />
+      <updated>1695723465798</updated>
+      <workItem from="1695723467414" duration="1705000" />
+      <workItem from="1695749971905" duration="327000" />
+      <workItem from="1695831188555" duration="1414000" />
+      <workItem from="1695893037832" duration="4869000" />
+      <workItem from="1695915406880" duration="1998000" />
+      <workItem from="1695960928122" duration="426000" />
+      <workItem from="1696327821307" duration="7038000" />
+      <workItem from="1696481536994" duration="567000" />
+      <workItem from="1696501250023" duration="346000" />
+      <workItem from="1696753944545" duration="13077000" />
+      <workItem from="1696776898573" duration="4991000" />
+      <workItem from="1696842035717" duration="8233000" />
+      <workItem from="1696954927587" duration="2574000" />
+      <workItem from="1697076599325" duration="11187000" />
+      <workItem from="1697097495824" duration="5660000" />
+      <workItem from="1697165355390" duration="1000" />
+      <workItem from="1697194928980" duration="2003000" />
+      <workItem from="1697524408972" duration="360000" />
+      <workItem from="1697555757582" duration="1510000" />
+      <workItem from="1697800917657" duration="50000" />
+      <workItem from="1698047631438" duration="21000" />
+      <workItem from="1698047770422" duration="74000" />
     </task>
     <servers />
   </component>
@@ -267,5 +157,17 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <condition expression="n == 31" language="ObjectiveC" />
+          <url>file://$PROJECT_DIR$/mybitarray.cpp</url>
+          <line>186</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
