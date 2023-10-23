@@ -1,0 +1,3 @@
+C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Life/cmake-build-debug/CMakeFiles/Life.dir
+C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Life/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Life/cmake-build-debug/CMakeFiles/rebuild_cache.dir
