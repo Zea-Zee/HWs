@@ -19,5 +19,7 @@ int main(int argc, char** argv)
 //
 //    using Module2::getMyName;
 //    std::cout << getMyName() << "\n"; // (D)
+    return 0;
+
 
 }
