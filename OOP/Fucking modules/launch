@@ -1,0 +1,5 @@
+g++ -c -std=c++20 -fmodules-ts module1.cxx
+g++ -c -std=c++20 -fmodules-ts module2.cxx
+g++ -c -std=c++20 -fmodules-ts main.cpp
+g++ main.o module1.o module2.o -o App
+./App
