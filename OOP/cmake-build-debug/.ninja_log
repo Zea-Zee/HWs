@@ -1,0 +1,13 @@
+# ninja log v5
+0	443	7197383186288635	CMakeFiles/OOP.dir/main.cpp.obj	ad8b0681b5e30eec
+417	523	7197385015066876	OOP.exe	bdcd3a9b6b5c4f15
+2	156	7197399072975762	build.ninja	3ead772a5cacd85b
+3	522	7197398872097490	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+4	448	7197399123936736	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+3	474	7197399639520392	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+3	454	7197399924866129	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+3	459	7197402217419266	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+3	474	7197402354045066	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+474	584	7197402355136066	OOP.exe	bdcd3a9b6b5c4f15
+3	445	7197404352288324	CMakeFiles/OOP.dir/Notifier.cpp.obj	5b970ffdb50097fa
+446	556	7197404353369945	OOP.exe	bdcd3a9b6b5c4f15
