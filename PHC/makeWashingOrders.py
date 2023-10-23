@@ -16,7 +16,7 @@ COLORS = {
     'RESET': '\033[0m'
 }
 
-MAX_ORDERS = 3
+MAX_ORDERS = 2
 
 gc = gspread.oauth(
     credentials_filename='./client_secret_154894298239-qer4lfqqn8gf7losmjbpdg1ll0316ou2.apps.googleusercontent.com.json',
@@ -36,10 +36,10 @@ def make_records(machine=1, wanted_count=2):
     num_of_records = 0
     # names_list_1 = ["J18"]
     # rooms_list_1 = ["K18"]
-    names_list_1 = ["R14", "P14", "R12", "P12", "H17", "J17", "L17", "N17", "P17", "R17", "J18", "N16"]
-    rooms_list_1 = ["S14", "Q14", "S12", "Q12", "I17", "K17", "M17", "O17", "Q17", "S17", "K18", "O16"]
-    names_list_2 = ["R14", "P14", "R12", "P12", "H17", "J17", "L17", "N17", "P17", "R17", "J18"]
-    rooms_list_2 = ["S14", "Q14", "S12", "Q12", "I17", "K17", "M17", "O17", "Q17", "S17", "K18"]
+    names_list_1 = ["J12", "L12", "N12", "P12", "R12"]
+    rooms_list_1 = ["K12", "M12", "O12", "Q12", "S12"]
+    names_list_2 = ["J12", "L12", "N12", "P12", "R12"]
+    rooms_list_2 = ["K12", "M12", "O12", "Q12", "S12"]
     time_bound = {"F": 10, "H": 12, "J": 14, "L": 16, "N": 18, "P": 20, "R": 22}
 
     name_cell = names_list_1.pop(0)
@@ -57,6 +57,7 @@ def make_records(machine=1, wanted_count=2):
             name_cell = names_list_1.pop(0)
             room_cell = rooms_list_1.pop(0)
         else:
+                
             break
 
     while num_of_records < MAX_ORDERS and wanted_count > 0 and machine == 2:
@@ -121,36 +122,6 @@ async def wait_washing():
                     if recs > 2:
                         return
         if flag_1 and flag_2 or recs == MAX_ORDERS:
-            # smtp_server = "smtp.gmail.com"
-            # port = 587
-            # sender_email = "s.krasilnikov2@g.nsu.ru"
-            # receiver_email = "s.krasilnikov2@g.nsu.ru"
-            # password = "yry1dqwf"
-            #
-            # # Compose the email message
-            # subject = "Washing was ordered"
-            # body = str(records)
-            #
-            # msg = MIMEText(body)
-            # msg["Subject"] = subject
-            # msg["From"] = sender_email
-            # msg["To"] = receiver_email
-            #
-            # # Connect to the SMTP server
-            # with smtplib.SMTP(smtp_server, port) as server:
-            #     # Log in to your Gmail account
-            #     server.starttls()
-            #     server.login(sender_email, password)
-            #
-            #     # Send the email
-            #     server.sendmail(sender_email, receiver_email, msg.as_string())
-            # receiver_email = "s.krasilnikov2@g.nsu.ru"
-            # msg["To"] = receiver_email
-            # with smtplib.SMTP(smtp_server, port) as server:
-            #     server.starttls()
-            #     server.login(sender_email, password)
-            #     server.sendmail(sender_email, receiver_email, msg.as_string())
-            # print("Email sent successfully")
             return
         await asyncio.sleep(15)
 

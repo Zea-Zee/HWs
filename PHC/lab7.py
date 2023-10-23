@@ -9,16 +9,19 @@ def find_obj(img, template, res_img, color):
     match_num = 0
     w, h = template.shape[1], template.shape[0]
     def find_and_rot(obj):
-        for i in range(0, 360, 40):
+        for i in range(0, 360, 10):
+            # obj = obj[int(obj.shape[0] * 0.05):int(obj.shape[0] * 0.95),
+            #            int(obj.shape[1] * 0.05):int(obj.shape[1] * 0.95)]
             temp_w, temp_h = obj.shape[1], obj.shape[0]
             loc_match_num = 0
             rot_matrix = cv2.getRotationMatrix2D((temp_w // 2, temp_h // 2), i, 1.0)
             temp = cv2.warpAffine(obj, rot_matrix, (temp_w, temp_h))
             res = cv2.matchTemplate(img, temp,
-                                    cv2.TM_CCOEFF_NORMED)  # 3rd -  Нормализованный коэффициент корреляции
+                                    cv2.TM_SQDIFF)  # 3rd -  Нормализованный коэффициент корреляции
             min_val, max_val, min_pos, max_pos = cv2.minMaxLoc(res)
             print(i, max_val, loc_match_num, max_pos)
             cv2.imshow("obj", temp)
+            # cv2.waitKey(0)
             if max_val < 0.7:
                 continue
             i -= 40
@@ -39,6 +42,8 @@ def find_obj(img, template, res_img, color):
         return loc_match_num
 
     find_and_rot(template)
+    find_and_rot(cv2.resize(template, (int(w * 1.3), int(h * 1.3))))
+    find_and_rot(cv2.resize(template, (int(w * 1.7), int(h * 1.7))))
     find_and_rot(cv2.resize(template, (int(w / 1.5), int(h // 1.5))))
     find_and_rot(cv2.resize(template, (int(w / 2), int(h // 2))))
     find_and_rot(cv2.resize(template, (int(w / 3), int(h // 3))))
@@ -51,12 +56,12 @@ ghost_1 = cv2.imread("./Halloween/candy_ghost.png")
 ghost_2 = cv2.imread("./Halloween/scary_ghost.png")
 ghost_3 = cv2.imread("./Halloween/pampkin_ghost.png")
 
-find_obj(background, ghost_1, background_cpy, (0, 255, 0))
-find_obj(background, cv2.flip(ghost_1, 0),background_cpy,  (0, 255, 0))
-find_obj(background, cv2.flip(ghost_1, 1),background_cpy,  (0, 255, 0))
-find_obj(background, ghost_2, background_cpy, (255, 0, 0))
-find_obj(background, cv2.flip(ghost_2, 0),background_cpy,  (255, 0, 0))
-find_obj(background, cv2.flip(ghost_2, 1),background_cpy,  (255, 0, 0))
+# find_obj(background, ghost_1, background_cpy, (0, 255, 0))
+# find_obj(background, cv2.flip(ghost_1, 0),background_cpy,  (0, 255, 0))
+# find_obj(background, cv2.flip(ghost_1, 1),background_cpy,  (0, 255, 0))
+# find_obj(background, ghost_2, background_cpy, (255, 0, 0))
+# find_obj(background, cv2.flip(ghost_2, 0),background_cpy,  (255, 0, 0))
+# find_obj(background, cv2.flip(ghost_2, 1),background_cpy,  (255, 0, 0))
 find_obj(background, ghost_3, background_cpy, (0, 0, 255))
 find_obj(background, cv2.flip(ghost_3, 0),background_cpy,  (0, 0, 255))
 find_obj(background, cv2.flip(ghost_3, 1),background_cpy,  (0, 0, 255))
