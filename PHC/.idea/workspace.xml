@@ -10,21 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a10d2ee-5e21-4c2d-b069-961eb940e18e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../OOP/Life/zeromode.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab7orb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/HWs.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/.idea/Life.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/.idea/Life.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/.cmake/api/v1/reply/cache-v2-90c28e1bef76f71d1ae4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-08f30e9108705808f6e9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/.cmake/api/v1/reply/index-2023-10-23T05-06-08-0795.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OOP/Life/zeromode.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/Life/zeromode.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +118,7 @@
       <workItem from="1697967558261" duration="3256000" />
       <workItem from="1697964677132" duration="1518000" />
       <workItem from="1698048432761" duration="2461000" />
+      <workItem from="1698210574540" duration="4000" />
     </task>
     <servers />
   </component>
