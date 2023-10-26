@@ -1,0 +1,3 @@
+C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug/CMakeFiles/modules.dir
+C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug/CMakeFiles/rebuild_cache.dir

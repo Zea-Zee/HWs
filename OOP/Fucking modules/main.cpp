@@ -1,6 +1,6 @@
+#include <iostream>
 import module1;
 import module2;
-#include <iostream>
 
 int main(int argc, char** argv)
 {

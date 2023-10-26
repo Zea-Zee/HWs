@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <fstream>
 
 using namespace std;
@@ -9,8 +10,8 @@ private:
     bool **board;
     const short mode;
     string name;
-    char ruleBirth;
-    char ruleSurvive;
+    vector<char> birthRule;
+    vector<char> surviveRule;
     int size;
 public:
     Board(): mode{0}{                                                                   //start game on default board
@@ -23,7 +24,7 @@ public:
         askForAction();
         return;
     }
-    Board(const string input_path, int iterations, const string output_path): mode{2}, ruleBirth{0}, ruleSurvive{0}, size{0}{  //offline from file
+    Board(const string input_path, int iterations, const string output_path): mode{2}, size{0}{  //offline from file
         return;
     }
     void fillBoardFromFile(const string path){
@@ -46,9 +47,13 @@ public:
                 } else throw invalid_argument("You are trying to set name second time, in doesn't allowed. Change your input file and try again.");
             }
             if(buf[1] == 'R'){
-                if(ruleBirth != 0 or ruleSurvive != 0) {
-                    this->ruleBirth = buf[4];
-                    this->ruleSurvive = buf[7];
+                if(birthRule.empty() and surviveRule.empty()) {
+                    int tmp = startPos = buf.find('/', 0);
+                    if(startPos == -1)
+                        throw invalid_argument("Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+                                               "and y is number of neighbors to survive");
+
+                    for(int j = 0; j < )
                     continue;
                 } else throw invalid_argument("You are trying to set rules second time, in doesn't allowed. Change your input file and try again.");
             }
@@ -90,16 +95,64 @@ public:
         }
     }
     void askForAction(){
-        cout << "Enter command (dump <filename> / tick (n) / exit / help";
-        string action;
-        cin >> action;
-        if(action == "help"){
-            cout << "Help yourself\n";
+        cout << "Enter command below:\n";
+        string buf;
+        getline(cin, buf, ' ');
+        cout << buf << endl;
+//        cin >> action;
+        if(buf == "help"){
+            cout << "dump <file.txt> - write current board's state in your file\n"
+                    "tic <n> - make n tics, if you type just tic, then will made 1 tic\n"
+                    "help - show all actions (it will show this text)\n"
+                    "exit - end game\n";
             askForAction();
             return;
         }
-        if(action.substr(0, 4) == "dump"){
-            
+        if(buf == "dump"){
+            getline(cin, buf);
+            ofstream out;
+            try{
+                out.open(buf, std::ios::out);
+            } catch (const char* err){
+                cout << "An error ocurred with opening the file : "
+                << buf << " type action dump with filename again\n";
+                askForAction();
+                return;
+            }
+            printBoard(&out);
+            askForAction();
+            return;
+        }
+        if(buf == "exit")
+            exit(0);
+        if(buf == "tic") {
+            buf = "";
+            getline(cin, buf);
+            if(buf.length() > 0){
+                int n;
+                try {
+                    n = stoi(buf);
+                } catch (const char* err){
+                    perror("After tic you must enter integer or nothing!!! Try it again\n");
+                    askForAction();
+                    return;
+                }
+                tic(n);
+            } else tic(1);
+            return;
+        }
+        perror("You must type one command from help list!!!\n");
+        askForAction();
+        return;
+    }
+    void tic(int n ){
+
+    }
+    void printBoard(ofstream *stream){
+        for(int i = 0; i < this->size; i++){
+//            cout << string(this->size + 2, '-') << '\n';
+            for(int j = 0; j < this->size; j++) *stream << ' ' << board[i][j];
+            *stream << " \n";
         }
     }
     void printBoard(){

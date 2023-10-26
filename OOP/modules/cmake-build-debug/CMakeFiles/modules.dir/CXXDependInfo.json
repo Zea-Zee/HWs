@@ -1,0 +1,29 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/modules.dir/mod1.cppm.obj" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "all_my_modules",
+			"relative-directory" : "",
+			"source" : "C:/Users/kuzga/Desktop/HWs/OOP/modules/mod1.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PRIVATE"
+		}
+	},
+	"dir-cur-bld" : "C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/kuzga/Desktop/HWs/OOP/modules",
+	"dir-top-bld" : "C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug",
+	"dir-top-src" : "C:/Users/kuzga/Desktop/HWs/OOP/modules",
+	"exports" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/kuzga/Desktop/HWs/OOP/modules/cmake-build-debug/CMakeFiles/modules.dir"
+}
