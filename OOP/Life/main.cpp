@@ -18,6 +18,9 @@ public:
     }
     Board(const string path): mode{1}{                                                  //start game from file
         fillBoardFromFile(path);
+        cout << "You've filled board with this shape:\n";
+        printBoard();
+        askForAction();
         return;
     }
     Board(const string input_path, int iterations, const string output_path): mode{2}, ruleBirth{0}, ruleSurvive{0}, size{0}{  //offline from file
@@ -70,12 +73,12 @@ public:
                         string cache;
                         int numPos = buf.find(',', pointer);
                         if(numPos == -1) break;
-                        cache = buf.substr(pointer, numPos);
-                        pointer += cache.length();
+                        cache = buf.substr(pointer, numPos - pointer);
+                        pointer += cache.length() + 1;
                         x = stoi(cache);
                         numPos = buf.find(' ', pointer);
-                        if(numPos == -1) break;
-                        cache = buf.substr(pointer, numPos);
+                        if(numPos == -1) numPos = buf.length();
+                        cache = buf.substr(pointer, numPos - pointer);
                         pointer += cache.length();
                         y = stoi(cache);
                         if(x < 0 or y < 0 or x >= this->size or y >= this->size)
@@ -84,6 +87,19 @@ public:
                     }
                 } else throw invalid_argument("Firstly you must to set size of the board. Change your input file and try again.");
             }
+        }
+    }
+    void askForAction(){
+        cout << "Enter command (dump <filename> / tick (n) / exit / help";
+        string action;
+        cin >> action;
+        if(action == "help"){
+            cout << "Help yourself\n";
+            askForAction();
+            return;
+        }
+        if(action.substr(0, 4) == "dump"){
+            
         }
     }
     void printBoard(){
