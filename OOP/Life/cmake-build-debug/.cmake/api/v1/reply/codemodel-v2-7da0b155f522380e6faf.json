@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Life::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Life-Debug-a91acc3c0781cdc5c346.json",
+					"jsonFile" : "target-Life-Debug-6d3391af15b152364853.json",
 					"name" : "Life",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/kuzga/Desktop/HWs/OOP/Life/cmake-build-debug",
-		"source" : "C:/Users/kuzga/Desktop/HWs/OOP/Life"
+		"build" : "/home/gleb/Desktop/HWs/OOP/Life/cmake-build-debug",
+		"source" : "/home/gleb/Desktop/HWs/OOP/Life"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 5
+		"minor" : 4
 	}
 }

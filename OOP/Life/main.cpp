@@ -2,30 +2,60 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <sstream>
+#include <cstdlib>
+
+void clear_screen(){
+    #ifdef WINDOWS
+        std::system("cls");
+    #else
+        // Assume POSIX
+        std::system ("clear");
+    #endif
+}
+
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+
+#include <chrono>
+#include <thread>
+using namespace std::this_thread; // sleep_for, sleep_until
+using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 using namespace std;
 
 class Board{
 private:
     bool **board;
-    const short mode;
+    bool mode;
     string name;
-    vector<char> birthRule;
-    vector<char> surviveRule;
+    vector<short> birthRule;
+    vector<short> surviveRule;
     int size;
+    int mi(int i){  //nake correct index from -1 size and other
+        if(i < 0) return i + this->size;
+        if(i == this->size) return 0;
+        return i;
+    }
 public:
-    Board(): mode{0}{                                                                   //start game on default board
+    Board(): Board("./crystal.txt"){                                                                   //start game on default board
         return;
     }
     Board(const string path): mode{1}{                                                  //start game from file
         fillBoardFromFile(path);
         cout << "You've filled board with this shape:\n";
-        printBoard();
         askForAction();
         return;
     }
-    Board(const string input_path, int iterations, const string output_path): mode{2}, size{0}{  //offline from file
-        return;
+    Board(const string input_path, int iterations, const string output_path): mode{false}{  //offline from file
+        fillBoardFromFile(input_path);
+        for(int i = 0; i < iterations; i++) tic();
+        ofstream out;
+        out.open(output_path);
+        printBoard(&out);
     }
     void fillBoardFromFile(const string path){
         ifstream in;
@@ -34,7 +64,6 @@ public:
         for(int i = 0; i < 4; i++){
             getline(in, buf);
             if(not (buf[0] == '#' and buf[2] == ' ')){
-//                cout << buf << ":" << buf.length() << endl;
                 throw invalid_argument("Data isn't valid, in every string of file must be #mode (where mode is R / N / S / C)(Rules, Name, Size, Coordinates)\n"
                        "change data and try again");
 //                i -= 1;
@@ -48,12 +77,23 @@ public:
             }
             if(buf[1] == 'R'){
                 if(birthRule.empty() and surviveRule.empty()) {
-                    int tmp = startPos = buf.find('/', 0);
-                    if(startPos == -1)
+                    int startPos = buf.find('B', 0) + 1;
+                    int slashPos = buf.find('/', 0);
+                    if(startPos == -1 or slashPos == startPos)
                         throw invalid_argument("Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
                                                "and y is number of neighbors to survive");
-
-                    for(int j = 0; j < )
+                    for(int j = 0; j < (slashPos - startPos); j++){
+                        string tmp = buf.substr(startPos + j, 1);
+                        birthRule.push_back(stoi(tmp));
+                    }
+                    startPos = buf.find('S', slashPos) + 1;
+                    slashPos = buf.length();
+                    if(startPos == -1 or slashPos == startPos)
+                        throw invalid_argument("Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+                                               "and y is number of neighbors to survive");
+                    for(int j = 0; j < (slashPos - startPos); j++){
+                        surviveRule.push_back(stoi(buf.substr(startPos + j, 1)));
+                    }
                     continue;
                 } else throw invalid_argument("You are trying to set rules second time, in doesn't allowed. Change your input file and try again.");
             }
@@ -93,80 +133,216 @@ public:
                 } else throw invalid_argument("Firstly you must to set size of the board. Change your input file and try again.");
             }
         }
+        if(this->mode){
+            cout << "You've entered universal with name:\n  " << BLUE << this->name << RESET << "\n";
+            cout << "Size:\n  " << BLUE << this->size << RESET << "\n";
+            cout << "Birth rules:\n  " << BLUE;
+            for(int j = 0; j < this->birthRule.size(); j++) cout << " " << this->birthRule[j];
+            cout << RESET << "\n";
+            cout << "Survival rules:\n  " << BLUE;
+            for(int j = 0; j < this->surviveRule.size(); j++) cout << " " << this->surviveRule[j];
+            cout << RESET << "\n";
+            cout << "Mode:\n  " << BLUE << (this->mode == 0 ? "Random board -> game" : (this->mode == 1 ? "Your board from file -> game" :
+                                                                                        "Offline mode")) << "\n" << RESET;
+            cout << YELLOW << "Field is:\n" << RESET;
+            printBoard();
+        }
     }
     void askForAction(){
-        cout << "Enter command below:\n";
-        string buf;
-        getline(cin, buf, ' ');
-        cout << buf << endl;
+        while(true){
+            cout << "Enter command below:\n";
+            string buf;
+            getline(cin, buf);
+//            if(buf[0] == '\n') buf = buf.substr(1, buf.length() - 1);
+            stringstream ss(buf);
+            string buf2;
+            getline(ss, buf2, ' ');
+            cout << "Command is:" << buf << endl;
 //        cin >> action;
-        if(buf == "help"){
-            cout << "dump <file.txt> - write current board's state in your file\n"
-                    "tic <n> - make n tics, if you type just tic, then will made 1 tic\n"
-                    "help - show all actions (it will show this text)\n"
-                    "exit - end game\n";
-            askForAction();
-            return;
-        }
-        if(buf == "dump"){
-            getline(cin, buf);
-            ofstream out;
-            try{
-                out.open(buf, std::ios::out);
-            } catch (const char* err){
-                cout << "An error ocurred with opening the file : "
-                << buf << " type action dump with filename again\n";
-                askForAction();
-                return;
+            if(buf == "help"){
+                cout << "dump <file.txt> - write current board's state in your file\n"
+                        "tic <n> - make n tics, if you type just tic, then will made 1 tic\n"
+                        "help - show all actions (it will show this text)\n"
+                        "exit - end game\n";
+                continue;
             }
-            printBoard(&out);
-            askForAction();
-            return;
-        }
-        if(buf == "exit")
-            exit(0);
-        if(buf == "tic") {
-            buf = "";
-            getline(cin, buf);
-            if(buf.length() > 0){
-                int n;
-                try {
-                    n = stoi(buf);
+            if(buf2 == "dump"){
+                getline(ss, buf2, ' ');
+                ofstream out;
+                try{
+                    out.open(buf2, std::ios::out);
                 } catch (const char* err){
-                    perror("After tic you must enter integer or nothing!!! Try it again\n");
-                    askForAction();
-                    return;
+                    cout << "An error ocurred with opening the file : "
+                         << buf2 << " type action dump with filename again\n";
+                    continue;
                 }
-                tic(n);
-            } else tic(1);
-            return;
+                printBoard(&out);
+                cout << "Dump was created.\n";
+                out.close();
+                continue;
+            }
+//            getline(ss, buf)
+            if(buf == "exit"){
+                cout << YELLOW << "You've exit the game.\n" << RESET;
+                exit(0);
+            }
+            if(buf == "tic"){
+                cout << "TIC once\n";
+                tic();
+                continue;
+            }
+            if(buf2 == "tic") {
+                buf2 = "";
+                getline(ss, buf2);
+                if(buf2.length() > 0){
+                    int n;
+                    try {
+                        n = stoi(buf2);
+                    } catch (const char* err){
+                        perror("After tic you must enter integer or nothing!!! Try it again\n");
+                        continue;
+                    }
+                    cout << "TIC " << n << " times\n";
+                    for(int j = 0; j < n; j++){
+                        tic();
+                        cout << string(size * 2 + 1, '-') << '\n';
+                        sleep_for(milliseconds(100));
+                        clear_screen();
+                    }
+                }
+                continue;
+            }
+            perror("You must type one command from help list!!!\n");
+            continue;
         }
-        perror("You must type one command from help list!!!\n");
-        askForAction();
-        return;
     }
-    void tic(int n ){
-
-    }
-    void printBoard(ofstream *stream){
+    void tic(){
+        //check for birth
+        bool **newBoard = (bool**) calloc(this->size, sizeof(bool*));
         for(int i = 0; i < this->size; i++){
-//            cout << string(this->size + 2, '-') << '\n';
-            for(int j = 0; j < this->size; j++) *stream << ' ' << board[i][j];
-            *stream << " \n";
+            newBoard[i] = (bool*) calloc(this->size, sizeof(bool));
+            for(int j = 0; j < this->size; j++){
+                int aliveNeighbors = 0;
+                aliveNeighbors += board[mi(i + 1)][mi(j - 1)];        //***
+                aliveNeighbors += board[mi(i + 1)][j];                  //---
+                aliveNeighbors += board[mi(i + 1)][mi(j + 1)];       //---
+                aliveNeighbors += board[i][mi(j - 1)];                 //---
+                aliveNeighbors += board[i][mi(j + 1)];                 //*-*
+                                                                         //---
+                aliveNeighbors += board[mi(i - 1)][mi(j - 1)];      //---
+                aliveNeighbors += board[mi(i - 1)][j];                //---
+                aliveNeighbors += board[mi(i - 1)][mi(j + 1)];     //***
+                if(board[i][j]){
+                    for(auto el: this->surviveRule){
+                        if(el == aliveNeighbors){
+                            newBoard[i][j] = true;
+                            break;
+                        }
+                    }
+                } else{
+                    for(auto el: this->birthRule){
+                        if(el == aliveNeighbors){
+                            newBoard[i][j] = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
+        for(int i = 0; i < this->size; i++){
+            free(board[i]);
+        }
+        free(board);
+        this->board = newBoard;
+        if(this->mode) printBoard();
+    }
+
+    void printBoard(ofstream *stream){
+//        string outputBuf;
+        for(int i = 0; i < this->size; i++){
+//            outputBuf += (string(2 * this->size, '-'));
+//            *stream << string(2 * size, '-');
+            for(int j = 0; j < this->size; j++) {
+//                outputBuf.push_back(' ');
+//                outputBuf.push_back((char) board[i][j]);
+                *stream << ' ' << board[i][j];
+            }
+//            outputBuf.push_back('\n');
+            *stream << '\n';
+        }
+//        *stream << outputBuf;
     }
     void printBoard(){
         for(int i = 0; i < this->size; i++){
 //            cout << string(this->size + 2, '-') << '\n';
-            for(int j = 0; j < this->size; j++) cout << ' ' << board[i][j];
+            for(int j = 0; j < this->size; j++){
+                if(j == 0){
+                    cout << "|";
+                }
+                if(board[i][j])
+                    cout << ' ' << GREEN << "◼" << RESET;
+                else
+                    cout << ' ' << RED << ' ' << RESET;
+            }
+            cout << "|";
             cout << " \n";
         }
     }
 };
 
-int main() {
-    Board a("./zeromode.txt");
-    a.printBoard();
+int main(int argc, char *argv[]){
+    if(argc >= 3){
+//        char options[] = "i:"
+        int iters;
+        string path;
+        bool iterFlag = false, outputFlag = false;
+        for(int i = 1; i < argc; i++){
+            string arg = argv[i];
+            if(arg == "-i"){
+                if(i >= argc){
+                    perror("After -i you must type number of iterations.\n");
+                    exit(1);
+                }
+                if(iterFlag){
+                    perror("You are trying two set number of iterations second time.\n");
+                    exit(1);
+                }
+                try{
+                    iters = stoi(argv[i + 1]);
+                } catch(const char* err){
+                    perror("Iterations must be integer.\n");
+                    exit(1);
+                }
+                iterFlag = true;
+                i++;
+            } else if(arg.find("--iterations=") == 0){
+                try{
+                    iters = stoi(arg.substr(13));
+                } catch(const char* err){
+                    perror("Iterations must be integer.\n");
+                    exit(1);
+                }
+            } else if(arg == "-o"){
+                if(i >= argc){
+                    perror("After -o you must type output path.\n");
+                    exit(1);
+                }
+                if(outputFlag){
+                    perror("You are trying two set output path second time.\n");
+                    exit(1);
+                }
+                path = argv[i + 1];
+                outputFlag = true;
+                i++;
+            } else if(arg.find("--output=") == 0){
+                path = arg.substr(9);
+            }
+        }
+        Board a("./zeromode.txt", iters, path);
+        exit(0);
+    }
+    Board a;
+//    Board a("./zeromode.txt");
 //    cout << "work";
     return 0;
 }

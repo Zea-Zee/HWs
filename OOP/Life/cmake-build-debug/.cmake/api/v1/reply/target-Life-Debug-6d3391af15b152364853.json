@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Life.exe"
-		},
-		{
-			"path" : "Life.pdb"
+			"path" : "Life"
 		}
 	],
 	"backtrace" : 1,
@@ -38,7 +35,10 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++1z -fdiagnostics-color=always"
+					"fragment" : "-g -fdiagnostics-color=always"
+				},
+				{
+					"fragment" : "-std=gnu++20"
 				}
 			],
 			"language" : "CXX",
@@ -68,16 +68,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "Life",
-	"nameOnDisk" : "Life.exe",
+	"nameOnDisk" : "Life",
 	"paths" : 
 	{
 		"build" : ".",
