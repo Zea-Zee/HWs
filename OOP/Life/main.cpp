@@ -1,29 +1,29 @@
 #include <iostream>
 #include <string>
 #include <vector>
-//#include <fstream>
-//#include <sstream>
-//#include <cstdlib>
-//
-//void clear_screen(){
-//    #ifdef WINDOWS
-//        std::system("cls");
-//    #else
-//        // Assume POSIX
-//        std::system ("clear");
-//    #endif
-//}
-//
-//#define RESET "\033[0m"
-//#define RED "\033[31m"
-//#define GREEN "\033[32m"
-//#define YELLOW "\033[33m"
-//#define BLUE "\033[34m"
-//
-//#include <chrono>
-//#include <thread>
-//using namespace std::this_thread; // sleep_for, sleep_until
-//using namespace std::chrono; // nanoseconds, system_clock, seconds
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
+
+void clear_screen(){
+    #ifdef WINDOWS
+        std::system("cls");
+    #else
+        // Assume POSIX
+        std::system ("clear");
+    #endif
+}
+
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+
+#include <chrono>
+#include <thread>
+using namespace std::this_thread; // sleep_for, sleep_until
+using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 using namespace std;
 
@@ -90,22 +90,27 @@ private:
     vector<short> birthRule;
     vector<short> surviveRule;
     int size;
-    int mi(int i){  //nake correct index from -1 size and other
+    int alive;  //number of alive cells to corr sleep time with it
+    int mi(int i){  //make correct index from -1 size and other
         if(i < 0) return i + this->size;
         if(i == this->size) return 0;
         return i;
     }
 public:
-    Board(): Board("./crystal.txt"){                                                                   //start game on default board
-        return;
+    Board(){    //start game on default board
+        srand(time(0));
+        int defPath = rand() % 3;
+        if(defPath == 0) Board("./triplet.txt");
+        else if(defPath == 1) Board("./crystal.txt");
+        else if(defPath == 2) Board("./gun.txt");
     }
-    Board(const string path): mode{1}{                                                  //start game from file
+    Board(const string path): mode{true}, size{0},alive{0}{                                                  //start game from file
         fillBoardFromFile(path);
         cout << "You've filled board with this shape:\n";
         askForAction();
         return;
     }
-    Board(const string input_path, int iterations, const string output_path): mode{false}{  //offline from file
+    Board(const string input_path, int iterations, const string output_path): mode{false}, size{0},alive{0}{  //offline from file
         fillBoardFromFile(input_path);
         for(int i = 0; i < iterations; i++) tic();
         ofstream out;
@@ -118,6 +123,7 @@ public:
         string buf;
         for(int i = 0; i < 4; i++){
             getline(in, buf);
+            cout << "fillBuff buf:" << buf << ":\n";
             if(not (buf[0] == '#' and buf[2] == ' ')){
                 throw invalid_argument("Data isn't valid, in every string of file must be #mode (where mode is R / N / S / C)(Rules, Name, Size, Coordinates)\n"
                        "change data and try again");
@@ -134,32 +140,53 @@ public:
                 if(birthRule.empty() and surviveRule.empty()) {
                     int startPos = buf.find('B', 0) + 1;
                     int slashPos = buf.find('/', 0);
-                    if(startPos == -1 or slashPos == startPos)
-                        throw invalid_argument("Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
-                                               "and y is number of neighbors to survive");
+                    if(startPos == -1 or slashPos == startPos) {
+                        ArgumentError aerr(
+                                "Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+                                "and y is number of neighbors to survive");
+                        aerr.throwException();
+                        throw invalid_argument(
+                                "Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+                                "and y is number of neighbors to survive");
+                    }
                     for(int j = 0; j < (slashPos - startPos); j++){
                         string tmp = buf.substr(startPos + j, 1);
                         birthRule.push_back(stoi(tmp));
                     }
                     startPos = buf.find('S', slashPos) + 1;
                     slashPos = buf.length();
-                    if(startPos == -1 or slashPos == startPos)
-                        throw invalid_argument("Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
-                                               "and y is number of neighbors to survive");
+                    if(startPos == -1 or slashPos == startPos) {
+                        ArgumentError aerr(
+                                "Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+                                "and y is number of neighbors to survive");
+                        aerr.throwException();
+//                        throw invalid_argument(
+//                                "Your rules are wrong, enter them by example (#R Bx/Sy) (where x is number of neighbotr to birth"
+//                                "and y is number of neighbors to survive");
+                    }
                     for(int j = 0; j < (slashPos - startPos); j++){
                         surviveRule.push_back(stoi(buf.substr(startPos + j, 1)));
                     }
                     continue;
-                } else throw invalid_argument("You are trying to set rules second time, in doesn't allowed. Change your input file and try again.");
+                } else{
+                    ArgumentError aerr("You are trying to set rules second time, in doesn't allowed. Change your input file and try again.");
+                    aerr.throwException();
+//                    throw invalid_argument("You are trying to set rules second time, in doesn't allowed. Change your input file and try again.");
+                }
             }
             if(buf[1] == 'S'){
-                if(this->size != 0) {
+                cout << "\n" << ":" << this->size << ":\n";
+                if(this->size == 0) {
                     this->size = stoi(buf.substr(3, buf.length() - 3));
                     this->board = (bool **) calloc(this->size, sizeof(bool*));
                     for(int j = 0; j < this->size; j++)
                         this->board[j] = (bool*) calloc(this->size, sizeof(bool));
                     continue;
-                } else throw invalid_argument("You are trying to set size second time, in doesn't allowed. Change your input file and try again.");
+                } else{
+                    ArgumentError aerr("You are trying to set size second time, in doesn't allowed. Change your input file and try again.");
+                    aerr.throwException();
+//                    throw invalid_argument("You are trying to set size second time, in doesn't allowed. Change your input file and try again.");
+                }
             }
             if(buf[1] == 'C') {
                 if (this->size > 0) {
@@ -269,8 +296,9 @@ public:
                     cout << "TIC " << n << " times\n";
                     for(int j = 0; j < n; j++){
                         tic();
-                        cout << string(size * 2 + 1, '-') << '\n';
-                        sleep_for(milliseconds(100));
+                        cout << string(size * 2 + 2, '-') << '\n';
+                        int sleepTime = this->alive < 10 ? 50 : this->alive * 7;
+                        sleep_for(milliseconds(size * 20));
                         clear_screen();
                     }
                 }
@@ -284,6 +312,7 @@ public:
     }
     void tic(){
         //check for birth
+        int curAlive = 0;
         bool **newBoard = (bool**) calloc(this->size, sizeof(bool*));
         for(int i = 0; i < this->size; i++){
             newBoard[i] = (bool*) calloc(this->size, sizeof(bool));
@@ -302,6 +331,7 @@ public:
                     for(auto el: this->surviveRule){
                         if(el == aliveNeighbors){
                             newBoard[i][j] = true;
+                            curAlive++;
                             break;
                         }
                     }
@@ -309,6 +339,7 @@ public:
                     for(auto el: this->birthRule){
                         if(el == aliveNeighbors){
                             newBoard[i][j] = true;
+                            curAlive++;
                             break;
                         }
                     }
@@ -320,6 +351,7 @@ public:
         }
         free(board);
         this->board = newBoard;
+        this->alive = curAlive;
         if(this->mode) printBoard();
     }
 
@@ -346,9 +378,11 @@ public:
                     cout << "|";
                 }
                 if(board[i][j])
-                    cout << ' ' << GREEN << "◼" << RESET;
-                else
-                    cout << ' ' << RED << ' ' << RESET;
+                    cout << ' ' << GREEN << "■" << RESET;
+                else {
+//                    cout << ' ' << RED << "□" << RESET;
+                    cout << ' ' << RED << " " << RESET;
+                }
             }
             cout << "|";
             cout << " \n";
@@ -357,6 +391,7 @@ public:
 };
 
 int main(int argc, char *argv[]){
+    Board a;
     if(argc >= 3){
 //        char options[] = "i:"
         int iters;
@@ -417,8 +452,5 @@ int main(int argc, char *argv[]){
         Board a("./zeromode.txt", iters, path);
         exit(0);
     }
-    Board a;
-//    Board a("./zeromode.txt");
-//    cout << "work";
     return 0;
 }

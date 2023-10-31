@@ -3,4 +3,4 @@ project(Life)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Life main.cpp)
+add_executable(life main.cpp)
