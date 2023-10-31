@@ -1,32 +1,87 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
-
-void clear_screen(){
-    #ifdef WINDOWS
-        std::system("cls");
-    #else
-        // Assume POSIX
-        std::system ("clear");
-    #endif
-}
-
-#define RESET "\033[0m"
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define BLUE "\033[34m"
-
-#include <chrono>
-#include <thread>
-using namespace std::this_thread; // sleep_for, sleep_until
-using namespace std::chrono; // nanoseconds, system_clock, seconds
+//#include <fstream>
+//#include <sstream>
+//#include <cstdlib>
+//
+//void clear_screen(){
+//    #ifdef WINDOWS
+//        std::system("cls");
+//    #else
+//        // Assume POSIX
+//        std::system ("clear");
+//    #endif
+//}
+//
+//#define RESET "\033[0m"
+//#define RED "\033[31m"
+//#define GREEN "\033[32m"
+//#define YELLOW "\033[33m"
+//#define BLUE "\033[34m"
+//
+//#include <chrono>
+//#include <thread>
+//using namespace std::this_thread; // sleep_for, sleep_until
+//using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 using namespace std;
 
+class MyError{
+protected:
+    const char *msg;
+//    int exitNumber;
+public:
+    MyError(const char *str){
+        this->msg = str;
+//        this->exitNumber = exitNum;
+    }
+    virtual void throwException() const{
+        perror("Unknown error.\n");
+        exit(-1);
+    }
+};
+
+class ArgumentError : public MyError{
+public:
+    using MyError::MyError;
+//    explicit MyFatalError(const string str) : MyError(str){}
+    void throwException() const override{
+        throw invalid_argument(this->msg);
+    }
+};
+
+class RangeError : public MyError{
+public:
+    using MyError::MyError;
+//    explicit MyFatalError(const string str) : MyError(str){}
+    void throwException() const override{
+        throw out_of_range(this->msg);
+    }
+};
+
+class MyPlainError : public MyError{
+public:
+    using MyError::MyError;
+//    explicit MyFatalError(const string str) : MyError(str){}
+    void throwException() const override{
+        perror(this->msg);
+    }
+};
+
+//int main(){
+////    MyError err("err\n");
+//    ArgumentError aerr("Arg\n");
+//    RangeError rerr("Arg\n");
+//    MyPlainError perr("warn\n");
+////    err.throwException();
+////    aerr.throwException();
+////    rerr.throwException();
+//    perr.throwException();
+//    cout << "work";
+//    return 0;
+//}
+//
 class Board{
 private:
     bool **board;
@@ -126,11 +181,18 @@ public:
                         cache = buf.substr(pointer, numPos - pointer);
                         pointer += cache.length();
                         y = stoi(cache);
-                        if(x < 0 or y < 0 or x >= this->size or y >= this->size)
-                            throw out_of_range("Coordinates of dots are out of board size range. Change your input file and try again.");
+                        if(x < 0 or y < 0 or x >= this->size or y >= this->size){
+                            RangeError rerr("Coordinates of dots are out of board size range. Change your input file and try again.");
+                            rerr.throwException();
+                        }
+//                            throw out_of_range("Coordinates of dots are out of board size range. Change your input file and try again.");
                         this->board[x][y] = true;
                     }
-                } else throw invalid_argument("Firstly you must to set size of the board. Change your input file and try again.");
+                } else{
+                    RangeError rerr("Firstly you must to set size of the board. Change your input file and try again.");
+                    rerr.throwException();
+//                    throw invalid_argument("Firstly you must to set size of the board. Change your input file and try again.");
+                }
             }
         }
         if(this->mode){
@@ -199,7 +261,9 @@ public:
                     try {
                         n = stoi(buf2);
                     } catch (const char* err){
-                        perror("After tic you must enter integer or nothing!!! Try it again\n");
+//                        perror("After tic you must enter integer or nothing!!! Try it again\n");
+                        MyPlainError perr("After tic you must enter integer or nothing!!! Try it again.\\n");
+                        perr.throwException();
                         continue;
                     }
                     cout << "TIC " << n << " times\n";
@@ -212,7 +276,9 @@ public:
                 }
                 continue;
             }
-            perror("You must type one command from help list!!!\n");
+//            perror("You must type one command from help list!!!\n");
+            MyPlainError perr("You must type one command from help list!!!\n");
+            perr.throwException();
             continue;
         }
     }
@@ -300,18 +366,22 @@ int main(int argc, char *argv[]){
             string arg = argv[i];
             if(arg == "-i"){
                 if(i >= argc){
-                    perror("After -i you must type number of iterations.\n");
-                    exit(1);
+//                    perror("After -i you must type number of iterations.\n");
+                    ArgumentError aerr("After -i you must type number of iterations.\n");
+                    aerr.throwException();
                 }
                 if(iterFlag){
                     perror("You are trying two set number of iterations second time.\n");
-                    exit(1);
+                    ArgumentError aerr("You are trying two set number of iterations second time.\n");
+                    aerr.throwException();
                 }
                 try{
                     iters = stoi(argv[i + 1]);
                 } catch(const char* err){
-                    perror("Iterations must be integer.\n");
-                    exit(1);
+//                    perror("Iterations must be integer.\n");
+                    ArgumentError aerr("Iterations must be integer.\n");
+                    aerr.throwException();
+//                    exit(1);
                 }
                 iterFlag = true;
                 i++;
@@ -319,17 +389,23 @@ int main(int argc, char *argv[]){
                 try{
                     iters = stoi(arg.substr(13));
                 } catch(const char* err){
-                    perror("Iterations must be integer.\n");
-                    exit(1);
+//                    perror("Iterations must be integer.\n");
+//                    exit(1);
+                    ArgumentError aerr("After -i you must type number of iterations.\n");
+                    aerr.throwException();
                 }
             } else if(arg == "-o"){
                 if(i >= argc){
-                    perror("After -o you must type output path.\n");
-                    exit(1);
+//                    perror("After -o you must type output path.\n");
+//                    exit(1);
+                    ArgumentError aerr("After -o you must type output path.\n");
+                    aerr.throwException();
                 }
                 if(outputFlag){
-                    perror("You are trying two set output path second time.\n");
-                    exit(1);
+//                    perror("You are trying two set output path second time.\n");
+//                    exit(1);
+                    ArgumentError aerr("You are trying two set output path second time.\n");
+                    aerr.throwException();
                 }
                 path = argv[i + 1];
                 outputFlag = true;
