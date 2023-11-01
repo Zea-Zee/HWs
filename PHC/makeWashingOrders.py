@@ -36,8 +36,8 @@ def make_records(machine=1, wanted_count=2):
     num_of_records = 0
     # names_list_1 = ["J18"]
     # rooms_list_1 = ["K18"]
-    names_list_1 = ["J12", "L12", "N12", "P12", "R12"]
-    rooms_list_1 = ["K12", "M12", "O12", "Q12", "S12"]
+    names_list_1 = ["N12", "P12", "J12", "L12", "N12", "P12", "R12"]
+    rooms_list_1 = ["O12", "Q12", "K12", "M12", "O12", "Q12", "S12"]
     names_list_2 = ["J12", "L12", "N12", "P12", "R12"]
     rooms_list_2 = ["K12", "M12", "O12", "Q12", "S12"]
     time_bound = {"F": 10, "H": 12, "J": 14, "L": 16, "N": 18, "P": 20, "R": 22}
