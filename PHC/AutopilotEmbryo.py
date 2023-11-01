@@ -25,25 +25,10 @@ for key in sing_links.keys():
     # cv2.imshow("tst", signs[key])
     # cv2.waitKey(0)
 
-sign_url = input()
-sign_resp = requests.get(sign_url, stream=True).raw
-sign = np.asarray(bytearray(sign_resp.read()), dtype="uint8")
-sign = cv2.imdecode(sign, cv2.IMREAD_COLOR)
-
-def get_SIFT_score(img, template):
-    sift = cv2.ORB_create(5)
-
-    kp_template, des_template = sift.detectAndCompute(template, None)
-    kp_template1, des_template1 = sift.detectAndCompute(img, None)
-
-    bf = cv2.BFMatcher()
-    matches = bf.knnMatch(img, template, k=2)
-
-    good_matches = []
-    for m, n in matches:
-        if m.distance < 0.75 * n.distance:
-            matches.append(m)
-    return len(good_matches)
+# sign_url = input()
+# sign_resp = requests.get(sign_url, stream=True).raw
+# sign = np.asarray(bytearray(sign_resp.read()), dtype="uint8")
+# sign = cv2.imdecode(sign, cv2.IMREAD_COLOR)
 
 
 def BFMatching(img1, img2):
@@ -57,25 +42,29 @@ def BFMatching(img1, img2):
     good = []
     # matched_image = cv2.drawMatchesKnn(img1,kpnt1, img2, kpnt2, matches, None,matchColor=(0, 255, 0), matchesMask=None,singlePointColor=(255, 0, 0), flags=0)
     for m, n in matches:
-        if m.distance < 0.75 * n.distance:
+        if m.distance < 0.05 * n.distance:
             good.append([m])
 
     # cv2.imshow("matches", matched_image)
     # cv2.waitKey(0)
     return len(good)
 
-same_sign = "Главная дорога"
-same_sign_val = 0
-
-for key in signs.keys():
-    # print(BFMatching(sign, signs[key]))
-    res = BFMatching(sign, signs[key])
-    if res > same_sign_val:
-        same_sign_val = res
-        same_sign = signs[key]
-    # cv2.imshow("tst", signs[key])
+for k in signs.keys():
+    img = signs[k]
+    # cv2.imshow("tst", img)
     # cv2.waitKey(0)
+    same_sign = "Главная дорога"
+    same_sign_val = 0
 
-print(same_sign)
+    for key in signs.keys():
+        # print(BFMatching(sign, signs[key]))
+        res = BFMatching(img, signs[key])
+        if res > same_sign_val:
+            same_sign_val = res
+            same_sign = key
+        # cv2.imshow("tst", signs[key])
+        # cv2.waitKey(0)
+
+    print(same_sign)
 
 # https://ucarecdn.com/5c4d85b9-19e7-4acd-8afc-9c8e2babf6c6/
