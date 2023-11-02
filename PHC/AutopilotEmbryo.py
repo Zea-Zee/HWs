@@ -2,17 +2,19 @@ import cv2
 import numpy as np
 import requests
 
+ns = 150
+
 sing_links = {
-    "Главная дорога": "https://ucarecdn.com/5c4d85b9-19e7-4acd-8afc-9c8e2babf6c6/",
-    "Стоянка запрещена": "https://ucarecdn.com/d249f2d7-88b7-4cc0-8d0c-eb213135efad/",
-    "Крутой подъем": "https://ucarecdn.com/607031cb-bd16-4225-92bd-3c3f8a15f564/",
-    "Подача звукового сигнала запрещена": "https://ucarecdn.com/368f8b3a-8892-4c21-a985-8a882d9202c5/",
-    "Ограничение максимальной скорости": "https://ucarecdn.com/34dca296-fe42-4201-9c24-9312c4ce3ccc/",
-    "Дети": "https://ucarecdn.com/31c23597-e443-42a7-a604-fabe620790ea/",
-    "Дорожные работы": "https://ucarecdn.com/5f4c6c41-659d-4ff2-86a3-46b130287078/",
-    "Железнодорожный переезд без шлагбаума": "https://ucarecdn.com/d32e96b5-2f42-4c72-a3c6-e2e33ad15152/",
-    "Пешеходный переход": "https://ucarecdn.com/7974d6b2-143c-41e2-b357-28a7b9a2c8d1/",
-    "Велосипедная дорожка": "https://ucarecdn.com/20b23f45-3064-451a-9ba6-22fee46f7fd8/"
+    "Главная дорога": "https://stepik.org/media/attachments/course/187016/Главная_дорога_7155.png",
+    "Стоянка запрещена": "https://stepik.org/media/attachments/course/187016/Стоянка_запрещена_6465.png",
+    "Крутой подъем": "https://stepik.org/media/attachments/course/187016/Крутой_подъем_9512.png",
+    "Подача звукового сигнала запрещена": "https://stepik.org/media/attachments/course/187016/Подача_звукового_сигнала_запрещена_6305.png",
+    "Ограничение максимальной скорости": "https://stepik.org/media/attachments/course/187016/Ограничение_максимальной_скорости_2359.png",
+    "Дети": "https://stepik.org/media/attachments/course/187016/Дети_1192.png",
+    "Дорожные работы": "https://stepik.org/media/attachments/course/187016/Дорожные_работы_9507.jpg",
+    "Железнодорожный переезд без шлагбаума": "https://stepik.org/media/attachments/course/187016/Железнодорожный_переезд_без_шлагбаума_3857.png",
+    "Пешеходный переход": "https://stepik.org/media/attachments/course/187016/Пешеходеый_переход_3561__1_.jpg",
+    "Велосипедная дорожка": "https://stepik.org/media/attachments/course/187016/Велосипедная_дорожка_1811.jpg"
 }
 
 signs = {}
@@ -21,14 +23,16 @@ for key in sing_links.keys():
     resp = requests.get(sing_links[key], stream=True).raw
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+    image = cv2.resize(image, (ns, ns))
     signs[key] = image
     # cv2.imshow("tst", signs[key])
     # cv2.waitKey(0)
 
-# sign_url = input()
-# sign_resp = requests.get(sign_url, stream=True).raw
-# sign = np.asarray(bytearray(sign_resp.read()), dtype="uint8")
-# sign = cv2.imdecode(sign, cv2.IMREAD_COLOR)
+sign_url = input()
+sign_resp = requests.get(sign_url, stream=True).raw
+sign = np.asarray(bytearray(sign_resp.read()), dtype="uint8")
+sign = cv2.imdecode(sign, cv2.IMREAD_COLOR)
+sign = cv2.resize(sign, (ns, ns))
 
 
 def BFMatching(img1, img2):
@@ -49,22 +53,18 @@ def BFMatching(img1, img2):
     # cv2.waitKey(0)
     return len(good)
 
-for k in signs.keys():
-    img = signs[k]
-    # cv2.imshow("tst", img)
+same_sign = "Знак неизвестен"
+same_sign_val = 0
+
+for key in signs.keys():
+    # print(BFMatching(sign, signs[key]))
+    res = BFMatching(sign, signs[key])
+    if res > same_sign_val and res > 1:
+        same_sign_val = res
+        same_sign = key
+    # cv2.imshow("tst", signs[key])
     # cv2.waitKey(0)
-    same_sign = "Главная дорога"
-    same_sign_val = 0
 
-    for key in signs.keys():
-        # print(BFMatching(sign, signs[key]))
-        res = BFMatching(img, signs[key])
-        if res > same_sign_val:
-            same_sign_val = res
-            same_sign = key
-        # cv2.imshow("tst", signs[key])
-        # cv2.waitKey(0)
-
-    print(same_sign)
+print(same_sign)
 
 # https://ucarecdn.com/5c4d85b9-19e7-4acd-8afc-9c8e2babf6c6/
