@@ -5,6 +5,32 @@
 #include <sstream>
 #include <cstdlib>
 
+#ifdef WINDOWS
+    #include<windows.h>
+    #define pause(a) Sleep(a)
+
+    #define ALIVE   '1'
+    #define DEAD    '0'
+
+    #define RESET   " "
+    #define RED     " "
+    #define GREEN   " "
+    #define YELLOW  " "
+    #define BLUE    " "
+#else
+    #include<unistd.h>
+    #define pause(a) usleep(a * 1000)
+
+    #define ALIVE   "■"
+    #define DEAD    "□"
+
+    #define RESET "\033[0m"
+    #define RED "\033[31m"
+    #define GREEN "\033[32m"
+    #define YELLOW "\033[33m"
+    #define BLUE "\033[34m"
+#endif
+
 void clear_screen(){
     #ifdef WINDOWS
         std::system("cls");
@@ -13,17 +39,6 @@ void clear_screen(){
         std::system ("clear");
     #endif
 }
-
-#define RESET "\033[0m"
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define BLUE "\033[34m"
-
-#include <chrono>
-#include <thread>
-using namespace std::this_thread; // sleep_for, sleep_until
-using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 using namespace std;
 
@@ -69,19 +84,6 @@ public:
     }
 };
 
-//int main(){
-////    MyError err("err\n");
-//    ArgumentError aerr("Arg\n");
-//    RangeError rerr("Arg\n");
-//    MyPlainError perr("warn\n");
-////    err.throwException();
-////    aerr.throwException();
-////    rerr.throwException();
-//    perr.throwException();
-//    cout << "work";
-//    return 0;
-//}
-//
 class Board{
 private:
     bool **board;
@@ -123,7 +125,7 @@ public:
         string buf;
         for(int i = 0; i < 4; i++){
             getline(in, buf);
-            cout << "fillBuff buf:" << buf << ":\n";
+//            cout << "fillBuff buf:" << buf << ":\n";
             if(not (buf[0] == '#' and buf[2] == ' ')){
                 throw invalid_argument("Data isn't valid, in every string of file must be #mode (where mode is R / N / S / C)(Rules, Name, Size, Coordinates)\n"
                        "change data and try again");
@@ -175,7 +177,7 @@ public:
                 }
             }
             if(buf[1] == 'S'){
-                cout << "\n" << ":" << this->size << ":\n";
+//                cout << "\n" << ":" << this->size << ":\n";
                 if(this->size == 0) {
                     this->size = stoi(buf.substr(3, buf.length() - 3));
                     this->board = (bool **) calloc(this->size, sizeof(bool*));
@@ -298,7 +300,7 @@ public:
                         tic();
                         cout << string(size * 2 + 2, '-') << '\n';
                         int sleepTime = this->alive < 10 ? 50 : this->alive * 7;
-                        sleep_for(milliseconds(size * 20));
+                        pause(size * 20);
                         clear_screen();
                     }
                 }
@@ -378,10 +380,10 @@ public:
                     cout << "|";
                 }
                 if(board[i][j])
-                    cout << ' ' << GREEN << "■" << RESET;
+                    cout << ' ' << GREEN << ALIVE << RESET;
                 else {
-//                    cout << ' ' << RED << "□" << RESET;
-                    cout << ' ' << RED << " " << RESET;
+                    cout << ' ' << RED << DEAD << RESET;
+//                    cout << ' ' << RED << " " << RESET;
                 }
             }
             cout << "|";
@@ -391,9 +393,7 @@ public:
 };
 
 int main(int argc, char *argv[]){
-    Board a;
     if(argc >= 3){
-//        char options[] = "i:"
         int iters;
         string path;
         bool iterFlag = false, outputFlag = false;
@@ -449,8 +449,9 @@ int main(int argc, char *argv[]){
                 path = arg.substr(9);
             }
         }
-        Board a("./zeromode.txt", iters, path);
+        Board a("./triplet.txt", iters, path);
         exit(0);
     }
+    Board a;
     return 0;
 }
