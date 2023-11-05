@@ -30,7 +30,8 @@ validation_data, test_data = train_test_split(test_data, test_size=0.5, random_s
 # Step 3: Tune hyperparameters and train models
 # 3.1. Random Forest
 start = time.time()
-rf_params = {'n_estimators': [50, 100, 200, 300], 'max_depth': [5, 10, 20, 30]}
+# rf_params = {'n_estimators': [50, 100, 200, 300, 500, 700], 'max_depth': [5, 10, 20, 30]} #Random Forest Accuracy: 0.8037383177570093 Precision: 0.8717948717948718
+rf_params = {'n_estimators': [50], 'max_depth': [5]}
 rf_classifier = RandomForestClassifier(random_state=42)
 rf_grid_search = GridSearchCV(rf_classifier, rf_params, cv=5)
 rf_grid_search.fit(train_data.drop(['Survived'], axis=1), train_data['Survived'])
