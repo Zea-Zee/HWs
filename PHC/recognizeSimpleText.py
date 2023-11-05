@@ -17,7 +17,9 @@ def cut_corners(img):
     coords = np.argwhere(m)
     y0, x0, y1, x1 = *np.min(coords, axis=0), *np.max(coords, axis=0)
     im = im.crop((x0, y0, x1+1, y1+1))
-    return np.array(im)
+    ret = np.array(im)
+    ret = cv2.cvtColor(ret, cv2.COLOR_BGR2GRAY)
+    return ret
 
 def get_letter(img, i):
     img_height, img_width, img_channels = img.shape

@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 # import matplotlib.pyplot as plt
 
 df = pd.read_csv("./wells_info_with_prod.csv")
+df = df.drop(["Name"])
 X = df[["CompletionDate", "BottomHoleLatitude", "BottomHoleLongitude"]].copy()
 X['CompletionDate'] = pd.to_datetime(X['CompletionDate'])
 X['CompletionDate'] = (X['CompletionDate'] - X['CompletionDate'].min()).dt.days
