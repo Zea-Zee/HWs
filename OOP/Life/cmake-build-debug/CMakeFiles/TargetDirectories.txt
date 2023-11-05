@@ -1,3 +1,0 @@
-/home/gleb/Desktop/HWs/OOP/Life/cmake-build-debug/CMakeFiles/life.dir
-/home/gleb/Desktop/HWs/OOP/Life/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/gleb/Desktop/HWs/OOP/Life/cmake-build-debug/CMakeFiles/rebuild_cache.dir
