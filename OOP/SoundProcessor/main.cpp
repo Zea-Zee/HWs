@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+//#include <c_s>
 #include <fstream>
 #include <cstdint>
 
@@ -8,12 +9,34 @@
 
 using namespace std;
 
-class MyError{
+class BaseError{
 private:
-    const char *errorMessage;
+    const string errorMessage;
     const char errorCode;
 public:
-    MyError(const char code, const char *msg):errorMessage{msg},errorCode{code}{}
+    BaseError(const char code, const char *msg):errorMessage{msg},errorCode{code}{
+//        cout << "Undetermined error with error code:" + to_string(errorCode) + " and message:" + errorMessage + "\n";
+        perror((" " + errorMessage + " code " + to_string(errorCode) + "\n").c_str());
+    }
+};
+
+class IOFileError : public BaseError{
+public:
+    IOFileError(const char code, const char *msg) : BaseError(code, msg){
+        exit(code);
+    }
+};
+
+class WAVFormatError : public BaseError{
+public:
+    WAVFormatError(const char code, const char *msg) : BaseError(code, msg){
+        exit(code);
+    }
+};
+
+class MyWarning : public BaseError{
+public:
+    MyWarning(const char code, const char *msg) : BaseError(code, msg){}
 };
 
 
@@ -49,19 +72,19 @@ public:
     WavFile(const char *path) {
         this->wavFile = fopen(path, "r");
         if (this->wavFile == nullptr) {
-            fprintf(stderr, "Unable to open wave file: %s\n", path);
-            exit(1);
+            IOFileError err(1, ("Unable to open WAV file: " + string(path)).c_str());
         }
 
         this->header = (wav_hdr *) calloc(1, sizeof(wav_hdr));
         size_t bytesRead = fread(this->header, 1, sizeof(*this->header), this->wavFile);
         cout << "Header Read " << bytesRead << " bytes." << endl;
+        printHeader();
 
         if (bytesRead > 0){
-            if(header->AudioFormat != 1) InputWAVError(3, "Audio format must be PMC (without encoding) (field must have val 1)");
-            if(header->NumOfChan != 1) InputWAVError(4, "WAV for this program must have one channel (Mono) (field must have val 1)");
-            if(header->bitsPerSample != 16) InputWAVError(5, "WAV for this program must have 16 bitness (field must have val 16)");
-            if(header->SamplesPerSec != 44100) InputWAVError(6, "WAV for this program can only have 44100 sampling rate (field must have val 44100)");
+            if(header->AudioFormat != 1) WAVFormatError err(3, "Audio format must be PMC (without encoding) (field must have val 1)");
+            if(header->NumOfChan != 1) WAVFormatError err(4, "WAV for this program must have one channel (Mono) (field must have val 1)");
+            if(header->bitsPerSample != 16) WAVFormatError err(5, "WAV for this program must have 16 bitness (field must have val 16)");
+            if(header->SamplesPerSec != 44100) WAVFormatError err(6, "WAV for this program can only have 44100 sampling rate (field must have val 44100)");
 
             fseek(this->wavFile, 0, SEEK_END);
             this->fileSize = ftell(this->wavFile);
@@ -69,19 +92,26 @@ public:
 
             //Read the data
             uint16_t bytesPerSample = this->header->bitsPerSample / 8;      //Number     of bytes per sample
-            uint64_t numSamples = this->header->ChunkSize / bytesPerSample; //How many samples are in the wav file?
-            int8_t* buffer = new int8_t[BUFFER_SIZE];
-            while ((bytesRead = fread(buffer, sizeof buffer[0], BUFFER_SIZE / (sizeof buffer[0]), wavFile)) > 0){
-                /** DO SOMETHING WITH THE WAVE DATA HERE **/
-                cout << "Read " << bytesRead << " bytes." << endl;
+            uint32_t numSamples = this->header->Subchunk2Size / (this->header->bitsPerSample / 8);
+            cout << numSamples << " samples in wav\n";
+            for (uint32_t i = 0; i < numSamples; ++i) {
+                int16_t sample;
+                bytesRead = fread(&sample, 1, sizeof(int16_t), wavFile);
+                if (bytesRead != sizeof(int16_t)) {
+                    std::cerr << "Error reading audio sample." << std::endl;
+                    fclose(wavFile);
+                    exit(100);
+                }
+                std::cout << "Sample " << i << ": " << sample << std::endl;
             }
-            delete [] buffer;
-            buffer = nullptr;
+
+
+            fclose(wavFile);
         }else{
-            perror("Empty wav header, try again with another file");
-            exit(2);
+            WAVFormatError err(2, "Empty WAV header, try again with another file or correct this one.");
+//            perror("Empty wav header, try again with another file");
+//            exit(2);
         }
-        printHeader();
     }
     void printHeader(){
         cout << "File is                    :" << fileSize << " bytes." << endl;
