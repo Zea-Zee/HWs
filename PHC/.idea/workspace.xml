@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a10d2ee-5e21-4c2d-b069-961eb940e18e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lab9.1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/titanic_prepared.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/discorSpamer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classWork9.1.py" beforeDir="false" afterPath="$PROJECT_DIR$/classWork9.1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classWork9.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/classWork9.2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +102,8 @@
       <workItem from="1699073034618" duration="5366000" />
       <workItem from="1699080143448" duration="5076000" />
       <workItem from="1699142802959" duration="9558000" />
+      <workItem from="1699170871951" duration="52000" />
+      <workItem from="1699170932701" duration="57000" />
     </task>
     <servers />
   </component>
