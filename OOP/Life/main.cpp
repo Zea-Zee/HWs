@@ -3,21 +3,25 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include <cstdlib>
 
-#ifdef WINDOWS
-    #include<windows.h>
-    #define pause(a) Sleep(a)
 
-    #define ALIVE   '1'
-    #define DEAD    '0'
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#define winFlag true
 
-    #define RESET   " "
-    #define RED     " "
-    #define GREEN   " "
-    #define YELLOW  " "
-    #define BLUE    " "
+#include<windows.h>
+#define pause(a) Sleep(a)
+
+#define ALIVE   '1'
+#define DEAD    '0'
+
+#define RESET   " "
+#define RED     " "
+#define GREEN   " "
+#define YELLOW  " "
+#define BLUE    " "
 #else
+#define winFlag false
+
     #include<unistd.h>
     #define pause(a) usleep(a * 1000)
 
@@ -29,15 +33,17 @@
     #define GREEN "\033[32m"
     #define YELLOW "\033[33m"
     #define BLUE "\033[34m"
+
+    winFlag = false
 #endif
 
 void clear_screen(){
-    #ifdef WINDOWS
-        std::system("cls");
-    #else
-        // Assume POSIX
-        std::system ("clear");
-    #endif
+#ifdef WINDOWS
+    std::system("cls");
+#else
+    // Assume POSIX
+    std::system ("clear");
+#endif
 }
 
 using namespace std;
@@ -128,7 +134,7 @@ public:
 //            cout << "fillBuff buf:" << buf << ":\n";
             if(not (buf[0] == '#' and buf[2] == ' ')){
                 throw invalid_argument("Data isn't valid, in every string of file must be #mode (where mode is R / N / S / C)(Rules, Name, Size, Coordinates)\n"
-                       "change data and try again");
+                                       "change data and try again");
 //                i -= 1;
 //                continue;
             }
@@ -325,7 +331,7 @@ public:
                 aliveNeighbors += board[mi(i + 1)][mi(j + 1)];       //---
                 aliveNeighbors += board[i][mi(j - 1)];                 //---
                 aliveNeighbors += board[i][mi(j + 1)];                 //*-*
-                                                                         //---
+                //---
                 aliveNeighbors += board[mi(i - 1)][mi(j - 1)];      //---
                 aliveNeighbors += board[mi(i - 1)][j];                //---
                 aliveNeighbors += board[mi(i - 1)][mi(j + 1)];     //***
@@ -376,7 +382,7 @@ public:
         for(int i = 0; i < this->size; i++){
 //            cout << string(this->size + 2, '-') << '\n';
             for(int j = 0; j < this->size; j++){
-                if(j == 0){
+                if(j == 0 and not winFlag){
                     cout << "|";
                 }
                 if(board[i][j])
@@ -386,7 +392,7 @@ public:
 //                    cout << ' ' << RED << " " << RESET;
                 }
             }
-            cout << "|";
+            if(not winFlag) cout << "|";
             cout << " \n";
         }
     }
