@@ -453,5 +453,6 @@ int main(int argc, char *argv[]){
         exit(0);
     }
     Board a;
+    Board b("gun.txt");
     return 0;
 }
