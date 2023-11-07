@@ -147,70 +147,114 @@ public:
 
 
 
-class Converter{
+//class Converter{
+//private:
+//    unsigned int start_time;
+//    unsigned int end_time;
+//public:
+//    Converter(unsigned int start, unsigned int end):start_time{start}, end_time{end}{}
+//};
+//
+//class WAVMuter : public Converter{
+//};
+//
+//class WAVMixer : public Converter{
+//};
+//
+//class  WAVAccelerator: public Converter{
+//};
+//
+//class ConverterFactory {
+//public:
+//    virtual Converter *createConverter(){};
+//    virtual ~ConverterFactory(){};
+//};
+//
+//class WAVMuterFactory : public ConverterFactory{
+//public:
+//    Converter *createConverter() override{
+//        return new WAVMuter();
+//    }
+//};
+//
+//class WAVAcceleratorFactory : public ConverterFactory{
+//    Converter *createConverter() override{
+//        return new WAVAccelerator();
+//    }
+//};
+//
+//class WAVMixerFactory : public ConverterFactory{
+//    Converter *createConverter() override{
+//        return new WAVMixer();
+//    }
+//};
+class WAVConverter {
 private:
-    time_t start_time;
-    time_t end_time;
+    unsigned int start_time;
+    unsigned int end_time;
+    const char *path;
+    unsigned int header_length;
 public:
-    Converter(){};
+    WAVConverter(unsigned int start, unsigned int end, const char *p, unsigned int header_len) : start_time{start}, end_time{end}, path{p}, header_length{header_len}{
+        convert();
+    }
+    virtual void convert() {};
+    virtual ~WAVConverter() {}
 };
 
-class WAVMuter : public Converter{
-};
-
-class WAVMixer : public Converter{
-};
-
-class  WAVAccelerator: public Converter{
-};
-
-class ConverterFactory {
+class WAVMuter : public WAVConverter {
 public:
-    virtual Converter *createConverter() = 0;
-    virtual ~ConverterFactory() = 0;
-};
-
-class WAVMuterFactory : public ConverterFactory{
-    Converter *createConverter() override{
-        return new WAVMuter();
+    WAVMuter(unsigned int start, unsigned int end, const char *p, unsigned int header_len) : WAVConverter(start, end, p, header_len){};
+    void convert() override{
+        std::cout << "Converting WAV to MP3" << std::endl;
     }
 };
 
-class WAVAcceleratorFactory : public ConverterFactory{
-    Converter *createConverter() override{
-        return new WAVAccelerator();
+class WAVMixer : public WAVConverter {
+public:
+    WAVMixer(unsigned int start, unsigned int end, const char *p, unsigned int header_len) : WAVConverter(start, end, p, header_len){};
+    void convert() override{
+        std::cout << "Converting WAV to MP3" << std::endl;
     }
 };
 
-class WAVMixerFactory : public ConverterFactory{
-    Converter *createConverter() override{
-        return new WAVMixer();
+class WAVAccelerator : public WAVConverter {
+public:
+    WAVAccelerator(unsigned int start, unsigned int end, const char *p, unsigned int header_len) : WAVConverter(start, end, p, header_len){};
+    void convert() override{
+        std::cout << "Converting WAV to MP3" << std::endl;
     }
 };
 
+class WAVConverterFactory {
+public:
+    static WAVConverter* createConverter(const std::string& type, unsigned int start, unsigned int end, const char *p, unsigned int header_len) {
+        if (type == "Mute") {
+            return new WAVMuter(start, end, p, header_len);
+        } else if (type == "Mix") {
+            return new WAVMixer(start, end, p, header_len);
+        } else if (type == "Accelerate") {
+            return new WAVAccelerator(start, end, p, header_len);
+        } else {
+            return nullptr; // Invalid type
+        }
+    }
+};
 
-int main(int argc, char* argv[]){
-    const char* filePath;
-    filePath = "./ex1.wav";
-    WavFile a(filePath);
+int main() {
+    // Usage example
+    std::string conversionType = "MP3";
+    std::string inputFile = "input.wav";
+    std::string outputFile = "output.mp3";
 
-    ConverterFactory* muterFactory = new WAVMuterFactory();
-    ConverterFactory* mixerFactory = new WAVMixerFactory();
-    ConverterFactory* acceleratorFactory = new WAVAcceleratorFactory();
+    WAVConverter* converter = WAVConverterFactory::createConverter("Mute", 0, 5, "bebra", 44);
 
-    Converter* muter = muterFactory->createConverter();
-    Converter* mixer = muterFactory->createConverter();
+//    if (converter) {
+//        converter->convert(inputFile, outputFile);
+//        delete converter;
+//    } else {
+//        std::cout << "Invalid conversion type." << std::endl;
+//    }
 
-    circle->draw(); // Output: Drawing a Circle
-    square->draw(); // Output: Drawing a Square
-
-    delete circleFactory;
-    delete squareFactory;
-    delete circle;
-    delete square;
-
-    //Read the header
-
-//    fclose(wavFile);
-//    return 0;
+    return 0;
 }
