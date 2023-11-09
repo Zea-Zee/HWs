@@ -5,45 +5,46 @@
 #include <sstream>
 
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-#define winFlag true
+//#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+//#define winFlag true
+//
+//#include<windows.h>
+//#define pause(a) Sleep(a)
+//
+//#define ALIVE   '1'
+//#define DEAD    '0'
+//
+//#define RESET   " "
+//#define RED     " "
+//#define GREEN   " "
+//#define YELLOW  " "
+//#define BLUE    " "
+//#define winFlag true
+//#else
+//#define winFlag false
 
-#include<windows.h>
-#define pause(a) Sleep(a)
+#include<unistd.h>
+#define pause(a) usleep(a * 1000)
 
-#define ALIVE   '1'
-#define DEAD    '0'
+#define ALIVE   "■"
+#define DEAD    "□"
 
-#define RESET   " "
-#define RED     " "
-#define GREEN   " "
-#define YELLOW  " "
-#define BLUE    " "
-#else
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+
 #define winFlag false
-
-    #include<unistd.h>
-    #define pause(a) usleep(a * 1000)
-
-    #define ALIVE   "■"
-    #define DEAD    "□"
-
-    #define RESET "\033[0m"
-    #define RED "\033[31m"
-    #define GREEN "\033[32m"
-    #define YELLOW "\033[33m"
-    #define BLUE "\033[34m"
-
-    winFlag = false
-#endif
+//#endif
 
 void clear_screen(){
-#ifdef WINDOWS
-    std::system("cls");
-#else
-    // Assume POSIX
+//#ifdef defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+//    std::system("cls");
+//#else
+//    // Assume POSIX
     std::system ("clear");
-#endif
+//#endif
 }
 
 using namespace std;
@@ -159,6 +160,7 @@ public:
                     }
                     for(int j = 0; j < (slashPos - startPos); j++){
                         string tmp = buf.substr(startPos + j, 1);
+                        cout << 163 << "\n";
                         birthRule.push_back(stoi(tmp));
                     }
                     startPos = buf.find('S', slashPos) + 1;
@@ -173,6 +175,14 @@ public:
 //                                "and y is number of neighbors to survive");
                     }
                     for(int j = 0; j < (slashPos - startPos); j++){
+//                        if(j + startPos >= buf.length() + 1 or (buf.length() )) break;
+                        char ch = buf[startPos + j];
+                        if(ch == '\n' or (ch != '1' and ch != '2' and ch != '3' and ch != '4' and ch != '5' and ch != '6' and ch != '7' and ch != '8' and ch != '9')) break;
+                        cout << 178 << "\n";
+                        cout << buf << "\n";
+                        cout << "Buf:" << buf << ":buf len|" << buf.length() << "|\n";
+                        cout << "buf.substr(startPos + j, 1):" << buf.substr(startPos + j, 1) << ":\n";
+                        cout << "start " << startPos << " j " << j << "\n";
                         surviveRule.push_back(stoi(buf.substr(startPos + j, 1)));
                     }
                     continue;
@@ -185,6 +195,7 @@ public:
             if(buf[1] == 'S'){
 //                cout << "\n" << ":" << this->size << ":\n";
                 if(this->size == 0) {
+                    cout << 191 << "\n";
                     this->size = stoi(buf.substr(3, buf.length() - 3));
                     this->board = (bool **) calloc(this->size, sizeof(bool*));
                     for(int j = 0; j < this->size; j++)
@@ -210,11 +221,13 @@ public:
                         if(numPos == -1) break;
                         cache = buf.substr(pointer, numPos - pointer);
                         pointer += cache.length() + 1;
+                        cout << 217 << "\n";
                         x = stoi(cache);
                         numPos = buf.find(' ', pointer);
                         if(numPos == -1) numPos = buf.length();
                         cache = buf.substr(pointer, numPos - pointer);
                         pointer += cache.length();
+                        cout << 223 << "\n";
                         y = stoi(cache);
                         if(x < 0 or y < 0 or x >= this->size or y >= this->size){
                             RangeError rerr("Coordinates of dots are out of board size range. Change your input file and try again.");
@@ -294,6 +307,7 @@ public:
                 if(buf2.length() > 0){
                     int n;
                     try {
+                        cout << 303 << "\n";
                         n = stoi(buf2);
                     } catch (const char* err){
 //                        perror("After tic you must enter integer or nothing!!! Try it again\n");
@@ -306,7 +320,8 @@ public:
                         tic();
                         cout << string(size * 2 + 2, '-') << '\n';
                         int sleepTime = this->alive < 10 ? 50 : this->alive * 7;
-                        pause(size * 20);
+//                        pause(size * 20);
+                        pause(500);
                         clear_screen();
                     }
                 }
@@ -417,6 +432,7 @@ int main(int argc, char *argv[]){
                     aerr.throwException();
                 }
                 try{
+                    cout << 427 << "\n";
                     iters = stoi(argv[i + 1]);
                 } catch(const char* err){
 //                    perror("Iterations must be integer.\n");
@@ -428,6 +444,7 @@ int main(int argc, char *argv[]){
                 i++;
             } else if(arg.find("--iterations=") == 0){
                 try{
+                    cout << 439 << "\n";
                     iters = stoi(arg.substr(13));
                 } catch(const char* err){
 //                    perror("Iterations must be integer.\n");
@@ -459,6 +476,6 @@ int main(int argc, char *argv[]){
         exit(0);
     }
     Board a;
-    Board b("gun.txt");
+//    Board b("crystal.txt");
     return 0;
 }

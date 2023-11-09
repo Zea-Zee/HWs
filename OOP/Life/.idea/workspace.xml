@@ -21,11 +21,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="508869d6-47e8-4c71-9f62-e8e8f12c1008" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/crystal.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/crystal.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/gun.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/gun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/triplet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/triplet.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/zeromode.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/zeromode.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SoundProcessor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/cache-v2-91f24322d24c65b1a14f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-3a1d7c6280df08a24a94.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-e91137edaf10586113e6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-06T01-30-47-0704.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/target-SoundProcessor-Debug-6d7f2df191f63dda550e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-1555a5ce31899eddd569.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/SoundProcessor.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/SoundProcessor.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/SoundProcessor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/SoundProcessor.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/cache.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/cache.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/tmp.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/cmake-build-debug/tmp.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoundProcessor/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../SoundProcessor/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PHC/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../PHC/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +102,7 @@
     "cidr.known.project.marker": "true",
     "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Life",
+    "last_opened_file_path": "C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,13 +116,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Life" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Life" TARGET_NAME="Life" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Life" RUN_TARGET_NAME="Life">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -110,6 +136,9 @@
       <workItem from="1699258240851" duration="56000" />
       <workItem from="1699233619645" duration="435000" />
       <workItem from="1699257598715" duration="697000" />
+      <workItem from="1699338994629" duration="1910000" />
+      <workItem from="1699341682265" duration="1459000" />
+      <workItem from="1699504965037" duration="661000" />
     </task>
     <servers />
   </component>
@@ -131,22 +160,22 @@
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <condition expression="(i == 3 and j == 4) or (i == 4 and j == 4) or (i == 4 and j == 4)" language="ObjectiveC" />
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>260</line>
+          <line>273</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>132</line>
+          <line>133</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>109</line>
+          <line>110</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>401</line>
+          <line>416</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>

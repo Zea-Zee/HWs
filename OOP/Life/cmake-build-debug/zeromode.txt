@@ -1,4 +1,4 @@
-#N zero
+#N Zeromode
 #R B3/S2
 #S 10
 #C 4,4 4,5 5,4 5,5

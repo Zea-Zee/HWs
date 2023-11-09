@@ -104,6 +104,11 @@ public:
         if(wavOut) wavIn.close();
         cout << "WAV " << path << " have deleted" << "\n";
     }
+    void closeWAV(){
+        if(wavIn) wavIn.close();
+        if(wavOut) wavIn.close();
+        cout << "WAV " << path << " have been closed" << "\n";
+    }
     void readHeader(){
         wavIn.read(reinterpret_cast<char *>(header), sizeof(*header));
     }
@@ -215,7 +220,7 @@ public:
         }
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Muted successfully.\n";
-
+        out.closeWAV();
 //        delete out;
     }
 };
@@ -263,7 +268,7 @@ public:
             out.writeSample(&sample1);
         }
         cout << "Mixed successfully.\n";
-
+        out.closeWAV();
     }
 };
 
@@ -315,7 +320,7 @@ public:
         }
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Accelerated successfully.\n";
-
+        out.closeWAV();
     }
 };
 
@@ -352,7 +357,40 @@ public:
         }
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Cutted successfully.\n";
+        out.closeWAV();
+    }
+};
 
+class WAVCopy : public WAVConverter {
+private:
+    char *outPath;
+public:
+    WAVCopy(WavFile *wav1, char *outPath) : WAVConverter(0, 0, wav1){
+        this->outPath = outPath;
+        convert();
+    };
+    void convert() override{
+        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        WavFile out(outPath, wav1->getHeader());
+        out.writeHeader();
+
+        int duration = end_time - start_time;
+        cout << "dur is " << duration << "\n";
+        cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
+
+        int numOfSamples = wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
+        out.setHeader(wav1->getHeader());
+        cout << "Start copying " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
+
+
+        for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
+            int16_t sample;
+            wav1->readSample(&sample);
+            out.writeSample(&sample);
+        }
+//        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
+        cout << "Copied successfully.\n";
+        out.closeWAV();
     }
 };
 
@@ -367,14 +405,16 @@ public:
             return new WAVAccelerator(start, end, wav1, boost);
         } else if (type == "Cut") {
             return new WAVCutter(start, end, wav1);
+        } else if (type == "Copy") {
+            return new WAVCopy(wav1, (char*) "./result.wav");
         } else {
             return nullptr; // Invalid type
         }
     }
 };
 
-WavFile *getTempFile(){
-    tmpFlag = not tmpFlag;
+WavFile *getTempFile(bool reverse){
+    if(reverse) tmpFlag = not tmpFlag;
     char *tmpPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
     tmpFlag = not tmpFlag;
     WavFile *tmp = new WavFile (tmpPath);
@@ -384,10 +424,13 @@ WavFile *getTempFile(){
 int main() {
     WavFile a("./ex11.wav");
     WavFile b("./ex22.wav");
+//    WavFile temp("./tmp.wav");
 
-    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mix", 0, 25, &a, &b);
-    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mix", 0, 25, &a, &b);
-    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mix", 0, 25, &a, &b);
+    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
+    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile(true));
+    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, &a, getTempFile(true));
+    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, &a, getTempFile(true));
+    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(false));
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());
