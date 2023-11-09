@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <cstdint>
 #include <cstring>
+#include <unordered_map>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -396,7 +400,7 @@ public:
 
 class WAVConverterFactory {
 public:
-    static WAVConverter* createConverter(const std::string& type, unsigned int start, unsigned int end, WavFile *wav1, WavFile *wav2=nullptr, double boost=0) {
+    static WAVConverter* createConverter(const std::string& type, unsigned int start, unsigned int end, WavFile *wav1, WavFile *wav2=nullptr, double boost=0, char *out="./out.wav") {
         if (type == "Mute") {
             return new WAVMuter(start, end, wav1);
         } else if (type == "Mix" and wav2 != nullptr) {
@@ -406,31 +410,119 @@ public:
         } else if (type == "Cut") {
             return new WAVCutter(start, end, wav1);
         } else if (type == "Copy") {
-            return new WAVCopy(wav1, (char*) "./result.wav");
+            return new WAVCopy(wav1, out);
         } else {
             return nullptr; // Invalid type
         }
     }
 };
 
-WavFile *getTempFile(bool reverse){
-    if(reverse) tmpFlag = not tmpFlag;
-    char *tmpPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
-    tmpFlag = not tmpFlag;
+WavFile *getTempFile(){
+    char *tmpPath = tmpFlag ? (char*) "tmp.wav" : (char*) "cache.wav";
     WavFile *tmp = new WavFile (tmpPath);
     return tmp;
 }
 
-int main() {
-    WavFile a("./ex11.wav");
-    WavFile b("./ex22.wav");
-//    WavFile temp("./tmp.wav");
+int main(int argc, char **argv) {
+    if(argc == 2 and (argv[1] == (char*) "-h" or argv[1] == (char*) "-help")) {
+        cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
+    } else if (argc >= 5 and argv[1] == (char*) "-c"){
+        ifstream in(argv[2]);
+        if(not in){
+            127;
+        }
+        char *outPath = argv[3];
 
-    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
-    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile(true));
-    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, &a, getTempFile(true));
-    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, &a, getTempFile(true));
-    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(false));
+        argv++;
+        vector<WavFile *> files;
+        while(argv){
+            try{
+                files.push_back(new WavFile((char*) argv));
+            } catch (const char * err){
+                cout << err << "\n";
+                IOFileError e(127, (const char*) (string("There is problem with file") + string((char *) argv)).c_str());
+            }
+            argv++;
+        }
+        string line;
+        bool firstTime = true;
+        while(getline(in, line)) {
+            if (line.length() < 1) {
+                IOFileError e(127, "Smth went wrong.\n");
+            }
+            if (line[0] == '#') continue;
+            WavFile *a;
+            if (firstTime) {
+                a = new WavFile((char *) files[0]);
+                firstTime = false;
+            } else a = getTempFile();
+            stringstream ss(line);
+            string conv;
+            ss >> conv;
+            if (conv == "mute") {   //mute 5 25
+                int start, end;
+                try {
+                    ss >> start >> end;
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
+            } else if (conv == "mix") { //mix $2 10 20
+                string indexArg;
+                int start, end, wav2Index;
+                try {
+                    ss >> indexArg >> start >> end;
+                    wav2Index = stoi(indexArg.substr(1, indexArg.length() - 1));
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WavFile b((char *) files[wav2Index - 1]);
+                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, &b);
+            } else if (conv == "accelerate") {  //accelerate 5 10 1.5
+                int start, end, boost;
+                try {
+                    ss >> start >> end >> boost;
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
+            } else if(conv == "cut"){
+                int start, end;
+                try{
+                    ss >> start >> end;
+                } catch (const char *err){
+                    cout << err << "\n";
+                    IOFileError e(127, (const char*) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WAVConverter* c = WAVConverterFactory::createConverter("Cut", start, end, a);
+            } else{
+                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
+            }
+        }
+        if(not firstTime){
+            WAVConverter* c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
+        }
+        return 0;
+    }
+
+
+
+
+
+
+
+
+//    WavFile a("./ex11.wav");
+//    WavFile b("./ex22.wav");
+//
+//    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
+//    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile());
+//    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, getTempFile());
+//    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
+//    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile());
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());

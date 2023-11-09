@@ -1,0 +1,6 @@
+# заглушить первые 30 секунд input1
+mute 0 15
+mute 30 45
+mute 60 75
+mute 75 90
+#  start -c instructions.txt sound.wav ex11.wav
