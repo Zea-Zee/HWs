@@ -41,40 +41,40 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/kuzga/OneDrive/Рабочий$ стол/HWs/OOP/SoundProcessor/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target SoundProcessor
+# Object build statements for EXECUTABLE target SoundProcessor.exe
 
 
 #############################################
-# Order-only phony target for SoundProcessor
+# Order-only phony target for SoundProcessor.exe
 
-build cmake_object_order_depends_target_SoundProcessor: phony || CMakeFiles/SoundProcessor.dir
+build cmake_object_order_depends_target_SoundProcessor.exe: phony || CMakeFiles/SoundProcessor.exe.dir
 
-build CMakeFiles/SoundProcessor.dir/main.cpp.obj: CXX_COMPILER__SoundProcessor_unscanned_Debug C$:/Users/kuzga/OneDrive/Рабочий$ стол/HWs/OOP/SoundProcessor/main.cpp || cmake_object_order_depends_target_SoundProcessor
-  DEP_FILE = CMakeFiles\SoundProcessor.dir\main.cpp.obj.d
+build CMakeFiles/SoundProcessor.exe.dir/main.cpp.obj: CXX_COMPILER__SoundProcessor.2eexe_unscanned_Debug C$:/Users/kuzga/OneDrive/Рабочий$ стол/HWs/OOP/SoundProcessor/main.cpp || cmake_object_order_depends_target_SoundProcessor.exe
+  DEP_FILE = CMakeFiles\SoundProcessor.exe.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\SoundProcessor.dir
-  OBJECT_FILE_DIR = CMakeFiles\SoundProcessor.dir
-  TARGET_COMPILE_PDB = CMakeFiles\SoundProcessor.dir\
-  TARGET_PDB = SoundProcessor.pdb
+  OBJECT_DIR = CMakeFiles\SoundProcessor.exe.dir
+  OBJECT_FILE_DIR = CMakeFiles\SoundProcessor.exe.dir
+  TARGET_COMPILE_PDB = CMakeFiles\SoundProcessor.exe.dir\
+  TARGET_PDB = SoundProcessor.exe.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target SoundProcessor
+# Link build statements for EXECUTABLE target SoundProcessor.exe
 
 
 #############################################
-# Link the executable SoundProcessor.exe
+# Link the executable SoundProcessor.exe.exe
 
-build SoundProcessor.exe: CXX_EXECUTABLE_LINKER__SoundProcessor_Debug CMakeFiles/SoundProcessor.dir/main.cpp.obj
+build SoundProcessor.exe.exe: CXX_EXECUTABLE_LINKER__SoundProcessor.2eexe_Debug CMakeFiles/SoundProcessor.exe.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\SoundProcessor.dir
+  OBJECT_DIR = CMakeFiles\SoundProcessor.exe.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\SoundProcessor.dir\
-  TARGET_FILE = SoundProcessor.exe
-  TARGET_IMPLIB = libSoundProcessor.dll.a
-  TARGET_PDB = SoundProcessor.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\SoundProcessor.exe.dir\
+  TARGET_FILE = SoundProcessor.exe.exe
+  TARGET_IMPLIB = libSoundProcessor.exe.dll.a
+  TARGET_PDB = SoundProcessor.exe.pdb
 
 
 #############################################
@@ -102,7 +102,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build SoundProcessor: phony SoundProcessor.exe
+build SoundProcessor.exe: phony SoundProcessor.exe.exe
 
 # =============================================================================
 # Folder targets.
@@ -112,7 +112,7 @@ build SoundProcessor: phony SoundProcessor.exe
 #############################################
 # Folder: C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/SoundProcessor/cmake-build-debug
 
-build all: phony SoundProcessor.exe
+build all: phony SoundProcessor.exe.exe
 
 # =============================================================================
 # Built-in targets

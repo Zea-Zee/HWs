@@ -6,6 +6,7 @@
 #include <cstring>
 #include <unordered_map>
 #include <vector>
+#include <math.h>
 #include <sstream>
 
 using namespace std;
@@ -82,7 +83,7 @@ public:
 
         wavIn.read(reinterpret_cast<char*>(header), sizeof(*header));
         std::cout << "Header Read " << wavIn.gcount() << " bytes from " << path << "\n";
-        printHeader();
+//        printHeader();
 //        cout << "Subchunk2Size is " << header->Subchunk2Size << endl;
 //        if(header->Subchunk2Size <= header->ChunkSize / 2) header->Subchunk2Size = header->ChunkSize - 36;
 //        cout << "Subchunk2Size is " << header->Subchunk2Size << endl;
@@ -94,7 +95,7 @@ public:
         }else{
             WAVFormatError err(2, "Empty WAV header, try again with another file or correct this one.");
         }
-        cout << "BBB" << "\n";
+//        cout << "BBB" << "\n";
     }
     WavFile(char *path, WAV_HEADER *newHeader) : path{path}, header{newHeader} {
         wavOut.open(path, std::ios::binary);
@@ -111,14 +112,32 @@ public:
     void closeWAV(){
         if(wavIn) wavIn.close();
         if(wavOut) wavIn.close();
+        printHeader();
         cout << "WAV " << path << " have been closed" << "\n";
     }
     void readHeader(){
         wavIn.read(reinterpret_cast<char *>(header), sizeof(*header));
     }
-    WAV_HEADER *getHeader(){       //It's genius give a pointer to private field :)
-        WAV_HEADER *wav_header_copy = this->header;
-        return wav_header_copy;
+    WAV_HEADER *getHeaderCopy(){       //It's genius give a pointer to private field :)
+//        WAV_HEADER *wav_header_copy = this->header;
+        WAV_HEADER *wh = (WAV_HEADER*) calloc(1, sizeof(WAV_HEADER));
+//        wh->ChunkSize = header->ChunkSize;
+//        wh->Subchunk1Size = header->Subchunk1Size;
+//        wh->AudioFormat = header->AudioFormat;
+//        wh->NumOfChan = header->NumOfChan;
+//        wh->SamplesPerSec = header->SamplesPerSec;
+//        wh->bytesPerSec = header->bytesPerSec;
+//        wh->blockAlign = header->blockAlign;
+//        wh->bitsPerSample = header->bitsPerSample;
+//        wh->Subchunk2Size = header->Subchunk2Size;
+//
+//        memcpy(wh->RIFF, header->RIFF);
+//        memcpy(wh->WAVE, header->WAVE);
+//        memcpy(wh->fmt, header->fmt);
+//        memcpy(wh->Subchunk2ID, header->Subchunk2ID);
+        memcpy(wh, this->header, sizeof(WAV_HEADER));
+//        memcpy
+        return wh;
     }
     void setHeader(WAV_HEADER *newHeader){
         if(this->header != nullptr) free(this->header);
@@ -196,23 +215,24 @@ public:
         if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, wav1->getHeaderCopy());
 
         // Calculate the duration of the audio in seconds
-        int duration = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
+        int duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
         cout << "Start muting " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
         // Write the WAV header to the output file
         out.writeHeader();
 
-        uint32_t startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-        uint32_t endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
+        uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+        uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
 //        cout << "startSample " << startSample << "\n";
 //        cout << "endSample " << endSample << "\n";
 
         // Mute the specified range
-        int numOfSamples = wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
+        int numOfSamples = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan;
 //        int numOfSamples = (int) wav->getHeader()->Subchunk2Size / 2;
 //        cout << "Number of samples is: " << numOfSamples << "\n";
 
@@ -225,6 +245,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Muted successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
 //        delete out;
     }
 };
@@ -241,38 +262,43 @@ public:
         if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WAV_HEADER *header2 = wav2->getHeaderCopy();
+        WavFile out(outPath, header);
         out.writeHeader();
 
-        int dur_1 = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
-        int dur_2 = (int) wav2->getHeader()->Subchunk2Size / (wav2->getHeader()->bitsPerSample / 8) / wav2->getHeader()->NumOfChan / wav2->getHeader()->SamplesPerSec;
+        int dur_1 = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        int dur_2 = (int) header2->Subchunk2Size / (header2->bitsPerSample / 8) / header2->NumOfChan / header2->SamplesPerSec;
         cout << wav1->getPath() << " duration is " << dur_1 << " seconds or " << (int) dur_1 / 60 << " m " << (int) dur_1 % 60 << " s.\n";
         cout << wav2->getPath() << " duration is " << dur_2 << " seconds or " << (int) dur_2 / 60 << " m " << (int) dur_2 % 60 << " s.\n";
         cout << "Start mixing " << wav1->getPath() << " and " << wav2->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
 
-        uint32_t startSample, endSample;
-        int numOfSamples = static_cast<uint32_t>(dur_1 * wav1->getHeader()->SamplesPerSec);
-        cout << "Number of samples is: " << numOfSamples << "\n";
+        uint32_t startSample, endSample, lastSample;
+        int numOfSamples = static_cast<uint32_t>(dur_1 * header->SamplesPerSec);
+//        cout << "Number of samples is: " << numOfSamples << "\n";
 
-        startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-        endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
+        startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+        endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+        lastSample = static_cast<uint32_t>(dur_2 * header2->SamplesPerSec);
 
-        cout << "startSample " << startSample << "\n";
-        cout << "endSample " << endSample << "\n";
+//        cout << "startSample " << startSample << "\n";
+//        cout << "endSample " << endSample << "\n";
 
         for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
             int16_t sample1, sample2;
             wav1->readSample(&sample1);
             wav2->readSample(&sample2);
-            if (sampleIndex >= startSample && sampleIndex < endSample) {
-                unsigned int sum = sample1 + sample2;
-                sample1 = (int16_t) sum / 2;
+            if (sampleIndex >= startSample and sampleIndex < endSample and sampleIndex < lastSample) {
+                unsigned long long sum = sample1 + sample2;
+//                sample1 = (int16_t) sum / 2;
+                sample1 += sample2;
             }
             out.writeSample(&sample1);
         }
         cout << "Mixed successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -288,43 +314,77 @@ public:
         if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
-        out.writeHeader();
+        WAV_HEADER *header = wav1->getHeaderCopy();
 
-        int tot_duration = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
+        int tot_duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
         cout << wav1->getPath() << " old duration is " << tot_duration << " seconds or " << (int) tot_duration / 60 << " m " << (int) tot_duration % 60 << " s.\n";
-        int duration = start_time
-                       + tot_duration - end_time
-                       + (end_time - start_time) / acceleration;
-        cout << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
+        unsigned long long skipSample = -1;
+        if(acceleration >= 1){
+            int duration = start_time
+                           + tot_duration - end_time
+                           + (end_time - start_time) / acceleration;
+            uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+            uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+            int numOfSamples = static_cast<uint32_t>(duration * header->SamplesPerSec);
+//            cout << "sssssssssssssssssssssssssamples " << numOfSamples << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
-        uint32_t startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-        uint32_t endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
-        int numOfSamples = static_cast<uint32_t>(tot_duration * wav1->getHeader()->SamplesPerSec);
-        unsigned long long skipSample = 0;
+            header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            header->ChunkSize = header->Subchunk2Size + 396;
+//            cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << header->Subchunk2Size << "\n";
+            WavFile out(outPath, header);
+            out.writeHeader();
+            for (uint32_t sampleIndex = 0; sampleIndex < tot_duration * header->SamplesPerSec; sampleIndex++) {
+                int16_t sample;
+                wav1->readSample(&sample);
+                if (sampleIndex >= startSample && sampleIndex < endSample){
+                    skipSample += 1;
+                    if(skipSample % (int) acceleration == 0)
+                        out.writeSample(&sample);
+                } else out.writeSample(&sample);
+            }
+            cout << "Accelerated successfully.\n";
+            out.closeWAV();
+            wav1->closeWAV();
+        } else {
+            uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+            uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+            int numOfSamples = tot_duration * header->SamplesPerSec;
 
-        for (uint32_t sampleIndex = 0; acceleration >= 1 and sampleIndex < numOfSamples; sampleIndex++) {
-            int16_t sample;
-            wav1->readSample(&sample);
-            if (sampleIndex >= startSample && sampleIndex < endSample){
-                if(skipSample % (int) acceleration == 0)
-                    out.writeSample(&sample);
-            } else out.writeSample(&sample);
-        }
+            uint32_t slowed_endSample = static_cast<uint32_t>(((end_time - start_time) / acceleration) + start_time) * header->SamplesPerSec;
+            int slowed_numOfSamples = start_time + slowed_endSample + (tot_duration - end_time) * header->SamplesPerSec;
 
-        for (uint32_t sampleIndex = 0; acceleration < 1 and acceleration > 0 and sampleIndex < numOfSamples; sampleIndex++) {
-            int16_t sample;
-            wav1->readSample(&sample);
-            if (sampleIndex >= startSample && sampleIndex < endSample){
-                for(int j = 0; j < (int) 1 / acceleration; j++){
+//            header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            int duration = slowed_numOfSamples / header->SamplesPerSec;
+//            cout << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
+//            cout << "-----------------------------num of samples " << numOfSamples << " " << slowed_numOfSamples << " " << endSample << "\n";
+            header->Subchunk2Size = slowed_numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            header->ChunkSize = header->Subchunk2Size + 396;
+            WavFile out(outPath, header);
+            out.writeHeader();
+            long long written = 0;
+
+            for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
+                int16_t sample;
+                wav1->readSample(&sample);
+                if (sampleIndex >= startSample && sampleIndex < endSample){
+                    for(int j = 0; j < ceil(1 / acceleration); j++){
+                        out.writeSample(&sample);
+                        written += 1;
+                    }
+                } else{
+                    written += 1;
                     out.writeSample(&sample);
                 }
-            } else out.writeSample(&sample);
+            }
+            cout << "////////// written " << written << "\n";
+            cout << "Accelerated successfully.\n";
+//            out.printHeader();
+            out.closeWAV();
+            wav1->closeWAV();
         }
+//        exit(0);
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
-        cout << "Accelerated successfully.\n";
-        out.closeWAV();
     }
 };
 
@@ -337,7 +397,8 @@ public:
         if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, header);
         out.writeHeader();
 
         //127
@@ -349,9 +410,9 @@ public:
 
         // Write the WAV header to the output file
 
-        uint32_t startSample = static_cast<uint32_t>(start_time * (wav1->getHeader()->bitsPerSample / 8) * wav1->getHeader()->NumOfChan * wav1->getHeader()->SamplesPerSec);
-        uint32_t endSample = static_cast<uint32_t>(end_time * (wav1->getHeader()->bitsPerSample / 8) * wav1->getHeader()->NumOfChan * wav1->getHeader()->SamplesPerSec);
-        cout << "start samples is " << startSample << "end samples is " << endSample << "\n";
+        uint32_t startSample = static_cast<uint32_t>(start_time * (header->bitsPerSample / 8) * header->NumOfChan * header->SamplesPerSec);
+        uint32_t endSample = static_cast<uint32_t>(end_time * (header->bitsPerSample / 8) * header->NumOfChan * header->SamplesPerSec);
+//        cout << "start samples is " << startSample << "end samples is " << endSample << "\n";
 
         for (uint32_t sampleIndex = 0; true; sampleIndex++) {
             if(sampleIndex >= endSample) break;
@@ -362,6 +423,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Cutted successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -374,16 +436,16 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
-        WavFile out(outPath, wav1->getHeader());
-        out.writeHeader();
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, header);
 
-        int duration = end_time - start_time;
+        int duration = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
         cout << "dur is " << duration << "\n";
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
-        int numOfSamples = wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
-        out.setHeader(wav1->getHeader());
+        int numOfSamples = duration * header->SamplesPerSec;
+        header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8);
+        out.writeHeader();
         cout << "Start copying " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
 
@@ -395,6 +457,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Copied successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -424,109 +487,139 @@ WavFile *getTempFile(){
 }
 
 int main(int argc, char **argv) {
-    cout << argc << " " << argv[1] << "\n";
-    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
-        cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
-    } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
-        cout << argc;
-        ifstream in(argv[2]);
-        if (not in) {
-            127;
-        }
-        char *outPath = argv[3];
-
-        argv += 4;
-        vector < WavFile * > files;
-        cout << "\nargv is " << *argv << "\n";
-        while (argv) {
-            cout << "*argv is " << *argv << " argv is " << argv << "\n";
-            try {
-                WavFile *p = new WavFile((char*) *argv;
-                cout << "p is " << p << "\n";
-                files.push_back(p));
-            } catch (const char *err) {
-                cout << "\n\n\n\n\n" << err << "\n";
-                IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
-            }
-            argv++;
-            cout << "*argv is " << *argv << " argv is " << argv << "\n";
-        }
-        string line;
-        bool firstTime = true;
-        while (getline(in, line)) {
-            cout << "line is " << line << "\n";
-            if (line.length() < 1) {
-                IOFileError e(127, "Smth went wrong.\n");
-            }
-            if (line[0] == '#') continue;
-            WavFile *a;
-            if (firstTime) {
-                a = new WavFile((char *) files[0]);
-                firstTime = false;
-            } else a = getTempFile();
-            stringstream ss(line);
-            string conv;
-            ss >> conv;
-            if (conv == "mute") {   //mute 5 25
-                int start, end;
-                try {
-                    ss >> start >> end;
-                } catch (const char *err) {
-                    cout << err << "\n";
-                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-                }
-                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
-            } else if (conv == "mix") { //mix $2 10 20
-                string indexArg;
-                int start, end, wav2Index;
-                try {
-                    ss >> indexArg >> start >> end;
-                    wav2Index = stoi(indexArg.substr(1, indexArg.length() - 1));
-                } catch (const char *err) {
-                    cout << err << "\n";
-                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-                }
-                WavFile b((char *) files[wav2Index - 1]);
-                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, &b);
-            } else if (conv == "accelerate") {  //accelerate 5 10 1.5
-                int start, end, boost;
-                try {
-                    ss >> start >> end >> boost;
-                } catch (const char *err) {
-                    cout << err << "\n";
-                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-                }
-                WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
-            } else if (conv == "cut") {
-                int start, end;
-                try {
-                    ss >> start >> end;
-                } catch (const char *err) {
-                    cout << err << "\n";
-                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-                }
-                WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
-            } else {
-                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
-            }
-        }
-        if (not firstTime) {
-            WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
-        }
-    }
-//    WavFile a("./ex11.wav");
-//    WavFile b("./ex22.wav");
+//    cout << argc << " " << argv[1] << "\n";
+//    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
+//        cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
+//    } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
+//        cout << argc;
+//        ifstream in(argv[2]);
+//        if (not in) {
+//            127;
+//        }
+//        char *outPath = argv[3];
+//
+//        vector < WavFile * > files;
+//        cout << "\nargv is " << *argv << "\n";
+//        for(int i = 4; i < argc; i++){
+//            cout << "*argv is " << *argv << " argv is " << argv << "\n";
+//            try {
+//                WavFile *p = new WavFile((char*) argv[i]);
+////                cout << "p is " << p << "\n";
+//                files.push_back(p);
+//            } catch (const char *err) {
+//                cout << "\n\n\n\n\n" << err << "\n";
+//                IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
+//            }
+////            cout << "p is " << "\n";
+////            argv++;
+////            cout << "p is " << "\n";
+////            cout << "*argv is " << *argv << " argv is " << argv << "\n";
+//        }
+//        string line;
+//        bool firstTime = true;
+//        while (getline(in, line)) {
+////            cout << "line is " << line << "\n";
+//            if (line.length() < 1) {
+//                continue;
+////                IOFileError e(127, "Smth went wrong.\n");
+//            }
+//            if (line[0] == '#' or line[0] == '\n'){
+////                cout << "line " << line << " was skipped\n";
+//                continue;
+//            }
+////            cout << "line " << line << " was not skipped\n";
+//            WavFile *a;
+//            if (firstTime) {
+//                a = files[0];
+//                firstTime = false;
+//            } else a = getTempFile();
+//            stringstream ss(line);
+//            string conv;
+//            ss >> conv;
+//            if (conv == "mute") {   //mute 5 25
+//                int start, end;
+//                try {
+//                    ss >> start >> end;
+//                } catch (const char *err) {
+//                    cout << err << "\n";
+//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+//                }
+//                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
+//            } else if (conv == "mix") { //mix $2 10 20
+////                string indexArg;
+//                int start, end, wav2Index;
+//                try {
+////                    ss >> indexArg >> start >> end;
+//                    ss >> wav2Index >> start >> end;
+//                    cout << wav2Index << " " << start << " " << end << "\n";
+////                    wav2Index = stoi(indexArg.substr(1, indexArg.length() - 1));
+//                } catch (const char *err) {
+//                    cout << err << "\n";
+//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+//                }
+////                cout << "path is " << files[wav2Index - 2]-> << "\n";
+////                WavFile b((char *) files[wav2Index - 1]);
+//                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, files[wav2Index - 2]);
+//            } else if (conv == "accelerate") {  //accelerate 5 10 1.5
+//                int start, end;
+//                double boost;
+//                try {
+//                    ss >> start >> end >> boost;
+//                } catch (const char *err) {
+//                    cout << err << "\n";
+//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+//                }
+//                cout << "________________________________________" << boost << "\n";
+//                WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
+//            } else if (conv == "cut") {
+//                int start, end;
+//                try {
+//                    ss >> start >> end;
+//                } catch (const char *err) {
+//                    cout << err << "\n";
+//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+//                }
+//                WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
+//            } else {
+//                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
+//            }
+//        }
+//        if (not firstTime) {
+//            WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
+//        }
+//    }
+    WavFile a("./ex1.wav");
+    WavFile b("./ex2.wav");
 //
 //    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
 //    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile());
 //    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, getTempFile());
-//    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
-//    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
+//    WAVConverter* c_4 = WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
+//
+    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, &a);
+    WAVConverter* c_22 = WAVConverterFactory::createConverter("Mix", 30, 45, getTempFile(), &a);
+    WAVConverter* c_33 = WAVConverterFactory::createConverter("Mix", 60, 75, getTempFile(), &a);
+    WAVConverter* c_44 = WAVConverterFactory::createConverter("Mix", 90, 115, getTempFile(), &a);
+
+//    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, getTempFile());
+//    WAVConverter* c_12 = WAVConverterFactory::createConverter("Mix", 30, 45, &b, getTempFile());
+//    WAVConverter* c_13 = WAVConverterFactory::createConverter("Mix", 60, 75, &b, getTempFile());
+//    WAVConverter* c_14 = WAVConverterFactory::createConverter("Mix", 90, 105, &b, getTempFile());
+
+//    WAVConverter* c_5 = WAVConverterFactory::createConverter("Accelerate", 0, 410, &a, nullptr, 0.25);
+//    WAVConverter* c_6 = WAVConverterFactory::createConverter("Accelerate", 0, 1640, getTempFile(), nullptr, 4);
+//    WAVConverter* c_55 = WAVConverterFactory::createConverter("Accelerate", 0, 410, getTempFile(), nullptr, 0.25);
+//    WAVConverter* c_66 = WAVConverterFactory::createConverter("Accelerate", 0, 1640, getTempFile(), nullptr, 4);
+//    WAVConverter* c_67 = WAVConverterFactory::createConverter("Accelerate", 0, 410, getTempFile(), nullptr, 0.05);
+//    WAVConverter* c_57 = WAVConverterFactory::createConverter("Accelerate", 0, 8200, getTempFile(), nullptr, 20);
+
+
+    WAVConverter* c_1000 = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());
 //    WAVConverter* converter = WAVConverterFactory::createConverter("Cut", 0, 10, &a, &b);
-//    WAVConverter* converter = WAVConverterFactory::createConverter("Accelerate", 0, 411, &a, nullptr, 0.25);
+//    WAVConverter* converter = WAVConverterFactory::createConverter("Accelerate", 0, 411, &a, nullptr, 4);
     return 0;
 }
 

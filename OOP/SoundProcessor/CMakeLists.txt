@@ -3,4 +3,4 @@ project(SoundProcessor)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(SoundProcessor main.cpp)
+add_executable(SoundProcessor.exe main.cpp)
