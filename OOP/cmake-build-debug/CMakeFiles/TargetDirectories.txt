@@ -1,3 +1,0 @@
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/cmake-build-debug/CMakeFiles/OOP.dir
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -74,7 +74,6 @@ private:
 public:
     WavFile(char *path) : path{path}{
         wavIn.open(path, std::ios::binary);
-        cout << "BEBRA";
         if (not wavIn) {
             IOFileError err(1, ("Unable to open WAV file: " + string(path)).c_str());
         }
@@ -95,6 +94,7 @@ public:
         }else{
             WAVFormatError err(2, "Empty WAV header, try again with another file or correct this one.");
         }
+        cout << "BBB" << "\n";
     }
     WavFile(char *path, WAV_HEADER *newHeader) : path{path}, header{newHeader} {
         wavOut.open(path, std::ios::binary);
@@ -294,8 +294,8 @@ public:
         int tot_duration = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
         cout << wav1->getPath() << " old duration is " << tot_duration << " seconds or " << (int) tot_duration / 60 << " m " << (int) tot_duration % 60 << " s.\n";
         int duration = start_time
-                + tot_duration - end_time
-                + (end_time - start_time) / acceleration;
+                       + tot_duration - end_time
+                       + (end_time - start_time) / acceleration;
         cout << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
 
@@ -424,29 +424,37 @@ WavFile *getTempFile(){
 }
 
 int main(int argc, char **argv) {
-    if(argc == 2 and (argv[1] == (char*) "-h" or argv[1] == (char*) "-help")) {
+    cout << argc << " " << argv[1] << "\n";
+    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
         cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
-    } else if (argc >= 5 and argv[1] == (char*) "-c"){
+    } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
+        cout << argc;
         ifstream in(argv[2]);
-        if(not in){
+        if (not in) {
             127;
         }
         char *outPath = argv[3];
 
-        argv++;
-        vector<WavFile *> files;
-        while(argv){
-            try{
-                files.push_back(new WavFile((char*) argv));
-            } catch (const char * err){
-                cout << err << "\n";
-                IOFileError e(127, (const char*) (string("There is problem with file") + string((char *) argv)).c_str());
+        argv += 4;
+        vector < WavFile * > files;
+        cout << "\nargv is " << *argv << "\n";
+        while (argv) {
+            cout << "*argv is " << *argv << " argv is " << argv << "\n";
+            try {
+                WavFile *p = new WavFile((char*) *argv;
+                cout << "p is " << p << "\n";
+                files.push_back(p));
+            } catch (const char *err) {
+                cout << "\n\n\n\n\n" << err << "\n";
+                IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
             }
             argv++;
+            cout << "*argv is " << *argv << " argv is " << argv << "\n";
         }
         string line;
         bool firstTime = true;
-        while(getline(in, line)) {
+        while (getline(in, line)) {
+            cout << "line is " << line << "\n";
             if (line.length() < 1) {
                 IOFileError e(127, "Smth went wrong.\n");
             }
@@ -489,32 +497,23 @@ int main(int argc, char **argv) {
                     IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
                 }
                 WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
-            } else if(conv == "cut"){
+            } else if (conv == "cut") {
                 int start, end;
-                try{
+                try {
                     ss >> start >> end;
-                } catch (const char *err){
+                } catch (const char *err) {
                     cout << err << "\n";
-                    IOFileError e(127, (const char*) (string("Cant read start/end from  ") + line).c_str());
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
                 }
-                WAVConverter* c = WAVConverterFactory::createConverter("Cut", start, end, a);
-            } else{
+                WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
+            } else {
                 IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
             }
         }
-        if(not firstTime){
-            WAVConverter* c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
+        if (not firstTime) {
+            WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
         }
-        return 0;
     }
-
-
-
-
-
-
-
-
 //    WavFile a("./ex11.wav");
 //    WavFile b("./ex22.wav");
 //
@@ -522,13 +521,12 @@ int main(int argc, char **argv) {
 //    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile());
 //    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, getTempFile());
 //    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
-//    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile());
+//    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());
 //    WAVConverter* converter = WAVConverterFactory::createConverter("Cut", 0, 10, &a, &b);
 //    WAVConverter* converter = WAVConverterFactory::createConverter("Accelerate", 0, 411, &a, nullptr, 0.25);
-
     return 0;
 }
 

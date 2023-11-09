@@ -2,5 +2,13 @@
 mute 0 15
 mute 30 45
 mute 60 75
-mute 75 90
+mute 90 105
+
+mix 2 0 15
+mix 2 30 45
+mix 2 60 75
+mix 2 90 105
+
+accelerate 0 411 4
+#accelerate 0 411 0.25
 #  start -c instructions.txt sound.wav ex11.wav
