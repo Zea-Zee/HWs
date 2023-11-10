@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "SoundProcessor.exe::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-SoundProcessor.exe-Debug-7ccbea1fc840bea93aa1.json",
+					"jsonFile" : "target-SoundProcessor.exe-Debug-1ca7fd7576553a5ccc5b.json",
 					"name" : "SoundProcessor.exe",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/kuzga/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/HWs/OOP/SoundProcessor/cmake-build-debug",
-		"source" : "C:/Users/kuzga/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/HWs/OOP/SoundProcessor"
+		"build" : "C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug",
+		"source" : "C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor"
 	},
 	"version" : 
 	{

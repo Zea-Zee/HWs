@@ -44,6 +44,13 @@ public:
     MyWarning(const char code, const char *msg) : BaseError(code, msg){}
 };
 
+class InternalError : public BaseError{
+public:
+    InternalError(const char code, const char *msg) : BaseError(code, msg){
+        exit(code);
+    }
+};
+
 
 
 typedef struct  WAV_HEADER
@@ -144,16 +151,14 @@ public:
         this->header = newHeader;
     }
     void writeHeader(){
-        if(this->header == nullptr) exit(127);
+        if(this->header == nullptr) InternalError(-1, "Internal error: can't delete object which doesn't exist.\n");
         wavOut.write(reinterpret_cast<char *>(header), sizeof(*header));
         return;
     }
     void writeSample(int16_t *sample){
-        if(this->header == nullptr) exit(127);
         wavOut.write(reinterpret_cast<char *>(sample), sizeof(*sample));
     }
     int16_t *readSample(int16_t *sample){
-        if(this->header == nullptr) exit(127);
         wavIn.read(reinterpret_cast<char *>(sample), sizeof(*sample));
         return sample;
     }
@@ -162,21 +167,7 @@ public:
         strcpy(cpy, path);
         return cpy;
     }
-//    void dump(const char *p){
-//        int numOfSamples = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan;
-//
-//        ifstream input(this->path, std::ios::binary);
-//        ofstream output(p, std::ios::binary);
-//
-//        input.read(reinterpret_cast<char*>(header), sizeof(*header));
-//        output.write(reinterpret_cast<char*>(header), sizeof(*header));
-//
-//        for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
-//            int16_t sample;
-//            input.read(reinterpret_cast<char*>(&sample), sizeof(int16_t));
-//            output.write(reinterpret_cast<char*>(&sample), sizeof(int16_t));
-//        }
-//    }
+
     void printHeader(){
         cout << "RIFF header                :" << header->RIFF[0] << header->RIFF[1] << header->RIFF[2] << header->RIFF[3] << endl;
         cout << "WAVE header                :" << header->WAVE[0] << header->WAVE[1] << header->WAVE[2] << header->WAVE[3] << endl;
@@ -212,7 +203,7 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
         WAV_HEADER *header = wav1->getHeaderCopy();
@@ -220,10 +211,10 @@ public:
 
         // Calculate the duration of the audio in seconds
         int duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = duration;
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
         cout << "Start muting " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
-        // Write the WAV header to the output file
         out.writeHeader();
 
         uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
@@ -259,7 +250,7 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
         WAV_HEADER *header = wav1->getHeaderCopy();
@@ -268,6 +259,7 @@ public:
         out.writeHeader();
 
         int dur_1 = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = dur_1;
         int dur_2 = (int) header2->Subchunk2Size / (header2->bitsPerSample / 8) / header2->NumOfChan / header2->SamplesPerSec;
         cout << wav1->getPath() << " duration is " << dur_1 << " seconds or " << (int) dur_1 / 60 << " m " << (int) dur_1 % 60 << " s.\n";
         cout << wav2->getPath() << " duration is " << dur_2 << " seconds or " << (int) dur_2 / 60 << " m " << (int) dur_2 % 60 << " s.\n";
@@ -311,12 +303,13 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
         WAV_HEADER *header = wav1->getHeaderCopy();
 
         int tot_duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = tot_duration;
         cout << wav1->getPath() << " old duration is " << tot_duration << " seconds or " << (int) tot_duration / 60 << " m " << (int) tot_duration % 60 << " s.\n";
 
         unsigned long long skipSample = -1;
@@ -394,7 +387,7 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
         WAV_HEADER *header = wav1->getHeaderCopy();
@@ -403,6 +396,7 @@ public:
 
         //127
         int duration = end_time - start_time;
+        if(end_time == -1) end_time = duration;
         cout << "dur is " << duration << "\n";
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
@@ -488,118 +482,118 @@ WavFile *getTempFile(){
 
 int main(int argc, char **argv) {
 //    cout << argc << " " << argv[1] << "\n";
-//    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
-//        cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
-//    } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
-//        cout << argc;
-//        ifstream in(argv[2]);
-//        if (not in) {
-//            127;
-//        }
-//        char *outPath = argv[3];
-//
-//        vector < WavFile * > files;
-//        cout << "\nargv is " << *argv << "\n";
-//        for(int i = 4; i < argc; i++){
+    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
+        cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
+    } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
+        cout << argc;
+        ifstream in(argv[2]);
+        if (not in) {
+            127;
+        }
+        char *outPath = argv[3];
+
+        vector < WavFile * > files;
+        cout << "\nargv is " << *argv << "\n";
+        for(int i = 4; i < argc; i++){
+            cout << "*argv is " << *argv << " argv is " << argv << "\n";
+            try {
+                WavFile *p = new WavFile((char*) argv[i]);
+//                cout << "p is " << p << "\n";
+                files.push_back(p);
+            } catch (const char *err) {
+                cout << "\n\n\n\n\n" << err << "\n";
+                IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
+            }
+//            cout << "p is " << "\n";
+//            argv++;
+//            cout << "p is " << "\n";
 //            cout << "*argv is " << *argv << " argv is " << argv << "\n";
-//            try {
-//                WavFile *p = new WavFile((char*) argv[i]);
-////                cout << "p is " << p << "\n";
-//                files.push_back(p);
-//            } catch (const char *err) {
-//                cout << "\n\n\n\n\n" << err << "\n";
-//                IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
-//            }
-////            cout << "p is " << "\n";
-////            argv++;
-////            cout << "p is " << "\n";
-////            cout << "*argv is " << *argv << " argv is " << argv << "\n";
-//        }
-//        string line;
-//        bool firstTime = true;
-//        while (getline(in, line)) {
-////            cout << "line is " << line << "\n";
-//            if (line.length() < 1) {
-//                continue;
-////                IOFileError e(127, "Smth went wrong.\n");
-//            }
-//            if (line[0] == '#' or line[0] == '\n'){
-////                cout << "line " << line << " was skipped\n";
-//                continue;
-//            }
-////            cout << "line " << line << " was not skipped\n";
-//            WavFile *a;
-//            if (firstTime) {
-//                a = files[0];
-//                firstTime = false;
-//            } else a = getTempFile();
-//            stringstream ss(line);
-//            string conv;
-//            ss >> conv;
-//            if (conv == "mute") {   //mute 5 25
-//                int start, end;
-//                try {
-//                    ss >> start >> end;
-//                } catch (const char *err) {
-//                    cout << err << "\n";
-//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-//                }
-//                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
-//            } else if (conv == "mix") { //mix $2 10 20
-////                string indexArg;
-//                int start, end, wav2Index;
-//                try {
-////                    ss >> indexArg >> start >> end;
-//                    ss >> wav2Index >> start >> end;
-//                    cout << wav2Index << " " << start << " " << end << "\n";
-////                    wav2Index = stoi(indexArg.substr(1, indexArg.length() - 1));
-//                } catch (const char *err) {
-//                    cout << err << "\n";
-//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-//                }
-////                cout << "path is " << files[wav2Index - 2]-> << "\n";
-////                WavFile b((char *) files[wav2Index - 1]);
-//                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, files[wav2Index - 2]);
-//            } else if (conv == "accelerate") {  //accelerate 5 10 1.5
-//                int start, end;
-//                double boost;
-//                try {
-//                    ss >> start >> end >> boost;
-//                } catch (const char *err) {
-//                    cout << err << "\n";
-//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-//                }
-//                cout << "________________________________________" << boost << "\n";
-//                WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
-//            } else if (conv == "cut") {
-//                int start, end;
-//                try {
-//                    ss >> start >> end;
-//                } catch (const char *err) {
-//                    cout << err << "\n";
-//                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
-//                }
-//                WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
-//            } else {
-//                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
-//            }
-//        }
-//        if (not firstTime) {
-//            WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
-//        }
-//    }
-    WavFile a("./ex1.wav");
-    WavFile b("./ex2.wav");
+        }
+        string line;
+        bool firstTime = true;
+        while (getline(in, line)) {
+//            cout << "line is " << line << "\n";
+            if (line.length() < 1) {
+                continue;
+//                IOFileError e(127, "Smth went wrong.\n");
+            }
+            if (line[0] == '#' or line[0] == '\n'){
+//                cout << "line " << line << " was skipped\n";
+                continue;
+            }
+//            cout << "line " << line << " was not skipped\n";
+            WavFile *a;
+            if (firstTime) {
+                a = files[0];
+                firstTime = false;
+            } else a = getTempFile();
+            stringstream ss(line);
+            string conv;
+            ss >> conv;
+            if (conv == "mute") {   //mute 5 25
+                int start, end;
+                try {
+                    ss >> start >> end;
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
+            } else if (conv == "mix") { //mix $2 10 20
+//                string indexArg;
+                int start, end, wav2Index;
+                try {
+//                    ss >> indexArg >> start >> end;
+                    ss >> wav2Index >> start >> end;
+                    cout << wav2Index << " " << start << " " << end << "\n";
+//                    wav2Index = stoi(indexArg.substr(1, indexArg.length() - 1));
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+//                cout << "path is " << files[wav2Index - 2]-> << "\n";
+//                WavFile b((char *) files[wav2Index - 1]);
+                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, files[wav2Index - 2]);
+            } else if (conv == "accelerate") {  //accelerate 5 10 1.5
+                int start, end;
+                double boost;
+                try {
+                    ss >> start >> end >> boost;
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                cout << "________________________________________" << boost << "\n";
+                WAVConverter *c = WAVConverterFactory::createConverter("Accelerate", start, end, a, nullptr, boost);
+            } else if (conv == "cut") {
+                int start, end;
+                try {
+                    ss >> start >> end;
+                } catch (const char *err) {
+                    cout << err << "\n";
+                    IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
+                }
+                WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
+            } else {
+                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
+            }
+        }
+        if (not firstTime) {
+            WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
+        }
+    }
+//    WavFile a("./ex1.wav");
+//    WavFile b("./ex2.wav");
 //
 //    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
 //    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile());
 //    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, getTempFile());
 //    WAVConverter* c_4 = WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
 //
-    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, &a);
-    WAVConverter* c_22 = WAVConverterFactory::createConverter("Mix", 30, 45, getTempFile(), &a);
-    WAVConverter* c_33 = WAVConverterFactory::createConverter("Mix", 60, 75, getTempFile(), &a);
-    WAVConverter* c_44 = WAVConverterFactory::createConverter("Mix", 90, 115, getTempFile(), &a);
+//    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, &a);
+//    WAVConverter* c_22 = WAVConverterFactory::createConverter("Mix", 30, 45, getTempFile(), &a);
+//    WAVConverter* c_33 = WAVConverterFactory::createConverter("Mix", 60, 75, getTempFile(), &a);
+//    WAVConverter* c_44 = WAVConverterFactory::createConverter("Mix", 90, 115, getTempFile(), &a);
 
 //    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, getTempFile());
 //    WAVConverter* c_12 = WAVConverterFactory::createConverter("Mix", 30, 45, &b, getTempFile());
@@ -614,7 +608,7 @@ int main(int argc, char **argv) {
 //    WAVConverter* c_57 = WAVConverterFactory::createConverter("Accelerate", 0, 8200, getTempFile(), nullptr, 20);
 
 
-    WAVConverter* c_1000 = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
+//    WAVConverter* c_1000 = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());
@@ -623,8 +617,8 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-// Добавить грамотную обработку ошибок
-// Перенсти всю работу с файлами в WAV (открытие, сохранение) редактирование - создание нового WAV в конвертере и запись по нему
-// Добавить тона
-// Добавить склейку
-// Добавить ввод с консоли
+//~ Добавить грамотную обработку ошибок
+//V Перенсти всю работу с файлами в WAV (открытие, сохранение) редактирование - создание нового WAV в конвертере и запись по нему
+//- Добавить тона
+//- Добавить склейку
+//V Добавить ввод с консоли
