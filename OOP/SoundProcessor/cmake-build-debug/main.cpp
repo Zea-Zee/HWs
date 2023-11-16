@@ -44,6 +44,13 @@ public:
     MyWarning(const char code, const char *msg) : BaseError(code, msg){}
 };
 
+class InternalError : public BaseError{
+public:
+    InternalError(const char code, const char *msg) : BaseError(code, msg){
+        exit(code);
+    }
+};
+
 
 
 typedef struct  WAV_HEADER
@@ -118,25 +125,40 @@ public:
     void readHeader(){
         wavIn.read(reinterpret_cast<char *>(header), sizeof(*header));
     }
-    WAV_HEADER *getHeader(){       //It's genius give a pointer to private field :)
-        WAV_HEADER *wav_header_copy = this->header;
-        return wav_header_copy;
+    WAV_HEADER *getHeaderCopy(){       //It's genius give a pointer to private field :)
+//        WAV_HEADER *wav_header_copy = this->header;
+        WAV_HEADER *wh = (WAV_HEADER*) calloc(1, sizeof(WAV_HEADER));
+//        wh->ChunkSize = header->ChunkSize;
+//        wh->Subchunk1Size = header->Subchunk1Size;
+//        wh->AudioFormat = header->AudioFormat;
+//        wh->NumOfChan = header->NumOfChan;
+//        wh->SamplesPerSec = header->SamplesPerSec;
+//        wh->bytesPerSec = header->bytesPerSec;
+//        wh->blockAlign = header->blockAlign;
+//        wh->bitsPerSample = header->bitsPerSample;
+//        wh->Subchunk2Size = header->Subchunk2Size;
+//
+//        memcpy(wh->RIFF, header->RIFF);
+//        memcpy(wh->WAVE, header->WAVE);
+//        memcpy(wh->fmt, header->fmt);
+//        memcpy(wh->Subchunk2ID, header->Subchunk2ID);
+        memcpy(wh, this->header, sizeof(WAV_HEADER));
+//        memcpy
+        return wh;
     }
     void setHeader(WAV_HEADER *newHeader){
         if(this->header != nullptr) free(this->header);
         this->header = newHeader;
     }
     void writeHeader(){
-        if(this->header == nullptr) exit(127);
+        if(this->header == nullptr) InternalError(-1, "Internal error: can't delete object which doesn't exist.\n");
         wavOut.write(reinterpret_cast<char *>(header), sizeof(*header));
         return;
     }
     void writeSample(int16_t *sample){
-        if(this->header == nullptr) exit(127);
         wavOut.write(reinterpret_cast<char *>(sample), sizeof(*sample));
     }
     int16_t *readSample(int16_t *sample){
-        if(this->header == nullptr) exit(127);
         wavIn.read(reinterpret_cast<char *>(sample), sizeof(*sample));
         return sample;
     }
@@ -145,21 +167,7 @@ public:
         strcpy(cpy, path);
         return cpy;
     }
-//    void dump(const char *p){
-//        int numOfSamples = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan;
-//
-//        ifstream input(this->path, std::ios::binary);
-//        ofstream output(p, std::ios::binary);
-//
-//        input.read(reinterpret_cast<char*>(header), sizeof(*header));
-//        output.write(reinterpret_cast<char*>(header), sizeof(*header));
-//
-//        for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
-//            int16_t sample;
-//            input.read(reinterpret_cast<char*>(&sample), sizeof(int16_t));
-//            output.write(reinterpret_cast<char*>(&sample), sizeof(int16_t));
-//        }
-//    }
+
     void printHeader(){
         cout << "RIFF header                :" << header->RIFF[0] << header->RIFF[1] << header->RIFF[2] << header->RIFF[3] << endl;
         cout << "WAVE header                :" << header->WAVE[0] << header->WAVE[1] << header->WAVE[2] << header->WAVE[3] << endl;
@@ -195,26 +203,27 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, wav1->getHeaderCopy());
 
         // Calculate the duration of the audio in seconds
-        int duration = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
+        int duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = duration;
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
         cout << "Start muting " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
-        // Write the WAV header to the output file
         out.writeHeader();
 
-        uint32_t startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-        uint32_t endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
+        uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+        uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
 //        cout << "startSample " << startSample << "\n";
 //        cout << "endSample " << endSample << "\n";
 
         // Mute the specified range
-        int numOfSamples = wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
+        int numOfSamples = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan;
 //        int numOfSamples = (int) wav->getHeader()->Subchunk2Size / 2;
 //        cout << "Number of samples is: " << numOfSamples << "\n";
 
@@ -227,6 +236,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Muted successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
 //        delete out;
     }
 };
@@ -240,25 +250,29 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WAV_HEADER *header2 = wav2->getHeaderCopy();
+        WavFile out(outPath, header);
         out.writeHeader();
 
-        int dur_1 = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
-        int dur_2 = (int) wav2->getHeader()->Subchunk2Size / (wav2->getHeader()->bitsPerSample / 8) / wav2->getHeader()->NumOfChan / wav2->getHeader()->SamplesPerSec;
+        int dur_1 = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = dur_1;
+        int dur_2 = (int) header2->Subchunk2Size / (header2->bitsPerSample / 8) / header2->NumOfChan / header2->SamplesPerSec;
         cout << wav1->getPath() << " duration is " << dur_1 << " seconds or " << (int) dur_1 / 60 << " m " << (int) dur_1 % 60 << " s.\n";
         cout << wav2->getPath() << " duration is " << dur_2 << " seconds or " << (int) dur_2 / 60 << " m " << (int) dur_2 % 60 << " s.\n";
         cout << "Start mixing " << wav1->getPath() << " and " << wav2->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
 
-        uint32_t startSample, endSample;
-        int numOfSamples = static_cast<uint32_t>(dur_1 * wav1->getHeader()->SamplesPerSec);
+        uint32_t startSample, endSample, lastSample;
+        int numOfSamples = static_cast<uint32_t>(dur_1 * header->SamplesPerSec);
 //        cout << "Number of samples is: " << numOfSamples << "\n";
 
-        startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-        endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
+        startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+        endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+        lastSample = static_cast<uint32_t>(dur_2 * header2->SamplesPerSec);
 
 //        cout << "startSample " << startSample << "\n";
 //        cout << "endSample " << endSample << "\n";
@@ -267,14 +281,16 @@ public:
             int16_t sample1, sample2;
             wav1->readSample(&sample1);
             wav2->readSample(&sample2);
-            if (sampleIndex >= startSample && sampleIndex < endSample) {
-                unsigned int sum = sample1 + sample2;
-                sample1 = (int16_t) sum / 2;
+            if (sampleIndex >= startSample and sampleIndex < endSample and sampleIndex < lastSample) {
+                unsigned long long sum = sample1 + sample2;
+//                sample1 = (int16_t) sum / 2;
+                sample1 += sample2;
             }
             out.writeSample(&sample1);
         }
         cout << "Mixed successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -287,11 +303,13 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
+        WAV_HEADER *header = wav1->getHeaderCopy();
 
-        int tot_duration = (int) wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
+        int tot_duration = (int) header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
+        if(end_time == -1) end_time = tot_duration;
         cout << wav1->getPath() << " old duration is " << tot_duration << " seconds or " << (int) tot_duration / 60 << " m " << (int) tot_duration % 60 << " s.\n";
 
         unsigned long long skipSample = -1;
@@ -299,17 +317,17 @@ public:
             int duration = start_time
                            + tot_duration - end_time
                            + (end_time - start_time) / acceleration;
-            uint32_t startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-            uint32_t endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
-            int numOfSamples = static_cast<uint32_t>(duration * wav1->getHeader()->SamplesPerSec);
+            uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+            uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+            int numOfSamples = static_cast<uint32_t>(duration * header->SamplesPerSec);
 //            cout << "sssssssssssssssssssssssssamples " << numOfSamples << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
-            wav1->getHeader()->Subchunk2Size = numOfSamples * (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
-            wav1->getHeader()->ChunkSize = wav1->getHeader()->Subchunk2Size + 396;
-//            cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << wav1->getHeader()->Subchunk2Size << "\n";
-            WavFile out(outPath, wav1->getHeader());
+            header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            header->ChunkSize = header->Subchunk2Size + 396;
+//            cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << header->Subchunk2Size << "\n";
+            WavFile out(outPath, header);
             out.writeHeader();
-            for (uint32_t sampleIndex = 0; sampleIndex < tot_duration * wav1->getHeader()->SamplesPerSec; sampleIndex++) {
+            for (uint32_t sampleIndex = 0; sampleIndex < tot_duration * header->SamplesPerSec; sampleIndex++) {
                 int16_t sample;
                 wav1->readSample(&sample);
                 if (sampleIndex >= startSample && sampleIndex < endSample){
@@ -320,21 +338,22 @@ public:
             }
             cout << "Accelerated successfully.\n";
             out.closeWAV();
+            wav1->closeWAV();
         } else {
-            uint32_t startSample = static_cast<uint32_t>(start_time * wav1->getHeader()->SamplesPerSec);
-            uint32_t endSample = static_cast<uint32_t>(end_time * wav1->getHeader()->SamplesPerSec);
-            int numOfSamples = tot_duration * wav1->getHeader()->SamplesPerSec;
+            uint32_t startSample = static_cast<uint32_t>(start_time * header->SamplesPerSec);
+            uint32_t endSample = static_cast<uint32_t>(end_time * header->SamplesPerSec);
+            int numOfSamples = tot_duration * header->SamplesPerSec;
 
-            uint32_t slowed_endSample = static_cast<uint32_t>(((end_time - start_time) / acceleration) + start_time) * wav1->getHeader()->SamplesPerSec;
-            int slowed_numOfSamples = start_time + slowed_endSample + (tot_duration - end_time) * wav1->getHeader()->SamplesPerSec;
+            uint32_t slowed_endSample = static_cast<uint32_t>(((end_time - start_time) / acceleration) + start_time) * header->SamplesPerSec;
+            int slowed_numOfSamples = start_time + slowed_endSample + (tot_duration - end_time) * header->SamplesPerSec;
 
-//            wav1->getHeader()->Subchunk2Size = numOfSamples * (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
-            int duration = slowed_numOfSamples / wav1->getHeader()->SamplesPerSec;
+//            header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            int duration = slowed_numOfSamples / header->SamplesPerSec;
 //            cout << wav1->getPath() << " new duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 //            cout << "-----------------------------num of samples " << numOfSamples << " " << slowed_numOfSamples << " " << endSample << "\n";
-            wav1->getHeader()->Subchunk2Size = slowed_numOfSamples * (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan;
-            wav1->getHeader()->ChunkSize = wav1->getHeader()->Subchunk2Size + 396;
-            WavFile out(outPath, wav1->getHeader());
+            header->Subchunk2Size = slowed_numOfSamples * (header->bitsPerSample / 8) / header->NumOfChan;
+            header->ChunkSize = header->Subchunk2Size + 396;
+            WavFile out(outPath, header);
             out.writeHeader();
             long long written = 0;
 
@@ -355,6 +374,7 @@ public:
             cout << "Accelerated successfully.\n";
 //            out.printHeader();
             out.closeWAV();
+            wav1->closeWAV();
         }
 //        exit(0);
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
@@ -367,14 +387,16 @@ public:
         convert();
     };
     void convert() override{
-        if(start_time > end_time) MyWarning a(127, "Start time of mute can't be bigger then end time.");
+        if(start_time > end_time and end_time != -1) MyWarning a(127, "Start time of mute can't be bigger then end time.");
         char *outPath = tmpFlag ? (char*) "cache.wav" : (char*) "tmp.wav";
         tmpFlag = not tmpFlag;
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, header);
         out.writeHeader();
 
         //127
         int duration = end_time - start_time;
+        if(end_time == -1) end_time = duration;
         cout << "dur is " << duration << "\n";
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
@@ -382,8 +404,8 @@ public:
 
         // Write the WAV header to the output file
 
-        uint32_t startSample = static_cast<uint32_t>(start_time * (wav1->getHeader()->bitsPerSample / 8) * wav1->getHeader()->NumOfChan * wav1->getHeader()->SamplesPerSec);
-        uint32_t endSample = static_cast<uint32_t>(end_time * (wav1->getHeader()->bitsPerSample / 8) * wav1->getHeader()->NumOfChan * wav1->getHeader()->SamplesPerSec);
+        uint32_t startSample = static_cast<uint32_t>(start_time * (header->bitsPerSample / 8) * header->NumOfChan * header->SamplesPerSec);
+        uint32_t endSample = static_cast<uint32_t>(end_time * (header->bitsPerSample / 8) * header->NumOfChan * header->SamplesPerSec);
 //        cout << "start samples is " << startSample << "end samples is " << endSample << "\n";
 
         for (uint32_t sampleIndex = 0; true; sampleIndex++) {
@@ -395,6 +417,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Cutted successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -407,14 +430,15 @@ public:
         convert();
     };
     void convert() override{
-        WavFile out(outPath, wav1->getHeader());
+        WAV_HEADER *header = wav1->getHeaderCopy();
+        WavFile out(outPath, header);
 
-        int duration = wav1->getHeader()->Subchunk2Size / (wav1->getHeader()->bitsPerSample / 8) / wav1->getHeader()->NumOfChan / wav1->getHeader()->SamplesPerSec;
+        int duration = header->Subchunk2Size / (header->bitsPerSample / 8) / header->NumOfChan / header->SamplesPerSec;
         cout << "dur is " << duration << "\n";
         cout << wav1->getPath() << " duration is " << duration << " seconds or " << (int) duration / 60 << " m " << (int) duration % 60 << " s.\n";
 
-        int numOfSamples = duration * wav1->getHeader()->SamplesPerSec;
-        wav1->getHeader()->Subchunk2Size = numOfSamples * (wav1->getHeader()->bitsPerSample / 8);
+        int numOfSamples = duration * header->SamplesPerSec;
+        header->Subchunk2Size = numOfSamples * (header->bitsPerSample / 8);
         out.writeHeader();
         cout << "Start copying " << wav1->getPath() << " from " << start_time << " seconds to " << end_time << " seconds.\n";
 
@@ -427,6 +451,7 @@ public:
 //        cout << wav->getHeader()->NumOfChan << " " << wav->getHeader()->Subchunk2Size << " " << wav->getHeader()->ChunkSize << " " << wav->getHeader()->Subchunk1Size << "\n";// << "" << wav->getHeader()->NumOfChan << "" << wav->getHeader()->NumOfChan << ""
         cout << "Copied successfully.\n";
         out.closeWAV();
+        wav1->closeWAV();
     }
 };
 
@@ -456,7 +481,8 @@ WavFile *getTempFile(){
 }
 
 int main(int argc, char **argv) {
-    cout << argc << " " << argv[1] << "\n";
+//    cout << argc << " " << argv[1] << "\n";
+    cout << "argc is " << argc << " argv is " << argv[1] << "\n";
     if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
         cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
     } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
@@ -557,14 +583,33 @@ int main(int argc, char **argv) {
             WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
         }
     }
-    WavFile a("./ex11.wav");
-//    WavFile b("./ex22.wav");
+//    WavFile a("./ex1.wav");
+//    WavFile b("./ex2.wav");
 //
 //    WAVConverter* c_1 = WAVConverterFactory::createConverter("Mute", 0, 15, &a);
 //    WAVConverter* c_2 = WAVConverterFactory::createConverter("Mute", 30, 45, getTempFile());
 //    WAVConverter* c_3 = WAVConverterFactory::createConverter("Mute", 60, 75, getTempFile());
-//    WAVConverter* c_4= WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
-//    WAVConverter* c_5= WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
+//    WAVConverter* c_4 = WAVConverterFactory::createConverter("Mute", 90, 115, getTempFile());
+//
+//    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, &a);
+//    WAVConverter* c_22 = WAVConverterFactory::createConverter("Mix", 30, 45, getTempFile(), &a);
+//    WAVConverter* c_33 = WAVConverterFactory::createConverter("Mix", 60, 75, getTempFile(), &a);
+//    WAVConverter* c_44 = WAVConverterFactory::createConverter("Mix", 90, 115, getTempFile(), &a);
+
+//    WAVConverter* c_11 = WAVConverterFactory::createConverter("Mix", 0, 15, &b, getTempFile());
+//    WAVConverter* c_12 = WAVConverterFactory::createConverter("Mix", 30, 45, &b, getTempFile());
+//    WAVConverter* c_13 = WAVConverterFactory::createConverter("Mix", 60, 75, &b, getTempFile());
+//    WAVConverter* c_14 = WAVConverterFactory::createConverter("Mix", 90, 105, &b, getTempFile());
+
+//    WAVConverter* c_5 = WAVConverterFactory::createConverter("Accelerate", 0, 410, &a, nullptr, 0.25);
+//    WAVConverter* c_6 = WAVConverterFactory::createConverter("Accelerate", 0, 1640, getTempFile(), nullptr, 4);
+//    WAVConverter* c_55 = WAVConverterFactory::createConverter("Accelerate", 0, 410, getTempFile(), nullptr, 0.25);
+//    WAVConverter* c_66 = WAVConverterFactory::createConverter("Accelerate", 0, 1640, getTempFile(), nullptr, 4);
+//    WAVConverter* c_67 = WAVConverterFactory::createConverter("Accelerate", 0, 410, getTempFile(), nullptr, 0.05);
+//    WAVConverter* c_57 = WAVConverterFactory::createConverter("Accelerate", 0, 8200, getTempFile(), nullptr, 20);
+
+
+//    WAVConverter* c_1000 = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), 0, 0, "snd.wav");
 
 //    WAVConverter* c1 = WAVConverterFactory::createConverter("Mute", 10, 30, &a);
 //    WAVConverter* c2 = WAVConverterFactory::createConverter("Mix", 15, 25, &a, getTempFile());
@@ -573,8 +618,8 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-// Добавить грамотную обработку ошибок
-// Перенсти всю работу с файлами в WAV (открытие, сохранение) редактирование - создание нового WAV в конвертере и запись по нему
-// Добавить тона
-// Добавить склейку
-// Добавить ввод с консоли
+//~ Добавить грамотную обработку ошибок
+//V Перенсти всю работу с файлами в WAV (открытие, сохранение) редактирование - создание нового WAV в конвертере и запись по нему
+//- Добавить тона
+//- Добавить склейку
+//V Добавить ввод с консоли

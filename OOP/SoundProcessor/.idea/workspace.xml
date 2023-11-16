@@ -21,9 +21,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00dedb60-01e9-491c-bf82-b586855ba227" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Life/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Life/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../PHC/Lab10.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../PHC/classWork10.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../PHC/xorNeuro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,11 +88,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -109,7 +108,8 @@
       <workItem from="1699525825900" duration="3699000" />
       <workItem from="1699532954535" duration="6766000" />
       <workItem from="1699519587138" duration="3707000" />
-      <workItem from="1699596016201" duration="596000" />
+      <workItem from="1699596016201" duration="774000" />
+      <workItem from="1699939866451" duration="1776000" />
     </task>
     <servers />
   </component>

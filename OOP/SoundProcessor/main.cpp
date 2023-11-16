@@ -482,7 +482,10 @@ WavFile *getTempFile(){
 
 int main(int argc, char **argv) {
 //    cout << argc << " " << argv[1] << "\n";
-    if (argc == 2 and (argv[1] == (char *) "-h" or argv[1] == (char *) "-help")) {
+//    cout << "argc is " << argc << " argv is:" << argv[1] << ":" << endl;
+//    cout << strcmp(argv[1], string("-h").c_str()) << endl;
+//    if (argc == 2 and (argv[1] == string("-h").c_str() or argv[1] == string("-help").c_str())){
+    if (argc == 2 and string(argv[1]).find("-h") != -1){
         cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
     } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
         cout << argc;
@@ -574,9 +577,10 @@ int main(int argc, char **argv) {
                     IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
                 }
                 WAVConverter *c = WAVConverterFactory::createConverter("Cut", start, end, a);
-            } else {
-                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
             }
+//            else {
+//                IOFileError e(127, (const char *) (string("Parameter haven't recognized  ") + line).c_str());
+//            }
         }
         if (not firstTime) {
             WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
