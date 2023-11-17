@@ -5,8 +5,8 @@ from PIL import Image
 
 # for 0.8 koef works correctly
 # for 0.85 NOT
-skip_koeff = 0.8
-HEIGHT = 200
+skip_koeff = 0.75
+HEIGHT = 100
 waitFlag = 0
 
 def wait(w=0):
@@ -69,13 +69,15 @@ def get_letters(templates):
         letters.append(letter)
     return letters
 
-def get_letter(img, alphabet):
+def get_letter(img, alphabet, max_vals):
 # def get_letter(img, alphabet, used_width):
     biggest_val = float('-inf')
     biggest_index = 0
     biggest_pos = 0
     h, w = 0, 0
     for i in range(len(alphabet)):
+        if(max_vals[i] < skip_koeff):
+            continue
         # print(img.shape, template.shape)
         res = cv2.matchTemplate(img, alphabet[i], cv2.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
@@ -89,6 +91,7 @@ def get_letter(img, alphabet):
         # if tw < HEIGHT / 2 and tw > HEIGHT / 3:
         #     print(tw, HEIGHT, HEIGHT / tw)
         #     sh("narrow", alphabet[i], 2)
+        max_vals[i] = max_val
         is1 = tw > HEIGHT / 2.8 and tw < HEIGHT / 2.7
         isI = tw > HEIGHT / 2.5 and tw < HEIGHT / 2.4
         isJ = tw > HEIGHT / 1.7 and tw < HEIGHT / 1.9
@@ -112,12 +115,12 @@ def get_letter(img, alphabet):
     else:
         biggest_index += 24
     if biggest_val < skip_koeff or w < HEIGHT / 3:
-        return (-1, -1)
+        return (-1, -1, max_vals)
         # return (-1, -1, used_width)
     # print(biggest_val, biggest_pos, biggest_index, w, h)
     # used_width += w
     cv2.rectangle(img, (biggest_pos[0] + int(w / 100), biggest_pos[1]), (biggest_pos[0] + w - int(w / 100), biggest_pos[1] + h), (0, 0, 255), -1)
-    return (biggest_index, biggest_pos[0])
+    return (biggest_index, biggest_pos[0], max_vals)
 
 # url = input()
 # url = "https://stepik.org/media/attachments/course/187016/corrected_templ.png"
@@ -127,6 +130,7 @@ image = np.frombuffer(bytes([int(i, 16) for i in input().split()]), np.uint8)
 # Q_text = "https://stepik.org/media/attachments/course/187016/hpgQ.png"
 # full_test = "https://stepik.org/media/attachments/course/187016/Full_test.png"
 # e_full_test = "https://stepik.org/media/attachments/course/187016/extended_Full_test.png"
+# ee_full_test = "https://stepik.org/media/attachments/course/187016/eextended_Full_test.png"
 # url = e_full_test
 # resp = requests.get(url, stream=True, timeout=100.0).raw
 # image = np.asarray(bytearray(resp.read()), dtype="uint8")
@@ -135,9 +139,11 @@ ret, image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 image = cut_corners(image)
 ih, iw = image.shape
 image = cv2.resize(image, (int(iw / ih * HEIGHT), HEIGHT))
-sh("SDf", image)
+# sh("SDf", image)
 # print(image.shape)
 ih, iw = image.shape
+if(iw / ih > 25):
+    exit(1)
 # image_contours = get_text_contours(image)
 
 Q_url = "https://stepik.org/media/attachments/course/187016/Q.png"
@@ -154,7 +160,7 @@ cleared_q_num = 0
 letters = []
 Q_min_val, Q_max_val, Q_min_loc, Q_max_loc = cv2.minMaxLoc(cv2.matchTemplate(image, Q, cv2.TM_CCOEFF_NORMED))
 ih, old_iw = image.shape
-while Q_max_val > 0.9:
+while Q_max_val > 0.8:
     cleared_q_num += 1
     # sh("before remove Q", image, 0)
     cv2.rectangle(image, (Q_max_loc[0] - 5, Q_max_loc[1]), (Q_max_loc[0] + Q_w + 5, Q_max_loc[1] + Q_h), (255, 255, 255), -1)
@@ -169,6 +175,7 @@ new_ih, new_iw = image.shape
 # print(new_iw)
 for i in range(len(letters)):
     letters[i] = (letters[i][0], int(letters[i][1] * new_iw / old_iw))
+# sh("with no Q", image, 2)
 
 mn = "https://stepik.org/media/attachments/course/187016/MN_templ.png"
 templ = "https://stepik.org/media/attachments/course/187016/text_template.png"
@@ -192,7 +199,7 @@ alph_letters = get_letters(template.copy())
 # cv2.imshow("letter A", alph_letters[0])
 
 alph_txt = sort_by_text(alph_letters, template.copy())   #letters in alphabet order
-
+alph_recs = [1 for _ in range(len(alph_txt))]
 # for i in range(len(alph_txt)):
 #     print(i)
 #     cv2.imshow("Dfg", alph_txt[i])
@@ -203,7 +210,7 @@ alph_txt = sort_by_text(alph_letters, template.copy())   #letters in alphabet or
 #     cv2.destroyAllWindows()
 while(True):
     # val, pos, used_width = get_letter(image, alph_txt, used_width)
-    val, pos = get_letter(image, alph_txt)
+    val, pos, alph_recs = get_letter(image, alph_txt, alph_recs)
     # if val == -1 or used_width > iw * 0.95:
     if val == -1:
         break
