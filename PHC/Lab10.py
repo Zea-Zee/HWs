@@ -15,9 +15,7 @@ class Neuron:
         self.bias = np.random.randn()
 
     def activate(self, x):
-        # return 1 / (1 + np.exp(-(np.dot(x, self.weight) + self.bias)))
         res = np.dot(x, self.weight) + self.bias
-        # print(x, res)
         return sigmoid(res)
 
     def backward(self, x):
@@ -53,7 +51,6 @@ class Model:
         d_hidden2 = error_hidden2 * self.hidden_neuron2.backward(self.hidden_layer_res[1])
 
         # Update weights and biases
-        # print(d_output, self.output_neuron.weight, "|", self.hidden_layer_res * d_output * self.lr)
         self.output_neuron.weight += self.hidden_layer_res * d_output * self.lr
         self.output_neuron.bias += np.sum(d_output) * self.lr
 
@@ -63,11 +60,9 @@ class Model:
         self.hidden_neuron2.weight += inputs * d_hidden2 * self.lr
         self.hidden_neuron2.bias += np.sum(d_hidden2) * self.lr
 
-# Example usage
 inputLayerNeurons, hiddenLayerNeurons, outputLayerNeurons = 2, 2, 1
 model_2 = Model(inputLayerNeurons, hiddenLayerNeurons, outputLayerNeurons, 0.1)
 
-# Training
 inputs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 expected_output = np.array([[0], [1], [1], [0]])
 
@@ -76,11 +71,9 @@ epochs = 10000
 for epoch in range(epochs):
     for i in range(len(inputs)):
         hidden_res, output_res = model_2.forward(inputs[i])
-        # print(hidden_res, "|", output_res, "\\n")
         err = loss(expected_output[i], output_res)
         model_2.backward(inputs[i], err)
 
-# Testing
 for i in range(len(inputs)):
     _, output = model_2.forward(inputs[i])
     print(f"Input: {inputs[i]}, Predicted Output: {output} -> {round(output)}")
