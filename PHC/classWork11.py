@@ -26,6 +26,12 @@ class GeneratorDataset(data.Dataset):
         return self.num_samples
 
 
+dataset = GeneratorDataset(64, 10, 12800)
+dataloader = data.DataLoader(dataset, batch_size=16)
+for x, y in dataloader:
+    break
+print(x.shape, y.shape)
+
 dataset = GeneratorDataset(64, 10, 128)
 dataloader = data.DataLoader(dataset, batch_size=16)
 for x, y in dataloader:
@@ -48,35 +54,15 @@ class SimpleModel(nn.Module):
 
 
 mae = nn.L1Loss()
+model_seq = SimpleModelSeq(64, 10)
+print(list(model_seq.parameters()))
 
-def loss_batch(model, loss_func, xb, yb, opt=None):
-    loss = loss_func(model(xb), yb)
-
-    if opt is not None:
-        loss.backward()
-        opt.step()
-        opt.zero_grad()
-
-    return loss.item(), len(xb)
-
-def fit(epochs, model, loss_func, opt, data):
-    for epoch in range(epochs):
-        model.train()
-        for x, y in data:
-            for xb, yb in x:
-                loss_batch(model, loss_func, xb, yb, opt)
-
-            model.eval()
-            with torch.no_grad():
-                losses, nums = zip(
-                    *[loss_batch(model, loss_func, xb, yb) for xb, yb in y]
-                )
-            val_loss = np.sum(np.multiply(losses, nums)) / np.sum(nums)
-
-            print(epoch, val_loss)
-
-model = SimpleModel(64, 10)
-opt = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-print(model, end="\n------------------\n")
-print(dataloader)
-fit(1000, model, mae, opt, dataloader)
+opt = torch.optim.Adam(model_seq.parameters(), lr=0.001)
+for x, y in dataloader:
+    opt.zero_grad()
+    y_pred = model_seq(x)
+    loss = mae(y, y_pred)
+    loss.backward()
+    # print('Loss', loss.item())
+    opt.step()
+print('Loss', loss.item())
