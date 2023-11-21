@@ -10,19 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a10d2ee-5e21-4c2d-b069-961eb940e18e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lab10.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classWork10.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/textFork.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/textRecognizer by template.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xorNeuro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/cache.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/cache.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/instructions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/tmp.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/tmp.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classWork11.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textFork.py" beforeDir="false" afterPath="$PROJECT_DIR$/textFork.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
