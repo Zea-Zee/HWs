@@ -1,0 +1,13 @@
+Doesn't work 90% due to using letter Q, both of recognizer2 and textFork(3), should study to distinguish them.
+For textFork are 2? variants:
+1) using cut corner find borders of Q and separate for 2q + 1 images and every high the
+CORRECT solution:
+    resize Q for text height and try to find match template with max_val > 0.9,
+    if it was founded then hide it by white color
+    resize text and recompute Q pos
+    solved?
+!!! may be problems with tw
+troubles with I
+1 h/w ratio is 2,35 - 2,55  -> 2.7.
+I h/w ratio is 2 - 2.2      -> 2.439
+J h/w ratio is 1,7 - 1,9
