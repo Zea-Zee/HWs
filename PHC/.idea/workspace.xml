@@ -10,8 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a10d2ee-5e21-4c2d-b069-961eb940e18e" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OOP/SoundProcessor/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/classWork11.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textFork.py" beforeDir="false" afterPath="$PROJECT_DIR$/textFork.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab10.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab10.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab10_article.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab10_article.py" afterDir="false" />
+>>>>>>> bcc1c08eef1ff6b95e73caa6937eb4716a4864eb
+>>>>>>> 76d933d05b4daeef274d9fb5070a9ea610c875c2
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

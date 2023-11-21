@@ -20,7 +20,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="00dedb60-01e9-491c-bf82-b586855ba227" name="Changes" comment="" />
+=======
+    <list default="true" id="00dedb60-01e9-491c-bf82-b586855ba227" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../PHC/classWork11.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../PHC/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../PHC/textFork.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../PHC/textFork.py" afterDir="false" />
+    </list>
+>>>>>>> 76d933d05b4daeef274d9fb5070a9ea610c875c2
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +113,11 @@
       <workItem from="1699519587138" duration="3707000" />
       <workItem from="1699596016201" duration="774000" />
       <workItem from="1699939866451" duration="1776000" />
+<<<<<<< HEAD
       <workItem from="1700493543116" duration="2000" />
+=======
+      <workItem from="1700549044346" duration="5616000" />
+>>>>>>> 76d933d05b4daeef274d9fb5070a9ea610c875c2
     </task>
     <servers />
   </component>

@@ -241,6 +241,19 @@ public:
     }
 };
 
+unsigned long long counter = 0;
+int16_t mixSamples(int16_t a, int16_t b){
+    if(a == 0)
+        return b;
+    int32_t sum = a + b;
+//    if(counter % 100000 == 0)
+//        cout << "a is " << a << " b is " << b << " sum is " << sum << "\n";
+    if(sum >= INT16_MAX)
+        return (int16_t) (sum / 2);
+    else
+        return (int16_t) sum;
+}
+
 class WAVMixer : public WAVConverter {
 private:
     WavFile *wav2;
@@ -278,15 +291,22 @@ public:
 //        cout << "endSample " << endSample << "\n";
 
         for (uint32_t sampleIndex = 0; sampleIndex < numOfSamples; sampleIndex++) {
+//            counter++;
             int16_t sample1, sample2;
             wav1->readSample(&sample1);
             wav2->readSample(&sample2);
             if (sampleIndex >= startSample and sampleIndex < endSample and sampleIndex < lastSample) {
                 unsigned long long sum = sample1 + sample2;
 //                sample1 = (int16_t) sum / 2;
-                sample1 += sample2;
+                sample2 = mixSamples(sample1, sample2);
+                out.writeSample(&sample2);
+//                if(counter % 100000 == 0)
+//                    cout << "sample 2 is " << sample2 << "\n";
+            } else {
+                out.writeSample(&sample1);
+//                if(counter % 100000 == 0)
+//                    cout << "s 1 is " << sample1 << "\n";
             }
-            out.writeSample(&sample1);
         }
         cout << "Mixed successfully.\n";
         out.closeWAV();
@@ -485,6 +505,7 @@ int main(int argc, char **argv) {
 //    cout << "argc is " << argc << " argv is:" << argv[1] << ":" << endl;
 //    cout << strcmp(argv[1], string("-h").c_str()) << endl;
 //    if (argc == 2 and (argv[1] == string("-h").c_str() or argv[1] == string("-help").c_str())){
+    cout << argc << " " << string(argv[1]).find("-h") << " " << string(argv[1]).find("-c") << endl;
     if (argc == 2 and string(argv[1]).find("-h") != -1){
         cout << "You can write as: sound_processor [-h] [-c config.txt output.wav input1.wav [input2.wav …]]\n";
     } else if (argc > 2 and string(argv[1]).find("-c") != -1) {
@@ -495,14 +516,13 @@ int main(int argc, char **argv) {
         }
         char *outPath = argv[3];
 
-        vector < WavFile * > files;
+        vector <string> files;
         cout << "\nargv is " << *argv << "\n";
         for(int i = 4; i < argc; i++){
             cout << "*argv is " << *argv << " argv is " << argv << "\n";
             try {
-                WavFile *p = new WavFile((char*) argv[i]);
-//                cout << "p is " << p << "\n";
-                files.push_back(p);
+                cout << "->->->argv " << i << " is:" << argv[i] << ":\n";
+                files.push_back(string(argv[i]) + "\000");
             } catch (const char *err) {
                 cout << "\n\n\n\n\n" << err << "\n";
                 IOFileError e(127, (const char *) (string("There is problem with file") + string((char*) *argv)).c_str());
@@ -527,9 +547,12 @@ int main(int argc, char **argv) {
 //            cout << "line " << line << " was not skipped\n";
             WavFile *a;
             if (firstTime) {
-                a = files[0];
+                a = new WavFile((char*) (string(files[0])).c_str());
                 firstTime = false;
-            } else a = getTempFile();
+            } else{
+                a = getTempFile();
+            }
+            cout << "a file path is " << string(files[0]).c_str() << "\n";
             stringstream ss(line);
             string conv;
             ss >> conv;
@@ -541,7 +564,7 @@ int main(int argc, char **argv) {
                     cout << err << "\n";
                     IOFileError e(127, (const char *) (string("Cant read start/end from  ") + line).c_str());
                 }
-                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, a);
+                WAVConverter *c = WAVConverterFactory::createConverter("Mute", start, end, new WavFile((char*) files[0].c_str()));
             } else if (conv == "mix") { //mix $2 10 20
 //                string indexArg;
                 int start, end, wav2Index;
@@ -556,7 +579,8 @@ int main(int argc, char **argv) {
                 }
 //                cout << "path is " << files[wav2Index - 2]-> << "\n";
 //                WavFile b((char *) files[wav2Index - 1]);
-                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, files[wav2Index - 2]);
+                cout << "start mixing with file " << files[wav2Index - 1] << " \n";
+                WAVConverter *c = WAVConverterFactory::createConverter("Mix", start, end, a, new WavFile((char*) files[wav2Index - 1].c_str()));
             } else if (conv == "accelerate") {  //accelerate 5 10 1.5
                 int start, end;
                 double boost;
@@ -584,8 +608,11 @@ int main(int argc, char **argv) {
         }
         if (not firstTime) {
             WAVConverter *c = WAVConverterFactory::createConverter("Copy", 0, 0, getTempFile(), nullptr, NULL, outPath);
+        } else{
+            cout << " no operations\n";
         }
     }
+    cout << "end" << endl;
 //    WavFile a("./ex1.wav");
 //    WavFile b("./ex2.wav");
 //
