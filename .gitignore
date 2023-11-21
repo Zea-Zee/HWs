@@ -1,0 +1,5 @@
+# .gitignore
+
+# Virtual environment
+PHC/venv/
+PHC/.idea
