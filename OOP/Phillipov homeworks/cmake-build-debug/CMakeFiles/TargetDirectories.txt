@@ -1,0 +1,3 @@
+C:/Users/kuzga/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir
+C:/Users/kuzga/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kuzga/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/rebuild_cache.dir

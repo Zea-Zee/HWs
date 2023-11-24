@@ -1,0 +1,9 @@
+# ninja log v5
+10	865	7225155456016879	CMakeFiles/Phillipov_homeworks.dir/test_runner.cpp.obj	6746c4f9183d72fb
+4	1152	7225175784850924	CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj	99d2b8b08bb6e5
+1153	1407	7225175787290606	Phillipov_homeworks.exe	ec9c3c14b1f1cb12
+2	421	7225176392289642	build.ninja	e25e46e4bd6ea2c
+4	1112	7225176889817223	CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj	99d2b8b08bb6e5
+1113	1366	7225176892257474	Phillipov_homeworks.exe	df1ffc9c05027723
+4	1159	7225177032530580	CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj	99d2b8b08bb6e5
+1161	1424	7225177035158937	Phillipov_homeworks.exe	df1ffc9c05027723
