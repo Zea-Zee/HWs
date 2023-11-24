@@ -99,11 +99,26 @@ class DoubleLayerConvModel(nn.Module):
         return x
 
 
+class CombinedNeuralNetwork(nn.Module):
+    def __init__(self, CNN, FCNN):
+        super().__init__()
+        self.name = "CombinedNeuralNetwork"
+        self.CNN = CNN
+        self.FCNN = FCNN
+
+    def forward(self, x):
+        x = self.CNN(x)
+        x = x.view(32, -1)
+        # print(x.shape)
+        x = self.FCNN(x)
+        return x
+
+
 class CustomDataset(data.Dataset):
-    def __init__(self, size=320000):
+    def __init__(self, model, size=320000):
         self.size = size
         self.data = torch.randn((size, 3, 19, 19))  # Example random input data
-        self.model = DoubleLayerConvModel()
+        self.model = model
 
     def __len__(self):
         return self.size
@@ -123,8 +138,34 @@ class CustomDataset(data.Dataset):
 
         # Global Average Pooling to match the output size
         x = nn.functional.adaptive_avg_pool2d(x, (4, 4))
-
         return x
+
+
+class DatasetForCombinedNN(data.Dataset):
+    def __init__(self, size=320000):
+        self.__size = size
+        self.data = torch.randn((size, 3, 19, 19))  # Example random input data
+
+    def __len__(self):
+        return self.__size
+
+    def __getitem__(self, idx):
+        x = self.data[idx]
+        sums = np.zeros(3)
+        sums[0] = torch.sum(x[:, :, 0])
+        sums[1] = torch.sum(x[:, :, 1])
+        sums[2] = torch.sum(x[:, :, 2])
+        r = np.eye(4)
+        if sums[0] > sums[1]:
+            if sums[0] > sums[2]:
+                return x, r[0]
+            else:
+                return x, r[1]
+        elif sums[0] < sums[1]:
+            if sums[0] > sums[2]:
+                return x, r[2]
+            else:
+                return x, r[3]
 
 
 def learn_model(model, dataset, stop_loss, is_third=False):
@@ -133,11 +174,11 @@ def learn_model(model, dataset, stop_loss, is_third=False):
     counter = 0
     start = time.time()
 
+    # dataloader = data.DataLoader(dataset, batch_size=32)
     dataloader = data.DataLoader(dataset, batch_size=32)
     for x, y in dataloader:
         break
-
-
+    isFirst = True
     for x, y in dataloader:
         counter += 1
         opt.zero_grad()
@@ -146,8 +187,11 @@ def learn_model(model, dataset, stop_loss, is_third=False):
         loss.backward()
         opt.step()
         loss_val = loss.item()
+        if isFirst:
+            isFirst = False
+            print(f"first loss is {GREEN}{loss_val}{RESET}")
         if loss_val < stop_loss and counter > 1000 or counter >= 9999:
-            print(f"Model {BLUE} {model.name} {RESET} ended learning with loss {GREEN}{loss_val}{RESET} on {counter}'th step\n"
+            print(f"Model {BLUE}{model.name}{RESET} ended learning with loss {GREEN}{loss_val}{RESET} on {counter}'th step\n"
             f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}")
             return
         if counter % 100 == 0:
@@ -161,4 +205,7 @@ ex2_model = ThreeLayerModel(256, 64, 16, 4)
 learn_model(ex2_model, GeneratorDataset(256, 4, 320000), 0.2)
 
 ex3_model = DoubleLayerConvModel()
-learn_model(ex3_model, CustomDataset(), 0.03)
+learn_model(ex3_model, CustomDataset(ex3_model), 0.03)
+
+ex4_model = CombinedNeuralNetwork(DoubleLayerConvModel(), ThreeLayerModel(256, 64, 16, 4))
+learn_model(ex4_model, DatasetForCombinedNN(), 0.2)
