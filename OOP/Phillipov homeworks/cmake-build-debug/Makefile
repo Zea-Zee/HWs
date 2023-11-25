@@ -116,24 +116,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named YourExecutable
+# Target rules for targets named Phillipov_homeworks
 
 # Build rule for target.
-YourExecutable: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 YourExecutable
-.PHONY : YourExecutable
+Phillipov_homeworks: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Phillipov_homeworks
+.PHONY : Phillipov_homeworks
 
 # fast build rule for target.
-YourExecutable/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/build
-.PHONY : YourExecutable/fast
+Phillipov_homeworks/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/build
+.PHONY : Phillipov_homeworks/fast
 
 10th.obj: 10th.cpp.obj
 .PHONY : 10th.obj
 
 # target to build an object file
 10th.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/10th.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/10th.cpp.obj
 .PHONY : 10th.cpp.obj
 
 10th.i: 10th.cpp.i
@@ -141,7 +141,7 @@ YourExecutable/fast:
 
 # target to preprocess a source file
 10th.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/10th.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/10th.cpp.i
 .PHONY : 10th.cpp.i
 
 10th.s: 10th.cpp.s
@@ -149,7 +149,7 @@ YourExecutable/fast:
 
 # target to generate assembly for a file
 10th.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/10th.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/10th.cpp.s
 .PHONY : 10th.cpp.s
 
 ini.obj: ini.cpp.obj
@@ -157,7 +157,7 @@ ini.obj: ini.cpp.obj
 
 # target to build an object file
 ini.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/ini.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/ini.cpp.obj
 .PHONY : ini.cpp.obj
 
 ini.i: ini.cpp.i
@@ -165,7 +165,7 @@ ini.i: ini.cpp.i
 
 # target to preprocess a source file
 ini.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/ini.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/ini.cpp.i
 .PHONY : ini.cpp.i
 
 ini.s: ini.cpp.s
@@ -173,7 +173,7 @@ ini.s: ini.cpp.s
 
 # target to generate assembly for a file
 ini.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\YourExecutable.dir\build.make CMakeFiles/YourExecutable.dir/ini.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/ini.cpp.s
 .PHONY : ini.cpp.s
 
 # Help Target
@@ -184,7 +184,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... YourExecutable
+	@echo ... Phillipov_homeworks
 	@echo ... 10th.obj
 	@echo ... 10th.i
 	@echo ... 10th.s

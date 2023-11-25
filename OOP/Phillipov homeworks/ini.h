@@ -1,5 +1,4 @@
-#ifndef INI_PARSER_H
-#define INI_PARSER_H
+
 
 #include <string>
 #include <unordered_map>
@@ -34,4 +33,4 @@ namespace Ini {
 
 } // namespace Ini
 
-#endif // INI_PARSER_H
+
