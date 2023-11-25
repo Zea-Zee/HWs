@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/HWs/OOP/Phillipov homeworks/10th.cpp" "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.obj" "gcc" "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.obj.d"
-  "C:/HWs/OOP/Phillipov homeworks/ini.cpp" "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.obj" "gcc" "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.obj.d"
+  "/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/10th.cpp" "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.o" "gcc" "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.o.d"
+  "/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/ini.cpp" "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.o" "gcc" "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.o.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.
