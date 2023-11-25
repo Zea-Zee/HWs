@@ -51,5 +51,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Phillipov_homeworks.dir/DependInfo.cmake"
+  "CMakeFiles/YourExecutable.dir/DependInfo.cmake"
   )

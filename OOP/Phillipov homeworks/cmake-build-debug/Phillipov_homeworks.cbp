@@ -17,13 +17,14 @@
 					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Phillipov_homeworks">
-				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="YourExecutable">
+				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/YourExecutable.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="C:/HWs/OOP/Phillipov homeworks"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward"/>
@@ -33,19 +34,20 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 YourExecutable"/>
 					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Phillipov_homeworks/fast">
-				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="YourExecutable/fast">
+				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/YourExecutable.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="C:/HWs/OOP/Phillipov homeworks"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward"/>
@@ -55,7 +57,7 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks/fast"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 YourExecutable/fast"/>
 					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -82,8 +84,14 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/HWs/OOP/Phillipov homeworks/8th.cpp">
-			<Option target="Phillipov_homeworks"/>
+		<Unit filename="C:/HWs/OOP/Phillipov homeworks/10th.cpp">
+			<Option target="YourExecutable"/>
+		</Unit>
+		<Unit filename="C:/HWs/OOP/Phillipov homeworks/ini.cpp">
+			<Option target="YourExecutable"/>
+		</Unit>
+		<Unit filename="C:/HWs/OOP/Phillipov homeworks/ini.h">
+			<Option target="YourExecutable"/>
 		</Unit>
 		<Unit filename="C:/HWs/OOP/Phillipov homeworks/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

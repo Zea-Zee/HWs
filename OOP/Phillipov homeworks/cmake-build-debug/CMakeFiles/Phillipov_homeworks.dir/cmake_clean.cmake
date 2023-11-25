@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Phillipov_homeworks.dir/8th.cpp.obj"
-  "CMakeFiles/Phillipov_homeworks.dir/8th.cpp.obj.d"
+  "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.obj"
+  "CMakeFiles/Phillipov_homeworks.dir/10th.cpp.obj.d"
+  "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.obj"
+  "CMakeFiles/Phillipov_homeworks.dir/ini.cpp.obj.d"
   "Phillipov_homeworks.exe"
   "Phillipov_homeworks.exe.manifest"
   "Phillipov_homeworks.pdb"
