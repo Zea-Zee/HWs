@@ -9,6 +9,7 @@ import torch.utils.data as data
 BLUE = '\033[94m'
 CYAN = '\033[96m'
 GREEN = '\033[92m'
+RED = '\033[91m'
 RESET = '\033[0m'
 
 
@@ -170,39 +171,52 @@ class DatasetForCombinedNN(data.Dataset):
 
 def learn_model(model, dataset, stop_loss, is_third=False):
     mae = nn.L1Loss()
-    opt = torch.optim.Adam(model.parameters(), lr=0.001)
+    ls = 1
+    opt = torch.optim.Adam(model.parameters(), lr=0.0001)
     counter = 0
-    start = time.time()
+    isFirst = True
+    min_loss = float('inf')
+    min_loss_step = float('inf')
 
+    start = time.time()
     # dataloader = data.DataLoader(dataset, batch_size=32)
     dataloader = data.DataLoader(dataset, batch_size=32)
     for x, y in dataloader:
         break
-    isFirst = True
     for x, y in dataloader:
-        counter += 1
         opt.zero_grad()
         y_pred = model(x)
         loss = mae(y, y_pred)
         loss.backward()
         opt.step()
         loss_val = loss.item()
+        ls = loss_val
+        if loss_val < min_loss:
+            min_loss = loss_val
+            min_loss_step = counter
         if isFirst:
             isFirst = False
             print(f"first loss is {GREEN}{loss_val}{RESET}")
-        if loss_val < stop_loss and counter > 1000 or counter >= 9999:
+        if loss_val < stop_loss and counter > 1000:
             print(f"Model {BLUE}{model.name}{RESET} ended learning with loss {GREEN}{loss_val}{RESET} on {counter}'th step\n"
-            f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}")
+            f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}\n"
+            f"Min loss during entire learning was {GREEN}{min_loss}{RESET} on {min_loss_step}'th step")
             return
         if counter % 100 == 0:
             print(f"Loss on {counter}'th step is {loss_val}")
+        if counter >= 99999:
+            break
+        counter += 1
+    print(f"Model {BLUE}{model.name}{RESET} have ended learning {RED}due to end of data{RESET} with loss {GREEN}{ls}{RESET} on {counter}'th step\n"
+          f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}\n"
+          f"Min loss during entire learning was {GREEN}{min_loss}{RESET} on {RED if min_loss_step < counter else GREEN}{min_loss_step}{RESET}'th step")
 
 
 ex1_model = SimpleModelSeq(64, 10)
 learn_model(ex1_model, GeneratorDataset(64, 10, 320000), 0.003)
 
 ex2_model = ThreeLayerModel(256, 64, 16, 4)
-learn_model(ex2_model, GeneratorDataset(256, 4, 320000), 0.2)
+learn_model(ex2_model, GeneratorDataset(256, 4, 320000), 0.0001)
 
 ex3_model = DoubleLayerConvModel()
 learn_model(ex3_model, CustomDataset(ex3_model), 0.03)
