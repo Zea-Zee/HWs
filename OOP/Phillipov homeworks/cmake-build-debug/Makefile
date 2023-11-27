@@ -152,6 +152,30 @@ Phillipov_homeworks/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/10th.cpp.s
 .PHONY : 10th.cpp.s
 
+11th.obj: 11th.cpp.obj
+.PHONY : 11th.obj
+
+# target to build an object file
+11th.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.obj
+.PHONY : 11th.cpp.obj
+
+11th.i: 11th.cpp.i
+.PHONY : 11th.i
+
+# target to preprocess a source file
+11th.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.i
+.PHONY : 11th.cpp.i
+
+11th.s: 11th.cpp.s
+.PHONY : 11th.s
+
+# target to generate assembly for a file
+11th.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.s
+.PHONY : 11th.cpp.s
+
 ini.obj: ini.cpp.obj
 .PHONY : ini.obj
 
@@ -188,6 +212,9 @@ help:
 	@echo ... 10th.obj
 	@echo ... 10th.i
 	@echo ... 10th.s
+	@echo ... 11th.obj
+	@echo ... 11th.i
+	@echo ... 11th.s
 	@echo ... ini.obj
 	@echo ... ini.i
 	@echo ... ini.s
