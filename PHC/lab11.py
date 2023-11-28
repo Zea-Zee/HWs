@@ -1,80 +1,110 @@
 import numpy as np
 import torch
-import torch.nn as nn
+import torch.utils.data as data
+import time
 
-def sigmoid(x):
-    return 1 / (1 + np.exp(-x))
 
-def sigmoid_derivative(x):
-    return x * (1 - x)
+BLUE = '\033[94m'
+CYAN = '\033[96m'
+GREEN = '\033[92m'
+RED = '\033[91m'
+RESET = '\033[0m'
 
-def loss(t, y):
-    return t - y
 
-class Layer:
-    def __init__(self, in_size, out_size, func):
-        # self.fc1 = nn.Linear(in_size, out_size)  # Полносвязный слой 1
-        self.func = nn.ReLU()  # Функция активации
+class GeneratorDataset(data.Dataset):
+    def __init__(self, in_size, out_size, num_samples, func='sin'):
+        super().__init__()
+        self.num_samples = num_samples
+        self.in_size = in_size
+        self.out_size = out_size
+        self.func = func
 
-    def activate(self, x):
-        return self.func(x)
+    def __getitem__(self, index):
+        x = torch.rand(self.in_size)
+        if self.func == 'sin':
+            x = torch.sin(x)
+        elif self.func == 'cos':
+            x = torch.cos(x)
+        y = x[:self.out_size].clone()
+        return x, y
 
-    def backward(self, x):
-        return sigmoid_derivative(x)
+    def __len__(self):
+        return self.num_samples
+
 
 class Model:
-    def __init__(self, input_size=2, hidden_size=2, output_size=1, learning_rate=0.1):
-        self.hidden_neuron1 = Neuron(input_size)
-        self.hidden_neuron2 = Neuron(input_size)
-        self.output_neuron = Neuron(hidden_size)
-        self.output_layer_res = 0
-        self.hidden_layer_res = 0
+    def __init__(self, input_size=256, hidden1_size=64, hidden2_size=16, output_size=4, learning_rate=0.01, name="Barebone"):
+        self.name = name
+        self.weight_1 = torch.zeros(input_size, hidden1_size, requires_grad=True)
+        self.bias_1 = torch.zeros(hidden1_size, requires_grad=True)
+        self.weight_2 = torch.zeros(hidden1_size, hidden2_size, requires_grad=True)
+        self.bias_2 = torch.zeros(hidden2_size, requires_grad=True)
+        self.weight_3 = torch.zeros(hidden2_size, output_size, requires_grad=True)
+        self.bias_3 = torch.zeros(output_size, requires_grad=True)
         self.lr = learning_rate
 
-    def forward(self, inputs):
-        # Forward Propagation
-        hidden_layer_output1 = self.hidden_neuron1.activate(inputs)
-        hidden_layer_output2 = self.hidden_neuron2.activate(inputs)
-        self.hidden_layer_res = np.array([hidden_layer_output1, hidden_layer_output2])
-        # print(inputs, inputs.shape, hidden_layer_output1, hidden_layer_output1.shape, self.hidden_layer_res.shape)
-        self.output_layer_res = self.output_neuron.activate(self.hidden_layer_res)
-        # print(self.output_layer_res)
-        return self.hidden_layer_res, self.output_layer_res
+    def forward(self, x):
+        x = x @ self.weight_1
+        x += self.bias_1
+        x = torch.relu(x)
 
-    def backward(self, inputs, err):
-        # Backpropagation
-        d_output = err * self.output_neuron.backward(self.output_layer_res)
+        x = x @ self.weight_2
+        x += self.bias_2
+        x = torch.tanh(x)
 
-        error_hidden1 = d_output * self.output_neuron.weight[0]
-        error_hidden2 = d_output * self.output_neuron.weight[1]
+        x = x @ self.weight_3
+        x += self.bias_3
+        x = torch.softmax(x, dim=1)
+        return x
 
-        d_hidden1 = error_hidden1 * self.hidden_neuron1.backward(self.hidden_layer_res[0])
-        d_hidden2 = error_hidden2 * self.hidden_neuron2.backward(self.hidden_layer_res[1])
 
-        # Update weights and biases
-        self.output_neuron.weight += self.hidden_layer_res * d_output * self.lr
-        self.output_neuron.bias += np.sum(d_output) * self.lr
+    def backward(self, x, y):
+        y_pred = self.forward(x)
+        # Вычисляем функцию ошибок
+        loss = torch.mean((y_pred - y) ** 2)
+        # Вычисляем градиенты
+        loss.backward()
+        # Делаем шаг градиентного спуска по матрице весов
+        self.weight_1.data -= self.lr * self.weight_1.grad.data
+        self.weight_2.data -= self.lr * self.weight_2.grad.data
+        self.weight_3.data -= self.lr * self.weight_3.grad.data
 
-        self.hidden_neuron1.weight += inputs * d_hidden1 * self.lr
-        self.hidden_neuron1.bias += np.sum(d_hidden1) * self.lr
+        self.bias_1.data -= self.lr * self.bias_1.grad.data
+        self.bias_2.data -= self.lr * self.bias_2.grad.data
+        self.bias_3.data -= self.lr * self.bias_3.grad.data
+        # b.data -= lr * b.grad.data
+        # b.grad.data.zero_()
+        # обнуляем градиенты
+        self.weight_1.grad.data.zero_()
+        self.weight_2.grad.data.zero_()
+        self.weight_3.grad.data.zero_()
+        return loss.data
 
-        self.hidden_neuron2.weight += inputs * d_hidden2 * self.lr
-        self.hidden_neuron2.bias += np.sum(d_hidden2) * self.lr
 
-inputLayerNeurons, hiddenLayerNeurons, outputLayerNeurons = 2, 2, 1
-model_2 = Model(inputLayerNeurons, hiddenLayerNeurons, outputLayerNeurons, 0.1)
+def learn_model(model, dataset, stop_loss):
+    start = time.time()
+    # dataloader = data.DataLoader(dataset, batch_size=32)
+    dataloader = data.DataLoader(dataset, batch_size=32)
+    for x, y in dataloader:
+        break
+    isFirst = True
+    counter = 0
+    for x, y in dataloader:
+        mse = model.backward(x, y)
+        if isFirst:
+            isFirst = False
+            print(f"first loss is {GREEN}{mse}{RESET}")
+        if mse < stop_loss and counter > 1000:
+            print(f"Model {BLUE}{model.name}{RESET} ended learning with loss {GREEN}{mse}{RESET} on {counter}'th step\n"
+            f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}")
+            return
+        if counter % 100 == 0:
+            print(f"Loss on {counter}'th step is {mse}")
+        if counter >= 9999:
+            break
+        counter += 1
+    print(f"Model {BLUE}{model.name}{RESET} have ended learning {RED}due to end of data{RESET} with loss {GREEN}{mse}{RESET} on {counter}'th step\n"
+          f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}")
 
-inputs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-expected_output = np.array([[0], [1], [1], [0]])
-
-epochs = 10000
-
-for epoch in range(epochs):
-    for i in range(len(inputs)):
-        hidden_res, output_res = model_2.forward(inputs[i])
-        err = loss(expected_output[i], output_res)
-        model_2.backward(inputs[i], err)
-
-for i in range(len(inputs)):
-    _, output = model_2.forward(inputs[i])
-    print(f"Input: {inputs[i]}, Predicted Output: {output} -> {round(output)}")
+model = Model()
+learn_model(model, GeneratorDataset(256, 4, 320000), 0.0001)

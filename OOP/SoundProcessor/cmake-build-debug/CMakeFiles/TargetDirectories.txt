@@ -1,3 +1,0 @@
-C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug/CMakeFiles/SoundProcessor.exe.dir
-C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug/CMakeFiles/rebuild_cache.dir

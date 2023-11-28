@@ -1,0 +1,64 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Phillipov_homeworks",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Phillipov_homeworks::@6890427a1f51a3e7e1df",
+<<<<<<<< HEAD:OOP/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-f025ff269063fc3af506.json
+					"jsonFile" : "target-Phillipov_homeworks-Debug-bfe88e559b48bee87f23.json",
+========
+					"jsonFile" : "target-Phillipov_homeworks-Debug-d3d83655b8dea4e5a2c1.json",
+>>>>>>>> e56eb7b3693c1771088283b4055fcf7d189ffaae:OOP/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-17d7e92838f39fce200e.json
+					"name" : "Phillipov_homeworks",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug",
+		"source" : "/home/gleb/Desktop/HWs/OOP/Phillipov homeworks"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

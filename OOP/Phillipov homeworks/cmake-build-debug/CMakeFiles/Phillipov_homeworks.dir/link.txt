@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Phillipov_homeworks.dir/ini.cpp.o CMakeFiles/Phillipov_homeworks.dir/10th.cpp.o -o Phillipov_homeworks 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor -B C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor\cmake-build-debug
 -- The C compiler identification is GNU 6.3.0
 -- The CXX compiler identification is GNU 6.3.0
@@ -14,3 +15,11 @@
 -- Configuring done (10.6s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug
+=======
+/app/extra/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/gleb/Desktop/HWs/OOP/SoundProcessor -B /home/gleb/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.26 or higher is required.  You are running version 3.24.2
+
+
+-- Configuring incomplete, errors occurred!
+>>>>>>> cd964ba40af4148de10bbfd1450fa2eca73ecdb0
