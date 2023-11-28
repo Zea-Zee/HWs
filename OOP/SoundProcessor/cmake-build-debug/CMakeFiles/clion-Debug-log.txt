@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor -B C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor -B C:\Users\kuzga\Desktop\HWs\OOP\SoundProcessor\cmake-build-debug
 -- The C compiler identification is GNU 6.3.0
 -- The CXX compiler identification is GNU 6.3.0
 -- Detecting C compiler ABI info
@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: C:/MinGW/bin/c++.exe - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (9.6s)
--- Generating done (0.0s)
+-- Configuring done (10.6s)
+-- Generating done (0.1s)
 -- Build files have been written to: C:/Users/kuzga/Desktop/HWs/OOP/SoundProcessor/cmake-build-debug
