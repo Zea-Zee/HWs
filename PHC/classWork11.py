@@ -200,7 +200,7 @@ def learn_model(model, dataset, stop_loss, is_third=False):
         if loss_val < stop_loss and counter > 1000:
             print(f"Model {BLUE}{model.name}{RESET} ended learning with loss {GREEN}{loss_val}{RESET} on {counter}'th step\n"
             f"For one iteration it took {CYAN}{(time.time() - start) * 1000 / counter}ms{RESET}\n"
-            f"Min loss during entire learning was {GREEN}{min_loss}{RESET} on {min_loss_step}'th step")
+            f"Min loss during entire learning was {GREEN}{min_loss}{RESET} on {RED if min_loss_step < counter else GREEN}{min_loss_step}{RESET}'th step")
             return
         if counter % 100 == 0:
             print(f"Loss on {counter}'th step is {loss_val}")

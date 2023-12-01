@@ -1,3 +1,0 @@
-/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir
-/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/gleb/Desktop/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/rebuild_cache.dir

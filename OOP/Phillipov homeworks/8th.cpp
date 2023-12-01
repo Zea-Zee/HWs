@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -67,8 +68,8 @@ public:
 
 
 int main(){
-//    ifstream in("./8inp.txt");
-    ifstream in("./gendata.txt");
+   ifstream in("./8inp.txt");
+    // ifstream in("./gendata.txt");
     if(not in.is_open()){
         cerr << "Error opening file: ./8inp.txt.\n";
         return 1;
@@ -77,22 +78,23 @@ int main(){
     in >> n;
     Row *row = new Row();
 
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start_time = std::chrono::high_resolution_clock::now();
+    // time_t start = time.
 
-    for(int i = 0; i < n; i++){
+    for(int i = n - 1; i >= 0; i--){
         in >> num >> leaderNum;
         row->addElem(num, leaderNum);
     }
 
-    auto end = std::chrono::high_resolution_clock::now();
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // Output the duration in milliseconds
+    // std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+    cout << "For " << n << " elements it took " << duration.count() << "ms\n";
 
-    // Calculate the duration in milliseconds
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    cout << "For " << n << " elements it took " << duration << "\n";
-
-//    Sportsman *top = row->getTop();
-//    while(top != nullptr){
-//        cout << top->getNumber() << "\n";
-//        top = top->getLed();
-//    }
+   Sportsman *top = row->getTop();
+   while(top != nullptr){
+       cout << top->getNumber() << "\n";
+       top = top->getLed();
+   }
 }

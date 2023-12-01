@@ -9,4 +9,4 @@ def genDataFor7thOOP(n, out):
         a.write(str(i) + " " + str(n - i) + "\n")
     a.close()
 
-genDataFor7thOOP(1000000, "./gendata.txt")
+genDataFor7thOOP(100000, "./data/gendata.txt")
