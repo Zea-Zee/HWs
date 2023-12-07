@@ -8,4 +8,4 @@ set(CMAKE_CXX_STANDARD 23)
 #        10th.cpp
 #        11th.cpp)
 
-add_executable(Phillipov_homeworks 7th.cpp)
+add_executable(Phillipov_homeworks 11th.cpp)

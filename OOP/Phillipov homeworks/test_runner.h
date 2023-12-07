@@ -33,7 +33,9 @@ class TestRunner {
 public:
     template <class TestFunc>
     void RunTest(TestFunc func, const string& test_name);
-    ~TestRunner();
+    ~TestRunner(){
+        cout << "tesstrunner have deleted\n";
+    };
 private:
     int fail_count = 0; // счётчик числа упавших тестов
 };
