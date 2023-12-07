@@ -128,29 +128,29 @@ Phillipov_homeworks/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/build
 .PHONY : Phillipov_homeworks/fast
 
-11th.obj: 11th.cpp.obj
-.PHONY : 11th.obj
+12th.obj: 12th.cpp.obj
+.PHONY : 12th.obj
 
 # target to build an object file
-11th.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.obj
-.PHONY : 11th.cpp.obj
+12th.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj
+.PHONY : 12th.cpp.obj
 
-11th.i: 11th.cpp.i
-.PHONY : 11th.i
+12th.i: 12th.cpp.i
+.PHONY : 12th.i
 
 # target to preprocess a source file
-11th.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.i
-.PHONY : 11th.cpp.i
+12th.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.i
+.PHONY : 12th.cpp.i
 
-11th.s: 11th.cpp.s
-.PHONY : 11th.s
+12th.s: 12th.cpp.s
+.PHONY : 12th.s
 
 # target to generate assembly for a file
-11th.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/11th.cpp.s
-.PHONY : 11th.cpp.s
+12th.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.s
+.PHONY : 12th.cpp.s
 
 # Help Target
 help:
@@ -161,9 +161,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Phillipov_homeworks
-	@echo ... 11th.obj
-	@echo ... 11th.i
-	@echo ... 11th.s
+	@echo ... 12th.obj
+	@echo ... 12th.i
+	@echo ... 12th.s
 .PHONY : help
 
 
