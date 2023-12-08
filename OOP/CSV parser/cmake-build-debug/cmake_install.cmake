@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks
+# Install script for directory: C:/HWs/OOP/CSV parser
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Phillipov_homeworks")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/CSV_parser")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/HWs/OOP/CSV parser/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
