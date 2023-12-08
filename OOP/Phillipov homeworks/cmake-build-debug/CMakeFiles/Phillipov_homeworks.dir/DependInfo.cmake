@@ -8,7 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+<<<<<<< HEAD
   "C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/7th.cpp" "CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj" "gcc" "CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj.d"
+=======
+  "C:/HWs/OOP/Phillipov homeworks/12th.cpp" "CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj" "gcc" "CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj.d"
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
   )
 
 # Targets to which this target links which contain Fortran sources.

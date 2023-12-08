@@ -7,6 +7,14 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+<<<<<<< HEAD
+=======
+  "C:/HWs/OOP/Phillipov homeworks/CMakeLists.txt"
+  "CMakeFiles/3.26.4/CMakeCCompiler.cmake"
+  "CMakeFiles/3.26.4/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.26.4/CMakeRCCompiler.cmake"
+  "CMakeFiles/3.26.4/CMakeSystem.cmake"
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake"
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake"
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake"
@@ -31,11 +39,14 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake"
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake"
   "C:/Program Files/JetBrains/CLion 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/ProcessorCount.cmake"
+<<<<<<< HEAD
   "C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/CMakeLists.txt"
   "CMakeFiles/3.26.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.26.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.26.4/CMakeRCCompiler.cmake"
   "CMakeFiles/3.26.4/CMakeSystem.cmake"
+=======
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
   )
 
 # The corresponding makefile is:

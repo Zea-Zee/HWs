@@ -94,6 +94,7 @@ public:
     explicit Copier(string recipient) : recipient(move(recipient)) {}
 
     void Process(unique_ptr<Email> email) override {
+<<<<<<< HEAD
 // Pass the original email to the next worker
         auto copy = make_unique<Email>(*email);
         PassOn(move(email));
@@ -104,6 +105,14 @@ public:
             PassOn(move(copy));
         }
 
+=======
+        auto copy = make_unique<Email>(*email);
+        PassOn(move(email));
+        if (copy->to != recipient) {
+            copy->to = recipient;
+            PassOn(move(copy));
+        }
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
     }
 
 private:
@@ -113,7 +122,10 @@ private:
 class Sender : public Worker {
 public:
     explicit Sender(ostream& out) : output(out) {}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
     void Process(unique_ptr<Email> email) override {
         output << email->from << "\n" << email->to << "\n" << email->body << "\n";
         PassOn(move(email));

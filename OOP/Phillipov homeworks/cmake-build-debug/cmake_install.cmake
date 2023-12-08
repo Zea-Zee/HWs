@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Install script for directory: C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks
+=======
+# Install script for directory: C:/HWs/OOP/Phillipov homeworks
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +49,9 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
+<<<<<<< HEAD
 file(WRITE "C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+=======
+file(WRITE "C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

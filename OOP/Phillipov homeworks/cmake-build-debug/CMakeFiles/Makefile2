@@ -53,10 +53,17 @@ RM = "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks"
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug"
+=======
+CMAKE_SOURCE_DIR = "C:\HWs\OOP\Phillipov homeworks"
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug"
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -80,14 +87,24 @@ clean: CMakeFiles/Phillipov_homeworks.dir/clean
 CMakeFiles/Phillipov_homeworks.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/build
+<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target Phillipov_homeworks"
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target Phillipov_homeworks"
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 .PHONY : CMakeFiles/Phillipov_homeworks.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Phillipov_homeworks.dir/rule: cmake_check_build_system
+<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Phillipov_homeworks.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 0
+=======
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Phillipov_homeworks.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 0
+>>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 .PHONY : CMakeFiles/Phillipov_homeworks.dir/rule
 
 # Convenience name for target.
