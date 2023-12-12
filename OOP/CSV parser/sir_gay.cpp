@@ -206,7 +206,7 @@ private:
 int main() {
     std::ifstream file("../in.csv");
 //    CSVParser<int, double, string, char> parser(file, 0, '\n', ',');
-    CSVParser<double, string> parser(file, 0, '\n', ',');
+    CSVParser<string, int, double, string> parser(file, 0, '\n', ' ');
     for (auto rs : parser) {
         std::cout << rs << std::endl;
     }

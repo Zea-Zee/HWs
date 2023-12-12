@@ -62,8 +62,7 @@ print_tuple(ostream& /*os*/, const tuple<Args...>& /*t*/) {}
 template <size_t I = 0, typename... Args>
 typename enable_if<I < sizeof...(Args), void>::type
 print_tuple(ostream& os, const tuple<Args...>& t) {
-//    if (I != 0)
-//        os << ", ";
+    if (I != 0) os << ", ";
     os << get<I>(t);
     print_tuple<I + 1>(os, t);
 }
@@ -102,18 +101,6 @@ public:
      * @param resetFilePosition define will be fileposition reset or not.
      */
     unsigned long long countRowNum(bool resetFilePosition=true){
-//        streampos oldPos = file.tellg();
-//        unsigned long long count = 0;
-//        file.seekg(0, ios::end);
-//        streampos fileSize = file.tellg();
-//        file.seekg(0, ios::beg);
-//        string fileData;
-//        file.read(fileData.data(), fileSize);
-//        for(char ch : fileData) if(ch == '\n') count++;
-//        if(resetFilePosition) file.seekg(0, ios::beg);
-//        else file.seekg(oldPos, ios::beg);
-//        cout << "file rows is " << count << "\n";
-//        return count;
         unsigned long long count = 0;
         string line;
 
@@ -134,8 +121,10 @@ public:
     public:
         Iterator(ifstream& file, unsigned long long len, int skipLines=0, char rowDelimeter='\n', char colDelimiter=' ', char escapeChar='"')
         : rows(len), file(file), skipLines(skipLines), rowDelimeter(rowDelimeter), colDelimiter(colDelimiter), escapeChar(escapeChar) {
-            for(curLine = 0; curLine < skipLines; curLine++)
-                file.ignore(ULLONG_MAX, rowDelimeter);
+            for(curLine = 0; curLine < skipLines; curLine++) {
+//                file.ignore(ULLONG_MAX, rowDelimeter);
+                getline(file, line, rowDelimeter);
+            }
 //            for (; curLine < skipLines; curLine++) {
 //                if (!getline(file, line, rowDelimeter)) {
 //                    // Handle case where there are fewer lines than skipLines
@@ -195,7 +184,7 @@ public:
                 if(count_columns > sizeof ...(Args))
                     throw ManyArgumentsException(curLine, count_columns);
                 if(isEscaped) {
-                    new_line += c;
+//                    new_line += c;
                     isEscaped = false;
                 } else if (c == escapeChar) {
                     isEscaped = true;
@@ -257,15 +246,15 @@ private:
 };
 
 int main() {
-    const char *path = "./in.csv";
+    const char *path = "../in.csv";
     CSVParser<string, int, double, string> parser(path);
     for (auto rs : parser) {
         cout << rs << endl;
     }
     FIRST_TIME = true;
 
-    path = "./tst.csv";
-    CSVParser<int, double, string, char> parser2(path, 1, '>', ':');
+    path = "../tst.csv";
+    CSVParser<int, double, string, char> parser2(path, 1, '>', ':', '\\');
     for (auto rs : parser2) {
         cout << rs << endl;
     }
