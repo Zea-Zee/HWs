@@ -2,6 +2,10 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <windows.h>
+
+#define GREEN   "\x1b[32m"
+#define RESET   "\x1b[0m"
 
 using namespace std;
 
@@ -45,7 +49,7 @@ private:
     RealMatrix<T> *realMatrix;
     int sizeVar;
     unordered_map<int, unordered_set<int>*> cells;
-    T def;
+    const T def = defaultValue;
 //    int y, x;
 public:
     MatrixProxy() : def{defaultValue}, sizeVar{0}, realMatrix{nullptr} {};
@@ -98,12 +102,16 @@ public:
 };
 
 int main() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     MatrixProxy<int, -1> matrix;
     cout << (matrix)(1000000000, 2000000000) << "\n";
     cout << matrix(0, 0) << "\n";
     cout << matrix.size() << "\n";
-    matrix(2000000000, 2000000000, 10);
+    matrix(2000000000, 2000000000, 777);
     cout << matrix(2000000000, 2000000000) << "\n";
+    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+    cout << "___________________CHAR___________________\n";
+    SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
     MatrixProxy<char, '_'> c_matrix;
@@ -112,12 +120,20 @@ int main() {
     cout << c_matrix.size() << "\n";
     c_matrix(2000000000, 2000000000, 'b');
     cout << c_matrix(2000000000, 2000000000) << "\n";
+    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+    cout << "___________________DOUBLE___________________\n";
+    SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
-    MatrixProxy<double, 10> d_matrix;
+//    constexpr double def = 10;
+    MatrixProxy<double, 10.0> d_matrix;
     cout << (d_matrix)(1000000000, 2000000000) << "\n";
     cout << d_matrix(0, 0) << "\n";
     cout << d_matrix.size() << "\n";
-    d_matrix(2000000000, 2000000000, 10);
+    d_matrix(2000000000, 2000000000, 777.777);
     cout << d_matrix(2000000000, 2000000000) << "\n";
+//    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+//    cout << "___________________STRING___________________\n";
+//    SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 }

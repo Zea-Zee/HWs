@@ -8,20 +8,6 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-<<<<<<< HEAD
-				<Option working_dir="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Phillipov_homeworks">
-				<Option output="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
-=======
 				<Option working_dir="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
@@ -34,7 +20,6 @@
 			<Target title="Phillipov_homeworks">
 				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -48,17 +33,6 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-<<<<<<< HEAD
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Phillipov_homeworks/fast">
-				<Option output="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
-=======
 					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks"/>
 					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -68,7 +42,6 @@
 			<Target title="Phillipov_homeworks/fast">
 				<Option output="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Phillipov_homeworks.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -82,39 +55,6 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-<<<<<<< HEAD
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks/fast"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-		</Build>
-		<Unit filename="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/7th.cpp">
-			<Option target="Phillipov_homeworks"/>
-		</Unit>
-		<Unit filename="C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/CMakeLists.txt">
-=======
 					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 Phillipov_homeworks/fast"/>
 					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -142,11 +82,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/HWs/OOP/Phillipov homeworks/12th.cpp">
+		<Unit filename="C:/HWs/OOP/Phillipov homeworks/13th.cpp">
 			<Option target="Phillipov_homeworks"/>
 		</Unit>
 		<Unit filename="C:/HWs/OOP/Phillipov homeworks/CMakeLists.txt">
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

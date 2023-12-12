@@ -56,17 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
-CMAKE_SOURCE_DIR = "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks"
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug"
-=======
 CMAKE_SOURCE_DIR = "C:\HWs\OOP\Phillipov homeworks"
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug"
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -93,15 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\\CMakeFiles\progress.marks"
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\kuzga\OneDrive\Рабочий стол\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 0
-=======
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\HWs\OOP\Phillipov homeworks\cmake-build-debug\CMakeFiles" 0
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
 .PHONY : all
 
 # The main clean target
@@ -141,55 +128,29 @@ Phillipov_homeworks/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/build
 .PHONY : Phillipov_homeworks/fast
 
-<<<<<<< HEAD
-7th.obj: 7th.cpp.obj
-.PHONY : 7th.obj
+13th.obj: 13th.cpp.obj
+.PHONY : 13th.obj
 
 # target to build an object file
-7th.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj
-.PHONY : 7th.cpp.obj
+13th.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/13th.cpp.obj
+.PHONY : 13th.cpp.obj
 
-7th.i: 7th.cpp.i
-.PHONY : 7th.i
-
-# target to preprocess a source file
-7th.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/7th.cpp.i
-.PHONY : 7th.cpp.i
-
-7th.s: 7th.cpp.s
-.PHONY : 7th.s
-
-# target to generate assembly for a file
-7th.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/7th.cpp.s
-.PHONY : 7th.cpp.s
-=======
-12th.obj: 12th.cpp.obj
-.PHONY : 12th.obj
-
-# target to build an object file
-12th.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj
-.PHONY : 12th.cpp.obj
-
-12th.i: 12th.cpp.i
-.PHONY : 12th.i
+13th.i: 13th.cpp.i
+.PHONY : 13th.i
 
 # target to preprocess a source file
-12th.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.i
-.PHONY : 12th.cpp.i
+13th.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/13th.cpp.i
+.PHONY : 13th.cpp.i
 
-12th.s: 12th.cpp.s
-.PHONY : 12th.s
+13th.s: 13th.cpp.s
+.PHONY : 13th.s
 
 # target to generate assembly for a file
-12th.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/12th.cpp.s
-.PHONY : 12th.cpp.s
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
+13th.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Phillipov_homeworks.dir\build.make CMakeFiles/Phillipov_homeworks.dir/13th.cpp.s
+.PHONY : 13th.cpp.s
 
 # Help Target
 help:
@@ -200,15 +161,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Phillipov_homeworks
-<<<<<<< HEAD
-	@echo ... 7th.obj
-	@echo ... 7th.i
-	@echo ... 7th.s
-=======
-	@echo ... 12th.obj
-	@echo ... 12th.i
-	@echo ... 12th.s
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386
+	@echo ... 13th.obj
+	@echo ... 13th.i
+	@echo ... 13th.s
 .PHONY : help
 
 
