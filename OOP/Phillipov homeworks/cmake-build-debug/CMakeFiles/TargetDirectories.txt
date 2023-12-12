@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/kuzga/OneDrive/Рабочий стол/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-=======
-C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir
-C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/HWs/OOP/Phillipov homeworks/cmake-build-debug/CMakeFiles/rebuild_cache.dir
->>>>>>> 1e06dbb26eb373d18eaf1595de135176f6f0b386

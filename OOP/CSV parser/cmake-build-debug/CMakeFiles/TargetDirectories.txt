@@ -1,3 +1,0 @@
-C:/HWs/OOP/CSV parser/cmake-build-debug/CMakeFiles/CSV_parser.dir
-C:/HWs/OOP/CSV parser/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/HWs/OOP/CSV parser/cmake-build-debug/CMakeFiles/rebuild_cache.dir

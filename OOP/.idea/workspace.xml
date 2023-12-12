@@ -10,9 +10,7 @@
     <option name="reloaded" value="true" />
   </component>
   <component name="CMakeRunConfigurationManager">
-    <generated>
-      <config projectName="OOP" targetName="OOP" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -21,18 +19,84 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2817004-b998-4038-86ae-1ed30bb66504" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/HWs.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2023_10_04__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PHC/data/production.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/cache-v2-5146ac291b6020a474df.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-526e7403434a36219dbe.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-a257ae4b119fd30636ba.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/index-2023-12-08T04-22-40-0236.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/target-CSV_parser-Debug-2eb0dd1f51545797ecc3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-1555a5ce31899eddd569.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/CSV_parser.dir/main.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/CSV_parser.dir/sir_gay.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/CSV_parser.dir/varn.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSV parser/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/cache-v2-5f471d02a8276e974380.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/cache-v2-629e4107a797cd56d590.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-4513aef68b10d60712a8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-cca15e2fb2e3bb12e9c4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-15f3a10829a4422d2888.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-725ca437b3d5a4c9b9b9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/index-2023-12-07T06-57-23-0483.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/index-2023-12-07T09-09-23-0976.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/target-Phillipov_homeworks-Debug-74c399c52d08758a3584.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/target-Phillipov_homeworks-Debug-ceee2d404af21ee64f98.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-1555a5ce31899eddd569.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/11th.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/11th.cpp.obj.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/12class.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/12class.cpp.obj.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/12th.cpp.obj.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/7th.cpp.obj.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/compiler_depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/compiler_depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/compiler_depend.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/linkLibs.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/objects.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/objects1.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/Phillipov_homeworks.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phillipov homeworks/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PHC/.ipynb_checkpoints/Lesson13-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../PHC/.ipynb_checkpoints/Lesson13-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PHC/Lesson13.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../PHC/Lesson13.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PHC/data/filtered.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../PHC/data/filtered.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PHC/les13.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../PHC/les13.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,26 +127,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/kuzga/Desktop/HWs/OOP/CSV parser",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="OOP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OOP" TARGET_NAME="OOP" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OOP" RUN_TARGET_NAME="OOP">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -96,6 +161,7 @@
       <updated>1698035087435</updated>
       <workItem from="1698035089533" duration="2182000" />
       <workItem from="1698037546071" duration="22000" />
+      <workItem from="1702362106775" duration="60000" />
     </task>
     <servers />
   </component>

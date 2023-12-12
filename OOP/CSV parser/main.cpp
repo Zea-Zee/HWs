@@ -9,6 +9,10 @@
 #include <cerrno>
 #include <array>
 
+#ifndef ULLONG_MAX
+#define ULLONG_MAX 1000000000
+#endif
+
 bool FIRST_TIME = true;
 
 using namespace std;
@@ -16,7 +20,6 @@ using namespace std;
 class CSVParserException : public exception {
 public:
     explicit CSVParserException(const string& message) : message_(message) {}
-
     const char* what() const noexcept override {
         return message_.c_str();
     }
@@ -59,8 +62,8 @@ print_tuple(ostream& /*os*/, const tuple<Args...>& /*t*/) {}
 template <size_t I = 0, typename... Args>
 typename enable_if<I < sizeof...(Args), void>::type
 print_tuple(ostream& os, const tuple<Args...>& t) {
-    if (I != 0)
-        os << ", ";
+//    if (I != 0)
+//        os << ", ";
     os << get<I>(t);
     print_tuple<I + 1>(os, t);
 }
@@ -114,8 +117,8 @@ public:
         unsigned long long count = 0;
         string line;
 
-        while (getline(file, line)) {
-            ++count;
+        while (getline(file, line, rowDelimiter)) {
+            count++;
         }
 
         if (resetFilePosition) {
@@ -131,22 +134,37 @@ public:
     public:
         Iterator(ifstream& file, unsigned long long len, int skipLines=0, char rowDelimeter='\n', char colDelimiter=' ', char escapeChar='"')
         : rows(len), file(file), skipLines(skipLines), rowDelimeter(rowDelimeter), colDelimiter(colDelimiter), escapeChar(escapeChar) {
-            for(; curLine < skipLines; curLine++)
-                file.ignore(ULLONG_MAX, '\n');
+            for(curLine = 0; curLine < skipLines; curLine++)
+                file.ignore(ULLONG_MAX, rowDelimeter);
+//            for (; curLine < skipLines; curLine++) {
+//                if (!getline(file, line, rowDelimeter)) {
+//                    // Handle case where there are fewer lines than skipLines
+//                    curLine = rows;
+//                    cout << "skilpines bigger then number of rows\n";
+//                    break;
+//                }
+//            }
+            cout << "curline is:" << curLine << ":\n";
             cout << "constructor\n";
         }
 
         Iterator& operator++(){
 //            cout << curLine << " will be incremented and rows is " << rows << "\n" ;
-            trash:
-            if(getline(file, line, rowDelimeter)){
-                if(line.length() == 0)
-                    goto trash;
-                else{
-                    parseLine();
-                    curLine++;
-                }
+//            trash:
+//            if(getline(file, line, rowDelimeter)){
+//                if(line.length() == 0)
+//                    goto trash;
+//                else{
+//                    parseLine();
+//                    curLine++;
+//                }
+//            }
+            getline(file, line, rowDelimeter);
+//            cout << "line:" << line << ":\n";
+            if(line.length() > 0) {
+                parseLine();
             }
+            curLine++;
             return *this;
         }
 
@@ -158,12 +176,14 @@ public:
             return data;
         }
 
-        bool isEnd(){
-            return curLine == (rows + 1);
-        }
+//        bool isEnd(){
+//            return curLine == (rows + 5);
+//        }
 
         bool operator!=(const Iterator& other) const {
-            return curLine != rows;
+//            cout << "End res is:" << (curLine < rows + skipLines) + 1 << ":\n";
+            return curLine < rows + 1;
+//            return curLine < (rows + skipLines);
         }
 
     private:
@@ -193,6 +213,7 @@ public:
         void parseLine() {
             line = parseString(line);
             istringstream ss(line);
+//            cout << "line in parseline:" << line << ":\n";
             parseArgs(ss, data);
         }
 
@@ -223,7 +244,7 @@ public:
     }
 
     Iterator end() {
-        return Iterator(file, rowsNum, skipLines, rowDelimiter, colDelimiter, escapeChar);
+        return Iterator(file, rowsNum, 0, rowDelimiter, colDelimiter, escapeChar);
     }
 
 private:
@@ -236,9 +257,16 @@ private:
 };
 
 int main() {
-    const char *path = "../in.csv";
+    const char *path = "./in.csv";
     CSVParser<string, int, double, string> parser(path);
     for (auto rs : parser) {
+        cout << rs << endl;
+    }
+    FIRST_TIME = true;
+
+    path = "./tst.csv";
+    CSVParser<int, double, string, char> parser2(path, 1, '>', ':');
+    for (auto rs : parser2) {
         cout << rs << endl;
     }
     return 0;

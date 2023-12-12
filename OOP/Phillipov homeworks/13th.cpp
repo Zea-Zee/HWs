@@ -114,11 +114,10 @@ int main() {
     cout << c_matrix(2000000000, 2000000000) << "\n";
 
 
-    MatrixProxy<double, (double) -1.0> d_matrix;
+    MatrixProxy<double, 10> d_matrix;
     cout << (d_matrix)(1000000000, 2000000000) << "\n";
     cout << d_matrix(0, 0) << "\n";
     cout << d_matrix.size() << "\n";
-    d_matrix(2000000000, 2000000000, 5.0);
+    d_matrix(2000000000, 2000000000, 10);
     cout << d_matrix(2000000000, 2000000000) << "\n";
-    return 0;
 }
